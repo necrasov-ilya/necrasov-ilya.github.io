@@ -1,0 +1,77 @@
+﻿* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--bg-light);
+  line-height: 1.5;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+}
+
+body::before {
+  background: linear-gradient(to bottom, var(--bg-light) 0 50%, var(--bg-dark) 50% 100%);
+}
+
+body::after {
+  z-index: -1;
+  background:
+    linear-gradient(0deg, rgba(201, 36, 85, 0.08), rgba(201, 36, 85, 0.08)),
+    radial-gradient(circle at 10% 15%, rgba(201, 36, 85, 0.12), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(201, 36, 85, 0.08), transparent 44%);
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(100% - 2rem, var(--max-width));
+  margin-inline: auto;
+}
+
+.section {
+  padding: var(--space-3xl) 0;
+}
+
+.section-light {
+  color: var(--text-dark);
+}
+
+.section-dark {
+  color: var(--text-light);
+}
+
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.site-footer {
+  border-top: var(--border-medium) solid var(--accent);
+  color: var(--text-light);
+  padding: var(--space-lg) 0 var(--space-xl);
+}
+
+.site-footer p {
+  margin: 0;
+}

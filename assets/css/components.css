@@ -1,0 +1,111 @@
+﻿.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  border-bottom: var(--border-medium) solid rgba(201, 36, 85, 0.55);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.nav-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  min-height: 4.2rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  font-weight: 500;
+}
+
+.site-nav a {
+  position: relative;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-fast);
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 2.4vw, 2.75rem);
+  letter-spacing: 0.02em;
+}
+
+.panel {
+  border: var(--border-medium) solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--surface-light);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-brutal-dark);
+}
+
+.panel-dark {
+  border: var(--border-medium) solid var(--accent);
+  border-radius: var(--radius-md);
+  background: transparent;
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-brutal-light);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  border: var(--border-medium) solid var(--accent);
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translate(-2px, -2px);
+  background: var(--accent);
+  color: var(--bg-light);
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    position: static;
+  }
+
+  .nav-shell {
+    min-height: auto;
+    padding: var(--space-sm) 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-nav {
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+}

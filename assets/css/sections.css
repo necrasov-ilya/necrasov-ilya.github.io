@@ -1,0 +1,19 @@
+﻿.hero-section {
+  min-height: calc(100vh - 4.2rem);
+  display: grid;
+  align-items: center;
+}
+
+.hero-title {
+  margin: var(--space-md) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  line-height: 0.95;
+  max-width: 15ch;
+}
+
+.hero-subtitle {
+  max-width: 52ch;
+  margin-top: var(--space-md);
+  font-size: 1.05rem;
+}

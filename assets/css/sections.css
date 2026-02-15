@@ -125,12 +125,28 @@
   grid-column: span 5;
 }
 
-.about-values {
-  grid-column: span 4;
+.about-stack .chip-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.4rem, 1fr));
+  gap: 0.45rem;
+  padding-left: 0;
+}
+
+.about-stack .chip-list li {
+  width: 100%;
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.22rem 0.58rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  border-width: 1px;
 }
 
 .about-now {
-  grid-column: span 3;
+  grid-column: span 7;
 }
 
 .projects-grid {
@@ -789,7 +805,6 @@
   .about-main,
   .about-focus,
   .about-stack,
-  .about-values,
   .about-now {
     grid-column: span 6;
   }
@@ -833,7 +848,6 @@
   .about-main,
   .about-focus,
   .about-stack,
-  .about-values,
   .about-now {
     grid-column: span 12;
   }

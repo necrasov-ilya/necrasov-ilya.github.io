@@ -6,6 +6,7 @@
 
   const header = document.querySelector(".site-header");
   const heroSection = document.getElementById("hero");
+  const isMobileViewport = () => window.matchMedia("(max-width: 900px)").matches;
 
   const navLinks = Array.from(document.querySelectorAll(".site-nav a"));
   const sectionMap = navLinks
@@ -25,7 +26,17 @@
     .filter(Boolean);
 
   const updateHeaderVisibility = () => {
-    if (!header || !heroSection) {
+    if (!header) {
+      return;
+    }
+
+    if (isMobileViewport()) {
+      header.classList.add("is-visible");
+      return;
+    }
+
+    if (!heroSection) {
+      header.classList.add("is-visible");
       return;
     }
 

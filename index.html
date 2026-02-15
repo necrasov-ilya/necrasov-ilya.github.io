@@ -20,12 +20,18 @@
       <a class="brand" href="#hero" aria-label="На главную">
         <img src="assets/img/logo-avatar.svg" alt="Логотип">
       </a>
-      <nav class="site-nav" aria-label="Навигация по странице">
-        <a href="#about"><span class="material-symbols-outlined" aria-hidden="true">person</span>Обо мне</a>
-        <a href="#projects"><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>Проекты</a>
-        <a href="#its-u"><span class="material-symbols-outlined" aria-hidden="true">memory</span>Это ты</a>
-        <a href="#contacts"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Контакты</a>
-      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+      </button>
+      <div class="header-tools" id="site-menu">
+        <nav class="site-nav" aria-label="Навигация по странице">
+          <a href="#about"><span class="material-symbols-outlined" aria-hidden="true">person</span>Обо мне</a>
+          <a href="#projects"><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>Проекты</a>
+          <a href="#its-u"><span class="material-symbols-outlined" aria-hidden="true">memory</span>Это ты</a>
+          <a href="#contacts"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Контакты</a>
+        </nav>
+        <a class="btn btn-ghost header-blog-link" href="blog.html"><span class="material-symbols-outlined" aria-hidden="true">article</span>Читать блог</a>
+      </div>
     </div>
   </header>
 
@@ -36,7 +42,7 @@
           <img src="assets/img/avatar.png" alt="Фото Ilya Necrasov" class="hero-avatar">
           <div class="hero-avatar-foot">
             <span class="material-symbols-outlined" aria-hidden="true">verified</span>
-            <p>GenAI + Frontend Engineer</p>
+            <p>GenAI Application Engineer + Frontend Engineer</p>
           </div>
         </article>
         <article class="hero-intro panel">
@@ -60,12 +66,11 @@
         <div class="section-head">
           <p class="eyebrow">Обо мне</p>
           <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">face</span>Обо мне</h2>
-          <!-- <p class="section-lead"></p> TO-DO: Добавить описание -->
         </div>
         <div class="bento about-bento">
           <article class="panel about-card about-main">
             <h3>GenAI Application Engineer + Frontend</h3>
-            <p>Работаю последовательно: анализирую задачу и контекст, проектирую RAG/агентную логику, интегрирую в продукт и реализую интерфейс с проверкой качества.</p>
+            <p>GenAI Application Engineer - это проектирование AI-функций для продукта: RAG, агентные сценарии и интеграционные пайплайны. Frontend - это клиентская часть, интерфейсы и UX. Могу работать в каждом направлении отдельно и объединять их, когда нужна аккуратная интеграция в существующий сервис.</p>
           </article>
           <article class="panel about-card about-focus">
             <h3>Что в фокусе</h3>
@@ -87,13 +92,9 @@
               <li>LangChain</li>
             </ul>
           </article>
-          <article class="panel about-card about-values">
-            <h3>Подход</h3>
-            <p>Работаю аналитично и по шагам: фиксирую критерии, проверяю гипотезы на данных и затем закрепляю решение в продукте.</p>
-          </article>
           <article class="panel about-card about-now">
-            <h3>Текущий фокус</h3>
-            <p>Углубляюсь в оценку качества RAG, наблюдаемость агентных сценариев и стабильность интеграций в веб-интерфейсах.</p>
+            <h3>UX/UI опыт</h3>
+            <p>Долгий практический опыт в UX/UI-дизайне: сценарии, прототипы, структура интерфейсов и визуальные системы.</p>
           </article>
         </div>
       </div>
@@ -229,7 +230,7 @@
           </article>
           <article class="panel-dark contact-item">
             <h3><span class="material-symbols-outlined" aria-hidden="true">article</span>Мой блог</h3>
-            <a href="https://t.me/nksvilya" target="_blank" rel="noreferrer noopener">t.me/nksvilya</a>
+            <a href="blog.html">Открыть блог</a>
           </article>
         </div>
       </div>
@@ -242,6 +243,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/header.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/projects.js" defer></script>
   <script src="assets/js/its-u.js" defer></script>

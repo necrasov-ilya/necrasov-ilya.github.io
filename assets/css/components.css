@@ -58,6 +58,19 @@
   letter-spacing: 0.02em;
 }
 
+.section-head {
+  display: grid;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.section-lead {
+  margin: 0;
+  max-width: 56ch;
+  font-size: 1.03rem;
+  color: var(--text-muted);
+}
+
 .panel {
   border: var(--border-medium) solid var(--accent);
   border-radius: var(--radius-md);
@@ -95,6 +108,28 @@
 .btn-ghost {
   background: transparent;
   color: var(--text-dark);
+}
+
+.bento {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.chip-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.chip-list li {
+  border: var(--border-medium) solid var(--accent);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 @media (max-width: 700px) {

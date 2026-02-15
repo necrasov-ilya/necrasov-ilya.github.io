@@ -96,6 +96,47 @@
   color: var(--bg-light);
 }
 
+.about-bento {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.about-card h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.3rem;
+}
+
+.about-card p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.about-card ul {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.about-main {
+  grid-column: span 8;
+}
+
+.about-focus {
+  grid-column: span 4;
+}
+
+.about-stack {
+  grid-column: span 5;
+}
+
+.about-values {
+  grid-column: span 4;
+}
+
+.about-now {
+  grid-column: span 3;
+}
+
 @media (max-width: 1080px) {
   .hero-bottom {
     grid-template-columns: 1fr;
@@ -104,6 +145,14 @@
 
   .hero-copy {
     max-width: 100%;
+  }
+
+  .about-main,
+  .about-focus,
+  .about-stack,
+  .about-values,
+  .about-now {
+    grid-column: span 6;
   }
 }
 
@@ -114,5 +163,13 @@
 
   .hero-actions {
     gap: var(--space-sm);
+  }
+
+  .about-main,
+  .about-focus,
+  .about-stack,
+  .about-values,
+  .about-now {
+    grid-column: span 12;
   }
 }

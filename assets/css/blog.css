@@ -17,6 +17,19 @@ body.blog-page {
   border-bottom: var(--border-medium) solid var(--accent);
 }
 
+.blog-hero .section-title {
+  font-size: clamp(1.35rem, 5.8vw, 2.75rem);
+  line-height: 1.1;
+}
+
+.blog-hero .section-title-icon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.55rem;
+  row-gap: 0.2rem;
+}
+
 .blog-meta-bento {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
@@ -319,6 +332,10 @@ body.blog-page {
 }
 
 @media (max-width: 700px) {
+  .blog-hero .section-title {
+    font-size: clamp(1.2rem, 8vw, 1.7rem);
+  }
+
   .blog-meta-list div {
     grid-template-columns: 1fr;
     gap: 0.3rem;

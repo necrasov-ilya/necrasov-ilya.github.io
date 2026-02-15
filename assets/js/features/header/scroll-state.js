@@ -1,7 +1,5 @@
 import { qs, qsa } from "../../shared/dom.js";
 
-const MOBILE_QUERY = "(max-width: 900px)";
-
 export const initHeaderScrollState = () => {
   const header = qs(".site-header");
   const heroSection = qs("#hero");
@@ -9,8 +7,6 @@ export const initHeaderScrollState = () => {
   if (!header) {
     return { requestUpdate: () => {} };
   }
-
-  const isMobileViewport = () => window.matchMedia(MOBILE_QUERY).matches;
 
   const navLinks = qsa(".site-nav a");
   const sectionMap = navLinks
@@ -30,7 +26,7 @@ export const initHeaderScrollState = () => {
     .filter(Boolean);
 
   const updateHeaderVisibility = () => {
-    if (isMobileViewport() || !heroSection) {
+    if (!heroSection) {
       header.classList.add("is-visible");
       return;
     }

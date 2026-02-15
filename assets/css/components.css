@@ -260,12 +260,6 @@
     overflow: hidden;
   }
 
-  .site-header {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
   .nav-shell {
     min-height: 4rem;
     padding: 0.35rem 0;

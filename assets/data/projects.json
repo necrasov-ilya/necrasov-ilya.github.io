@@ -1,0 +1,44 @@
+﻿{
+  "projects": [
+    {
+      "title": "Vision QA Console",
+      "year": "2026",
+      "summary": "Платформа визуального контроля качества с моделью детекции аномалий и web-дашбордом для операторов.",
+      "tags": ["TypeScript", "Python", "FastAPI", "Computer Vision"],
+      "links": [
+        { "label": "Case", "url": "#" },
+        { "label": "Code", "url": "#" }
+      ]
+    },
+    {
+      "title": "Lead Intent Radar",
+      "year": "2025",
+      "summary": "Скоринг лидов и объяснимые сигналы намерения для CRM-интерфейса продаж в реальном времени.",
+      "tags": ["ML Scoring", "PostgreSQL", "React", "Node.js"],
+      "links": [
+        { "label": "Demo", "url": "#" },
+        { "label": "Docs", "url": "#" }
+      ]
+    },
+    {
+      "title": "Support Copilot UI",
+      "year": "2025",
+      "summary": "Внутренний фронтенд для AI-ассистента поддержки с контекстным поиском и подсветкой источников.",
+      "tags": ["RAG", "Embeddings", "TypeScript", "Design System"],
+      "links": [
+        { "label": "Overview", "url": "#" },
+        { "label": "GitHub", "url": "#" }
+      ]
+    },
+    {
+      "title": "Forecast Workbench",
+      "year": "2024",
+      "summary": "Bento-интерфейс сценарного прогноза с моделями временных рядов и аналитикой отклонений.",
+      "tags": ["Time Series", "Plotly", "Python", "UX"],
+      "links": [
+        { "label": "Preview", "url": "#" },
+        { "label": "Article", "url": "#" }
+      ]
+    }
+  ]
+}

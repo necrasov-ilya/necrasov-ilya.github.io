@@ -64,11 +64,19 @@
   margin-bottom: var(--space-xl);
 }
 
+.section-head-dark .section-title {
+  color: var(--text-light);
+}
+
 .section-lead {
   margin: 0;
   max-width: 56ch;
   font-size: 1.03rem;
   color: var(--text-muted);
+}
+
+.section-lead-dark {
+  color: rgba(244, 244, 244, 0.72);
 }
 
 .panel {

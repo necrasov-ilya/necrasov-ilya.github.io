@@ -2,18 +2,117 @@
   min-height: calc(100vh - 4.2rem);
   display: grid;
   align-items: center;
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
 }
 
-.hero-title {
-  margin: var(--space-md) 0 0;
+.hero-shell {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.hero-brandline {
+  margin: 0;
+  position: relative;
+  width: fit-content;
+  letter-spacing: 0.02em;
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 8vw, 7rem);
-  line-height: 0.95;
-  max-width: 15ch;
+  font-size: clamp(4rem, 15vw, 13rem);
+  line-height: 0.86;
+}
+
+.hero-brandline-fill,
+.hero-brandline-stroke {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-brandline-fill {
+  color: var(--accent);
+  clip-path: inset(0 0 48% 0);
+}
+
+.hero-brandline-stroke {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--accent);
+  clip-path: inset(48% 0 0 0);
 }
 
 .hero-subtitle {
-  max-width: 52ch;
-  margin-top: var(--space-md);
+  margin: 0 0 var(--space-lg);
+  max-width: 44ch;
   font-size: 1.05rem;
+}
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: end;
+  gap: var(--space-xl);
+}
+
+.hero-copy {
+  max-width: 52rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.hero-metrics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.hero-metrics li {
+  border: var(--border-medium) solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(5, 5, 5, 0.96);
+  box-shadow: var(--shadow-brutal-light);
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(244, 244, 244, 0.76);
+}
+
+.metric-value {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--bg-light);
+}
+
+@media (max-width: 1080px) {
+  .hero-bottom {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-brandline-stroke {
+    -webkit-text-stroke-width: 2px;
+  }
+
+  .hero-actions {
+    gap: var(--space-sm);
+  }
 }

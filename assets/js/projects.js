@@ -152,7 +152,7 @@
     return `<a class="project-link" href="${safeUrl}"${targetAttrs}>${safeLabel}</a>`;
   };
 
-  const createCard = (project) => {
+  const createCard = (project, isEntering = false) => {
     const tags = Array.isArray(project.tags)
       ? project.tags.map((tag) => `<li>${escapeHtml(tag)}</li>`).join("")
       : "";
@@ -162,7 +162,7 @@
       : "";
 
     return `
-      <article class="project-card panel-dark">
+      <article class="project-card panel-dark${isEntering ? " is-entering" : ""}">
         <header class="project-top">
           <h3>${escapeHtml(project.title || "Проект без названия")}</h3>
           <span class="project-year">${escapeHtml(project.year || "Н/Д")}</span>
@@ -183,7 +183,32 @@
     projectsMoreButton.hidden = !hasMore;
   };
 
-  const renderProjects = () => {
+  const animateProjectsExpansion = (fromHeight, toHeight) => {
+    if (toHeight <= fromHeight) {
+      return;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    projectsRoot.style.height = `${fromHeight}px`;
+    projectsRoot.style.overflow = "hidden";
+    projectsRoot.style.transition = "height 420ms cubic-bezier(0.22, 1, 0.36, 1)";
+
+    window.requestAnimationFrame(() => {
+      projectsRoot.style.height = `${toHeight}px`;
+    });
+
+    const cleanup = () => {
+      projectsRoot.style.height = "";
+      projectsRoot.style.overflow = "";
+      projectsRoot.style.transition = "";
+    };
+
+    window.setTimeout(cleanup, 460);
+  };
+
+  const renderProjects = (previousVisibleCount = 0, animateNewCards = false) => {
     if (!allProjects.length) {
       projectsRoot.innerHTML = '<p class="projects-empty">Проекты скоро будут добавлены.</p>';
       if (projectsMoreButton) {
@@ -193,14 +218,16 @@
     }
 
     const visibleProjects = allProjects.slice(0, visibleProjectsCount);
-    projectsRoot.innerHTML = visibleProjects.map(createCard).join("");
+    projectsRoot.innerHTML = visibleProjects
+      .map((project, index) => createCard(project, animateNewCards && index >= previousVisibleCount))
+      .join("");
     updateMoreButton();
   };
 
   const setProjects = (projects) => {
     allProjects = projects;
     visibleProjectsCount = Math.min(PAGE_SIZE, allProjects.length);
-    renderProjects();
+    renderProjects(0, false);
   };
 
   const fetchProjectsFromGitHub = async () => {
@@ -263,8 +290,12 @@
         return;
       }
 
+      const previousVisibleCount = visibleProjectsCount;
+      const fromHeight = projectsRoot.getBoundingClientRect().height;
       visibleProjectsCount = Math.min(visibleProjectsCount + PAGE_SIZE, allProjects.length);
-      renderProjects();
+      renderProjects(previousVisibleCount, true);
+      const toHeight = projectsRoot.getBoundingClientRect().height;
+      animateProjectsExpansion(fromHeight, toHeight);
     });
   }
 

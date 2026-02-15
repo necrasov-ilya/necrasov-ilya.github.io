@@ -148,6 +148,22 @@
   transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 
+.project-card.is-entering {
+  animation: project-card-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes project-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .project-card:hover {
   transform: translate(-3px, -3px);
   background: rgba(201, 36, 85, 0.08);
@@ -707,19 +723,33 @@
 
 .contacts-bento {
   grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-md);
 }
 
 .contacts-main {
-  grid-column: span 8;
+  grid-column: span 6;
 }
 
-.contacts-main h3,
-.contact-item h3 {
+.contacts-main h3 {
   margin: 0 0 var(--space-sm);
   font-size: 1.25rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+}
+
+.contact-item h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.contact-item h3 .material-symbols-outlined {
+  flex-shrink: 0;
+  font-size: 1.1rem;
 }
 
 .contacts-main p {
@@ -742,6 +772,8 @@
   border-bottom: 2px solid var(--accent);
   padding-bottom: 0.15rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-item a:hover,
@@ -783,7 +815,7 @@
   }
 
   .contact-item {
-    grid-column: span 6;
+    grid-column: span 4;
   }
 }
 

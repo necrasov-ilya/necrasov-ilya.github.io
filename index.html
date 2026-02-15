@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Портфолио Ilya Necrasov: ML и Frontend разработка.">
-  <title>Ilya Necrasov | ML + Frontend Portfolio</title>
+  <title>Ilya Necrasov | Портфолио ML + Frontend</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,0,0">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
@@ -16,55 +17,49 @@
 <body>
   <header class="site-header">
     <div class="container nav-shell">
-      <a class="brand" href="#hero">NECRASOV</a>
+      <a class="brand" href="#hero" aria-label="На главную">
+        <img src="assets/img/logo-avatar.svg" alt="Логотип">
+      </a>
       <nav class="site-nav" aria-label="Навигация по странице">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#its-u">It's U</a>
-        <a href="#contacts">Contacts</a>
+        <a href="#about"><span class="material-symbols-outlined" aria-hidden="true">person</span>Обо мне</a>
+        <a href="#projects"><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>Проекты</a>
+        <a href="#its-u"><span class="material-symbols-outlined" aria-hidden="true">memory</span>Это ты</a>
+        <a href="#contacts"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Контакты</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section id="hero" class="section hero-section">
-      <div class="container hero-shell">
-        <p class="eyebrow">ML / Frontend Engineer</p>
-        <h1 class="hero-brandline" aria-label="NECRASOV">
-          <span class="hero-brandline-fill">NECRASOV</span>
-          <span class="hero-brandline-stroke" aria-hidden="true">NECRASOV</span>
-        </h1>
-        <div class="hero-bottom">
-          <div class="hero-copy panel">
-            <p class="hero-subtitle">Разрабатываю продуктовые интерфейсы и ML-фичи, где визуал, данные и UX работают как одна система.</p>
-            <div class="hero-actions">
-              <a class="btn" href="#projects">Смотреть проекты</a>
-              <a class="btn btn-ghost" href="#contacts">Связаться</a>
-            </div>
+    <section id="hero" class="section hero-section section-light">
+      <div class="container hero-layout">
+        <article class="hero-avatar-box">
+          <img src="assets/img/avatar.png" alt="Фото Ilya Necrasov" class="hero-avatar">
+          <div class="hero-avatar-foot">
+            <span class="material-symbols-outlined" aria-hidden="true">verified</span>
+            <p>ML / Frontend разработчик</p>
           </div>
-          <ul class="hero-metrics" aria-label="Краткая информация">
-            <li>
-              <span class="metric-label">Фокус</span>
-              <span class="metric-value">ML + Frontend</span>
-            </li>
-            <li>
-              <span class="metric-label">Подход</span>
-              <span class="metric-value">Data-informed UI</span>
-            </li>
-            <li>
-              <span class="metric-label">Стек</span>
-              <span class="metric-value">TypeScript, Python</span>
-            </li>
+        </article>
+        <article class="hero-intro panel">
+          <img class="hero-logo" src="assets/img/logo.svg" alt="Логотип проекта">
+          <p class="hero-subtitle">Создаю интерфейсы и ML-фичи как единый продуктовый контур: от сигнала и модели до UI, которым реально удобно пользоваться.</p>
+          <ul class="hero-highlights">
+            <li><span class="material-symbols-outlined" aria-hidden="true">terminal</span>Продуктовый фронтенд</li>
+            <li><span class="material-symbols-outlined" aria-hidden="true">auto_graph</span>Прикладной ML</li>
+            <li><span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span>Bento UI-системы</li>
           </ul>
-        </div>
+          <div class="hero-actions">
+            <a class="btn" href="#projects">Смотреть проекты</a>
+            <a class="btn btn-ghost" href="#contacts">Связаться</a>
+          </div>
+        </article>
       </div>
     </section>
 
     <section id="about" class="section section-light">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">About me</p>
-          <h2 class="section-title">Обо мне</h2>
+          <p class="eyebrow">Обо мне</p>
+          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">face</span>Обо мне</h2>
           <p class="section-lead">Делаю цифровые продукты, где ML отвечает за интеллект, а фронтенд за четкость и скорость пользовательского пути.</p>
         </div>
         <div class="bento about-bento">
@@ -106,26 +101,29 @@
     <section id="projects" class="section section-dark">
       <div class="container">
         <div class="section-head section-head-dark">
-          <p class="eyebrow">Projects</p>
-          <h2 class="section-title">Проекты</h2>
+          <p class="eyebrow">Проекты</p>
+          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Проекты</h2>
           <p class="section-lead section-lead-dark">Подборка кейсов на стыке ML и Frontend: от аналитики поведения до production-интерфейсов с живыми данными.</p>
         </div>
         <div class="bento projects-grid" id="projects-grid" aria-live="polite"></div>
+        <div class="projects-actions">
+          <button class="btn projects-more" id="projects-more" type="button" hidden>Показать больше</button>
+        </div>
       </div>
     </section>
 
     <section id="its-u" class="section section-light itsu-section">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">It's U</p>
-          <h2 class="section-title">It's You</h2>
+          <p class="eyebrow">Это ты</p>
+          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">neurology</span>Это ты</h2>
           <p class="section-lead">Мини-паспорт твоего окружения: браузер, устройство и процент поддержки ключевых веб-возможностей.</p>
         </div>
-        <article class="fingerprint-window panel" aria-label="Browser and system overview">
+        <article class="fingerprint-window panel" aria-label="Обзор браузера и системы">
           <header class="window-head">
             <div class="window-title">
               <span class="window-dot"></span>
-              <span>C:\\fingerprint.exe</span>
+              <span>C:\fingerprint.exe</span>
             </div>
             <div class="window-controls" aria-hidden="true">
               <span class="wc-yellow"></span>
@@ -133,41 +131,74 @@
               <span class="wc-red"></span>
             </div>
           </header>
-          <div class="window-tabs" role="tablist" aria-label="Fingerprint tabs">
-            <button class="window-tab is-active" type="button" role="tab" aria-selected="true" data-tab-target="overview">Overview</button>
-            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="browser">Browser</button>
-            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="system">System</button>
+          <div class="window-tabs" role="tablist" aria-label="Вкладки паспорта">
+            <button class="window-tab is-active" type="button" role="tab" aria-selected="true" data-tab-target="overview">Обзор</button>
+            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="browser">Браузер</button>
+            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="system">Система</button>
           </div>
-          <div class="window-body">
+          <div class="window-body" id="window-body">
+            <div class="tab-loader" id="tab-loader" hidden>
+              <div class="tab-loader-ring" aria-hidden="true"></div>
+            </div>
             <section class="window-panel is-active" role="tabpanel" data-tab-panel="overview">
               <div class="overview-grid">
                 <article class="status-card">
-                  <h3>Device ID</h3>
-                  <p id="device-id">calculating...</p>
+                  <h3><span class="material-symbols-outlined" aria-hidden="true">badge</span>ID устройства</h3>
+                  <p id="device-id">вычисление...</p>
                 </article>
                 <article class="status-card">
-                  <h3>Feature Support</h3>
+                  <h3><span class="material-symbols-outlined" aria-hidden="true">network_check</span>Поддержка возможностей</h3>
                   <div class="support-bar">
                     <span id="feature-progress"></span>
                   </div>
-                  <p><strong id="feature-percent">0%</strong> | <span id="feature-count">0 / 0 features</span></p>
+                  <p><strong id="feature-percent">0%</strong> | <span id="feature-count">0 / 0 возможностей</span></p>
                 </article>
                 <article class="status-card">
-                  <h3>UA Suspicion Level</h3>
-                  <p class="status-pill" id="ua-suspicion">none</p>
-                  <p id="ua-summary">Checking user agent patterns.</p>
+                  <h3><span class="material-symbols-outlined" aria-hidden="true">gpp_maybe</span>Уровень подозрительности UA</h3>
+                  <p class="status-pill" id="ua-suspicion">нет</p>
+                  <p id="ua-summary">Проверка паттернов user agent.</p>
+                </article>
+                <article class="status-card status-summary">
+                  <h3><span class="material-symbols-outlined" aria-hidden="true">hub</span>Сводка окружения</h3>
+                  <dl>
+                    <div><dt>Основа</dt><dd id="overview-core">-</dd></div>
+                    <div><dt>Рендер</dt><dd id="overview-render">-</dd></div>
+                    <div><dt>Локаль</dt><dd id="overview-locale">-</dd></div>
+                  </dl>
+                </article>
+                <article class="status-card status-summary">
+                  <h3><span class="material-symbols-outlined" aria-hidden="true">shield_person</span>Приватность и безопасность</h3>
+                  <dl>
+                    <div><dt>Профиль</dt><dd id="overview-privacy">-</dd></div>
+                    <div><dt>Разрешения</dt><dd id="overview-perms">-</dd></div>
+                    <div><dt>Изоляция</dt><dd id="overview-isolation">-</dd></div>
+                  </dl>
+                </article>
+                <article class="status-card status-summary">
+                  <h3><span class="material-symbols-outlined" aria-hidden="true">database</span>Хранилище и медиа</h3>
+                  <dl>
+                    <div><dt>Хранилище</dt><dd id="overview-storage">-</dd></div>
+                    <div><dt>Медиа</dt><dd id="overview-media">-</dd></div>
+                    <div><dt>Батарея</dt><dd id="overview-battery">-</dd></div>
+                  </dl>
                 </article>
               </div>
             </section>
             <section class="window-panel" role="tabpanel" data-tab-panel="browser">
-              <h3>Browser Profile</h3>
+              <div class="panel-meta">
+                <h3><span class="material-symbols-outlined" aria-hidden="true">language</span>Профиль браузера</h3>
+                <p>Точный снимок клиентской среды, движка, подключения и доступных интерфейсов браузера.</p>
+              </div>
               <dl class="detail-list" id="browser-details"></dl>
             </section>
             <section class="window-panel" role="tabpanel" data-tab-panel="system">
-              <h3>System Profile</h3>
+              <div class="panel-meta">
+                <h3><span class="material-symbols-outlined" aria-hidden="true">memory</span>Профиль системы</h3>
+                <p>Аппаратные и системные параметры, локаль, приватность, разрешения и контекст запуска.</p>
+              </div>
               <dl class="detail-list" id="system-details"></dl>
-              <h3>Feature Matrix</h3>
-              <ul class="feature-list" id="feature-list"></ul>
+              <h3 class="matrix-title"><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>Матрица возможностей</h3>
+              <div class="feature-grid" id="feature-list"></div>
             </section>
           </div>
         </article>
@@ -177,8 +208,8 @@
     <section id="contacts" class="section section-dark">
       <div class="container">
         <div class="section-head section-head-dark">
-          <p class="eyebrow">Contacts</p>
-          <h2 class="section-title">Контакты</h2>
+          <p class="eyebrow">Контакты</p>
+          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">alternate_email</span>Контакты</h2>
           <p class="section-lead section-lead-dark">Если у тебя есть задача на стыке ML и Frontend, напиши мне: от идеи до релиза пройдём быстро и чисто.</p>
         </div>
         <div class="bento contacts-bento">
@@ -188,16 +219,12 @@
             <a class="btn contacts-mail" href="mailto:hello@necrasov.dev">hello@necrasov.dev</a>
           </article>
           <article class="panel-dark contact-item">
-            <h3>GitHub</h3>
-            <a href="https://github.com/" target="_blank" rel="noreferrer noopener">@necrasov</a>
+            <h3><span class="material-symbols-outlined" aria-hidden="true">code</span>GitHub</h3>
+            <a href="https://github.com/necrasov-ilya" target="_blank" rel="noreferrer noopener">necrasov-ilya</a>
           </article>
           <article class="panel-dark contact-item">
-            <h3>LinkedIn</h3>
-            <a href="https://linkedin.com/" target="_blank" rel="noreferrer noopener">/in/necrasov</a>
-          </article>
-          <article class="panel-dark contact-item">
-            <h3>Telegram</h3>
-            <a href="https://t.me/" target="_blank" rel="noreferrer noopener">@necrasov_dev</a>
+            <h3><span class="material-symbols-outlined" aria-hidden="true">send</span>Telegram</h3>
+            <a href="https://t.me/NKSV_ILYA" target="_blank" rel="noreferrer noopener">@NKSV_ILYA</a>
           </article>
         </div>
       </div>

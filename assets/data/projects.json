@@ -6,8 +6,8 @@
       "summary": "Платформа визуального контроля качества с моделью детекции аномалий и web-дашбордом для операторов.",
       "tags": ["TypeScript", "Python", "FastAPI", "Computer Vision"],
       "links": [
-        { "label": "Case", "url": "#" },
-        { "label": "Code", "url": "#" }
+        { "label": "Кейс", "url": "#" },
+        { "label": "Код", "url": "#" }
       ]
     },
     {
@@ -16,8 +16,8 @@
       "summary": "Скоринг лидов и объяснимые сигналы намерения для CRM-интерфейса продаж в реальном времени.",
       "tags": ["ML Scoring", "PostgreSQL", "React", "Node.js"],
       "links": [
-        { "label": "Demo", "url": "#" },
-        { "label": "Docs", "url": "#" }
+        { "label": "Демо", "url": "#" },
+        { "label": "Доки", "url": "#" }
       ]
     },
     {
@@ -26,7 +26,7 @@
       "summary": "Внутренний фронтенд для AI-ассистента поддержки с контекстным поиском и подсветкой источников.",
       "tags": ["RAG", "Embeddings", "TypeScript", "Design System"],
       "links": [
-        { "label": "Overview", "url": "#" },
+        { "label": "Обзор", "url": "#" },
         { "label": "GitHub", "url": "#" }
       ]
     },
@@ -36,8 +36,8 @@
       "summary": "Bento-интерфейс сценарного прогноза с моделями временных рядов и аналитикой отклонений.",
       "tags": ["Time Series", "Plotly", "Python", "UX"],
       "links": [
-        { "label": "Preview", "url": "#" },
-        { "label": "Article", "url": "#" }
+        { "label": "Превью", "url": "#" },
+        { "label": "Статья", "url": "#" }
       ]
     }
   ]

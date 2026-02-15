@@ -114,15 +114,92 @@
       </div>
     </section>
 
-    <section id="its-u" class="section section-light">
+    <section id="its-u" class="section section-light itsu-section">
       <div class="container">
-        <h2 class="section-title">It's You</h2>
+        <div class="section-head">
+          <p class="eyebrow">It's U</p>
+          <h2 class="section-title">It's You</h2>
+          <p class="section-lead">Мини-паспорт твоего окружения: браузер, устройство и процент поддержки ключевых веб-возможностей.</p>
+        </div>
+        <article class="fingerprint-window panel" aria-label="Browser and system overview">
+          <header class="window-head">
+            <div class="window-title">
+              <span class="window-dot"></span>
+              <span>C:\\fingerprint.exe</span>
+            </div>
+            <div class="window-controls" aria-hidden="true">
+              <span class="wc-yellow"></span>
+              <span class="wc-green"></span>
+              <span class="wc-red"></span>
+            </div>
+          </header>
+          <div class="window-tabs" role="tablist" aria-label="Fingerprint tabs">
+            <button class="window-tab is-active" type="button" role="tab" aria-selected="true" data-tab-target="overview">Overview</button>
+            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="browser">Browser</button>
+            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="system">System</button>
+          </div>
+          <div class="window-body">
+            <section class="window-panel is-active" role="tabpanel" data-tab-panel="overview">
+              <div class="overview-grid">
+                <article class="status-card">
+                  <h3>Device ID</h3>
+                  <p id="device-id">calculating...</p>
+                </article>
+                <article class="status-card">
+                  <h3>Feature Support</h3>
+                  <div class="support-bar">
+                    <span id="feature-progress"></span>
+                  </div>
+                  <p><strong id="feature-percent">0%</strong> | <span id="feature-count">0 / 0 features</span></p>
+                </article>
+                <article class="status-card">
+                  <h3>UA Suspicion Level</h3>
+                  <p class="status-pill" id="ua-suspicion">none</p>
+                  <p id="ua-summary">Checking user agent patterns.</p>
+                </article>
+              </div>
+            </section>
+            <section class="window-panel" role="tabpanel" data-tab-panel="browser">
+              <h3>Browser Profile</h3>
+              <dl class="detail-list" id="browser-details"></dl>
+            </section>
+            <section class="window-panel" role="tabpanel" data-tab-panel="system">
+              <h3>System Profile</h3>
+              <dl class="detail-list" id="system-details"></dl>
+              <h3>Feature Matrix</h3>
+              <ul class="feature-list" id="feature-list"></ul>
+            </section>
+          </div>
+        </article>
       </div>
     </section>
 
     <section id="contacts" class="section section-dark">
       <div class="container">
-        <h2 class="section-title">Контакты</h2>
+        <div class="section-head section-head-dark">
+          <p class="eyebrow">Contacts</p>
+          <h2 class="section-title">Контакты</h2>
+          <p class="section-lead section-lead-dark">Если у тебя есть задача на стыке ML и Frontend, напиши мне: от идеи до релиза пройдём быстро и чисто.</p>
+        </div>
+        <div class="bento contacts-bento">
+          <article class="panel-dark contacts-main">
+            <h3>Открыт к проектам</h3>
+            <p>Запусти диалог любым удобным способом, и я предложу технический план, сроки и минимальный жизнеспособный scope.</p>
+            <a class="btn contacts-mail" href="mailto:hello@necrasov.dev">hello@necrasov.dev</a>
+          </article>
+          <article class="panel-dark contact-item">
+            <h3>GitHub</h3>
+            <a href="https://github.com/" target="_blank" rel="noreferrer noopener">@necrasov</a>
+          </article>
+          <article class="panel-dark contact-item">
+            <h3>LinkedIn</h3>
+            <a href="https://linkedin.com/" target="_blank" rel="noreferrer noopener">/in/necrasov</a>
+          </article>
+          <article class="panel-dark contact-item">
+            <h3>Telegram</h3>
+            <a href="https://t.me/" target="_blank" rel="noreferrer noopener">@necrasov_dev</a>
+          </article>
+        </div>
       </div>
     </section>
   </main>
@@ -135,5 +212,6 @@
 
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/projects.js" defer></script>
+  <script src="assets/js/its-u.js" defer></script>
 </body>
 </html>

@@ -51,6 +51,18 @@
   transform: scaleX(1);
 }
 
+.site-nav a.is-active::after {
+  transform: scaleX(1);
+}
+
+.site-header.is-dark {
+  background: rgba(5, 5, 5, 0.86);
+}
+
+.site-header.is-dark .site-nav a {
+  color: var(--bg-light);
+}
+
 .section-title {
   margin: 0;
   font-family: var(--font-display);

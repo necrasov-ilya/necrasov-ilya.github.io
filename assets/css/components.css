@@ -1,4 +1,4 @@
-﻿.site-header {
+.site-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +9,9 @@
   transform: translateY(-110%);
   opacity: 0;
   pointer-events: none;
-  transition: transform 260ms ease, opacity 260ms ease;
+  transition:
+    transform 260ms ease,
+    opacity 260ms ease;
 }
 
 .site-header.is-visible {
@@ -85,7 +87,10 @@
 
 .btn.header-blog-link {
   white-space: nowrap;
-  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .header-blog-link .material-symbols-outlined {
@@ -205,7 +210,10 @@
   font-weight: 700;
   background: var(--accent);
   color: var(--bg-light);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .btn:hover,

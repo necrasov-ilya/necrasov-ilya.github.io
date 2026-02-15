@@ -1,100 +1,144 @@
 ﻿<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Блог Ilya Necrasov: посты из Telegram-канала @nksvilya.">
-  <title>Ilya Necrasov | Блог</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,0,0">
-  <link rel="stylesheet" href="assets/css/tokens.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/blog.css">
-</head>
-<body class="blog-page">
-  <header class="site-header site-header-static is-visible">
-    <div class="container nav-shell">
-      <a class="brand" href="index.html#hero" aria-label="На главную">
-        <img src="assets/img/logo-avatar.svg" alt="Логотип">
-      </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
-        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-      </button>
-      <div class="header-tools" id="site-menu">
-        <nav class="site-nav" aria-label="Навигация по сайту">
-          <a href="index.html#about"><span class="material-symbols-outlined" aria-hidden="true">person</span>Обо мне</a>
-          <a href="index.html#projects"><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>Проекты</a>
-          <a href="index.html#its-u"><span class="material-symbols-outlined" aria-hidden="true">memory</span>Это ты</a>
-          <a href="index.html#contacts"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Контакты</a>
-        </nav>
-        <a class="btn btn-ghost header-blog-link" href="blog.html" aria-current="page">
-          <span class="material-symbols-outlined" aria-hidden="true">article</span>Читать блог
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Блог Ilya Necrasov: посты из Telegram-канала @nksvilya." />
+    <title>Ilya Necrasov | Блог</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,0,0"
+    />
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/blog.css" />
+  </head>
+  <body class="blog-page">
+    <header class="site-header site-header-static is-visible">
+      <div class="container nav-shell">
+        <a class="brand" href="index.html#hero" aria-label="На главную">
+          <img src="assets/img/logo-avatar.svg" alt="Логотип" />
         </a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="section section-dark blog-hero">
-      <div class="container">
-        <div class="section-head section-head-dark">
-          <p class="eyebrow">Блог</p>
-          <h1 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">newspaper</span>Посты из @nksvilya</h1>
-          <p class="section-lead section-lead-dark">Отдельная лента Telegram-публикаций с быстрым доступом к последним материалам.</p>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          aria-label="Open menu"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
+        <div class="header-tools" id="site-menu">
+          <nav class="site-nav" aria-label="Навигация по сайту">
+            <a href="index.html#about"
+              ><span class="material-symbols-outlined" aria-hidden="true">person</span>Обо мне</a
+            >
+            <a href="index.html#projects"
+              ><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span
+              >Проекты</a
+            >
+            <a href="index.html#its-u"
+              ><span class="material-symbols-outlined" aria-hidden="true">memory</span>Это ты</a
+            >
+            <a href="index.html#contacts"
+              ><span class="material-symbols-outlined" aria-hidden="true">mail</span>Контакты</a
+            >
+          </nav>
+          <a class="btn btn-ghost header-blog-link" href="blog.html" aria-current="page">
+            <span class="material-symbols-outlined" aria-hidden="true">article</span>Читать блог
+          </a>
         </div>
+      </div>
+    </header>
 
-        <div class="bento blog-meta-bento">
-          <article class="panel-dark blog-meta-card">
-            <h2>Источник</h2>
-            <p>Публичный Telegram-канал.</p>
-            <a class="btn blog-channel-link" href="https://t.me/nksvilya" target="_blank" rel="noreferrer noopener">Открыть канал</a>
-          </article>
-          <article class="panel-dark blog-meta-card">
-            <h2>Синхронизация</h2>
-            <dl class="blog-meta-list">
-              <div><dt>Постов в ленте</dt><dd id="blog-count">0</dd></div>
-              <div><dt>Последнее обновление</dt><dd id="blog-updated">-</dd></div>
-            </dl>
-            <button class="btn btn-ghost blog-refresh-btn" id="blog-refresh" type="button">
-              <span class="material-symbols-outlined" aria-hidden="true">sync</span>Обновить
+    <main>
+      <section class="section section-dark blog-hero">
+        <div class="container">
+          <div class="section-head section-head-dark">
+            <p class="eyebrow">Блог</p>
+            <h1 class="section-title section-title-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">newspaper</span>Посты из
+              @nksvilya
+            </h1>
+            <p class="section-lead section-lead-dark">
+              Отдельная лента Telegram-публикаций с быстрым доступом к последним материалам.
+            </p>
+          </div>
+
+          <div class="bento blog-meta-bento">
+            <article class="panel-dark blog-meta-card">
+              <h2>Источник</h2>
+              <p>Публичный Telegram-канал.</p>
+              <a
+                class="btn blog-channel-link"
+                href="https://t.me/nksvilya"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Открыть канал</a
+              >
+            </article>
+            <article class="panel-dark blog-meta-card">
+              <h2>Синхронизация</h2>
+              <dl class="blog-meta-list">
+                <div>
+                  <dt>Постов в ленте</dt>
+                  <dd id="blog-count">0</dd>
+                </div>
+                <div>
+                  <dt>Последнее обновление</dt>
+                  <dd id="blog-updated">-</dd>
+                </div>
+              </dl>
+              <button class="btn btn-ghost blog-refresh-btn" id="blog-refresh" type="button">
+                <span class="material-symbols-outlined" aria-hidden="true">sync</span>Обновить
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light blog-feed-section">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">Лента</p>
+            <h2 class="section-title section-title-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">view_module</span>Последние
+              публикации
+            </h2>
+            <p class="section-lead">
+              Карточки постов загружаются автоматически и открываются в Telegram в один клик.
+            </p>
+          </div>
+
+          <div class="bento blog-feed" id="blog-feed" aria-live="polite">
+            <article class="panel blog-status-card">
+              <h3>Загрузка</h3>
+              <p>Собираю посты из канала...</p>
+            </article>
+          </div>
+
+          <div class="blog-actions">
+            <button class="btn btn-ghost blog-more" id="blog-more" type="button" hidden>
+              Показать больше
             </button>
-          </article>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <section class="section section-light blog-feed-section">
+    <footer class="site-footer">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Лента</p>
-          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">view_module</span>Последние публикации</h2>
-          <p class="section-lead">Карточки постов загружаются автоматически и открываются в Telegram в один клик.</p>
-        </div>
-
-        <div class="bento blog-feed" id="blog-feed" aria-live="polite">
-          <article class="panel blog-status-card">
-            <h3>Загрузка</h3>
-            <p>Собираю посты из канала...</p>
-          </article>
-        </div>
-
-        <div class="blog-actions">
-          <button class="btn btn-ghost blog-more" id="blog-more" type="button" hidden>Показать больше</button>
-        </div>
+        <p>© <span id="year"></span> Ilya Necrasov.</p>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> Ilya Necrasov.</p>
-    </div>
-  </footer>
-
-  <script src="assets/js/header.js" defer></script>
-  <script src="assets/js/blog.js" defer></script>
-</body>
+    <script type="module" src="assets/js/pages/blog-page.js"></script>
+  </body>
 </html>

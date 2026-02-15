@@ -1,4 +1,4 @@
-﻿.hero-section {
+.hero-section {
   min-height: 100vh;
   display: grid;
   align-items: center;
@@ -161,7 +161,9 @@
   align-content: start;
   height: 100%;
   gap: var(--space-md);
-  transition: transform var(--transition-fast), background-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .project-card.is-entering {
@@ -635,7 +637,9 @@
   overflow: hidden;
   background: #ffffff;
   box-shadow: 3px 3px 0 #f2f2f2;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .detail-row:hover {
@@ -880,4 +884,3 @@
     grid-column: span 12;
   }
 }
-

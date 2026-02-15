@@ -1,17 +1,25 @@
-(() => {
-  const toggleButton = document.querySelector(".menu-toggle");
-  const headerTools = document.querySelector(".header-tools");
+import { qs } from "../../shared/dom.js";
+
+const MOBILE_QUERY = "(max-width: 900px)";
+
+export const initHeaderMenu = () => {
+  const toggleButton = qs(".menu-toggle");
+  const headerTools = qs(".header-tools");
 
   if (!toggleButton || !headerTools) {
     return;
   }
 
-  const icon = toggleButton.querySelector(".material-symbols-outlined");
-  const mobileQuery = window.matchMedia("(max-width: 900px)");
-  const backdrop = document.createElement("div");
-  backdrop.className = "menu-backdrop";
-  backdrop.setAttribute("aria-hidden", "true");
-  document.body.appendChild(backdrop);
+  const icon = qs(".material-symbols-outlined", toggleButton);
+  const mobileQuery = window.matchMedia(MOBILE_QUERY);
+  const existingBackdrop = qs(".menu-backdrop");
+  const backdrop = existingBackdrop || document.createElement("div");
+
+  if (!existingBackdrop) {
+    backdrop.className = "menu-backdrop";
+    backdrop.setAttribute("aria-hidden", "true");
+    document.body.append(backdrop);
+  }
 
   const isMobile = () => mobileQuery.matches;
 
@@ -33,6 +41,7 @@
     if (!isMobile()) {
       return;
     }
+
     const expanded = toggleButton.getAttribute("aria-expanded") === "true";
     setExpanded(!expanded);
   });
@@ -58,10 +67,13 @@
       closeMenu();
       return;
     }
-    document.body.classList.toggle("menu-open", toggleButton.getAttribute("aria-expanded") === "true");
+
+    document.body.classList.toggle(
+      "menu-open",
+      toggleButton.getAttribute("aria-expanded") === "true",
+    );
   };
 
   window.addEventListener("resize", onResize);
-
   closeMenu();
-})();
+};

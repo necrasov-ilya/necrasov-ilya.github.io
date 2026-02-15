@@ -1,0 +1,83 @@
+[
+  {
+    "id": "4hzwwn-1",
+    "title": "🖼 🥹 Как LLM формирует нам свои ответы? (3/3)",
+    "excerpt": "🥹 Как LLM формирует нам свои ответы? (3/3) Вот и завершилась первая трилогия , рассматривающая устройства языковых моделей , но всё-же я думаю, что стоит собрать часть знаний воедино и использовать их как настоящую пользу для реального использования непосредственно вами ❤️ 🟡 Почему кажется, что модель \"помнит\", а потом внезапно \"забыва...",
+    "link": "https://t.me/nksvilya/45",
+    "image": "https://cdn4.telesco.pe/file/gG1_DK_Ef95MTWDN-0Cd98AbQLcY0lH3gItWkpi3i9dJ6VirBSPMgnG-bzbrFUmGj2fiS5fQfN2rfXlsra-RgdMiF4MvNkUQoTDoSOm1YYtDbvAIKdNNVLJ1ylJt69euB3BI0CRY4M6kx4neKpYnwMxDSwS3FqhuThYWxocenTMsd2UmyZmw7U_aE9S3dtc7LCqEI908AgBfExHR-6LUHo0GOKPhLaoXpCBgEsacvgEe_VPpUEA_NCSEYCwNveLxmk5YhclNP2LOnS86mq8DocLitQaRxfefnrGLoTYalbNpdJqinsHYRoaIMDTJKxOSxhUxTfZpJQiuAByOVidC1w.jpg",
+    "tags": [
+      "#nksv_razbor",
+      "#nksv_chain"
+    ],
+    "publishedAt": "Sat, 14 Feb 2026 18:52:43 GMT"
+  },
+  {
+    "id": "4hzwwm-2",
+    "title": "🖼 🥹 Как LLM формирует нам свои ответы? (2/3)",
+    "excerpt": "🥹 Как LLM формирует нам свои ответы? (2/3) Скажу прямо , первая часть была ориентирована на общее объяснение \"в целом как это работает\". Сейчас мы... спустимся на уровень ниже , потому-что в реальности готовый ответ модели строиться из огромного пайплайна (некого конвейера), который в свою очередь обладает очень приземлёнными ограничени...",
+    "link": "https://t.me/nksvilya/44",
+    "image": "https://cdn4.telesco.pe/file/QaevTTKt3Gexj2DtUnvwG6YdqiLGhku0-NqKtibfMEHh-oHa2KKq39lUxYGRukPTeV0BdRNkQF4o7PUsC_lWNIND1aWSEUkRVt8jZo4hlW6Iv5Mgnti6pFTVqJ9HwoKV4e3-Iux-0yX7S7H4X9272nTrCz-gV8sbQi7Y0x0GRj6pjJ9orCyRx_31jJuUsUxVKaQ2VKNfT8wcZfaEkDpvvW8VOrze_VozIEEpN3-TQn8PcVryhznlo0-P0EcpSHsukun9jdWZFYaSudBejFGwcrRZLRLfuwo49LGCU020vV8ULhMI6y9S0CREymVKMWvFqeEWwGORJsKkfFjqyftFIQ.jpg",
+    "tags": [
+      "#nksv_razbor",
+      "#nksv_chain"
+    ],
+    "publishedAt": "Sun, 01 Feb 2026 12:43:02 GMT"
+  },
+  {
+    "id": "4hzwwl-3",
+    "title": "🖼 🥹 Как LLM формирует нам свои ответы? (1/3)",
+    "excerpt": "🥹 Как LLM формирует нам свои ответы? (1/3) Казалось бы , в последнее время мы всё чаще взаимодействуем с языковыми моделями, будь то ChatGPT , Claude , Qwen , Deepseek и т.п. Они генерируют текст для самых разных задач, но как вообще устроены их ответы? Обычно это либо объясняют слишком сложно, либо вообще не объясняют и слушатель такой...",
+    "link": "https://t.me/nksvilya/43",
+    "image": "https://cdn4.telesco.pe/file/F36kcdXnjJjNgUH29Hc2gIbjwObrXUGzo3HWjLkRzbU03LBVCEICK5Uw0UGrhQwGLNXXDOhxNXDLbntNVXkjHqgBFqQKDVaWbQp9ekxQjbZ8BUUH1huL5ZgavW_JreYzpTP7VkU6BUCyj2l3lXSOgxFtF1r_R6Ovo08M1K2nCqh7Nobzo0n7nv_UmSyXNmFEKFPTE-7Bkw98ToSc_fduGrrK5ZydR-CjtN7k9tJhtJ14zzYN1WngadWEOLGUL8rCwqmhpQgDo6fRaIWIefzSe1Dxd29Lv7OFRydkjfJtKiGpf6unYb_VPOqY3R5xBFgGzZx-O99ay8Nb4HTNALJzJg.jpg",
+    "tags": [
+      "#nksv_razbor",
+      "#nksv_chain"
+    ],
+    "publishedAt": "Mon, 26 Jan 2026 17:30:54 GMT"
+  },
+  {
+    "id": "4hzwwk-4",
+    "title": "🖼 🥹 Gemini 3 pro и NanoBanana Pro — Революция?",
+    "excerpt": "🥹 Gemini 3 pro и NanoBanana Pro — Революция? Попробую разобраться. В прошлом посте мы разбирали нейро-агентов и AGI: перенос знаний, правила \"на лету\", сравнительно простые для человека задачи, на которых модели стабильно показывают крайне грустные результаты. Сегодня — конкретный кейс, где это перестаёт быть чистой теорией: связка Gemi...",
+    "link": "https://t.me/nksvilya/42",
+    "image": "https://cdn4.telesco.pe/file/uNF3waWYNodlWMgAxQ9YwDapqXIwh_kMEtONfbYTq-pezO-e1ImY-2LNiqKLo8fGokdgpizTWNm4fhL2KgIVbMsFI7qP7fi4bNMo0WPyuQiNPJZEPW0oonHGOPXHqaKH-Rjc4W2Ly3ts6BusgY5cXfG0KhlfItRut7CCCRNjoHtRMUrjpIKF-yJJd6VHtrHNQ1-b_tAgZRxKRkQNdovqFptSJHg2lZDF7JMz_QfONOhkhNtIjVOhwxAUKgNk4gOk15cmoohUe28vnsuocbelNFh9vKZ6TC3hh1cj0O3FKfyGuEglvddwmdEXDEqsUsgOOUaO1wDk3HztBiqoSLtO1g.jpg",
+    "tags": [
+      "#nksv_razbor"
+    ],
+    "publishedAt": "Sun, 23 Nov 2025 13:05:31 GMT"
+  },
+  {
+    "id": "4hzwwi-5",
+    "title": "🖼 🥹 Почему нейро-агенты — это шаг к AGI, но не само AGI",
+    "excerpt": "🥹 Почему нейро-агенты — это шаг к AGI, но не само AGI Агенты — это способ заставить модель не просто говорить, а делать : ставить цель, спланировать шаги, выбрать инструмент, выполнить действие в интерфейсе, проверить результат и поправить план. Это новый цикл управления: план → действие → наблюдение → рефлексия → память. Из «автокомпли...",
+    "link": "https://t.me/nksvilya/40",
+    "image": "https://cdn4.telesco.pe/file/JiI-qSfLOOAk09cFF191iXsPMzVPRux410yqewQ5gc76Mt4UBKVJFJtSWlxbtVw8CNCulaU5MCT9ZT7RdZPx0yZDdvpGToMYLZ2rq7I_ObeDkQ3MaWyxKvjIXdapClKogub9zafoJxM-bboqUJISajn3x_HLy_HCS7EETL8452ZLEdnLkVe5nCNls9ZtGdiRK0wmQdXjUdLyX8WFokJv5Q8G7gxaV6wgeHXBml2RD08MweFwVIGELx-_QQ4wxEc2eA22xdBRSejzplRe7EX8uAVLrsv-SG7sptYgJpAmKBK1Hf-WWqWOZfoDEmc6CBBczMt0AFv9_WF33s7ADwRrSg.jpg",
+    "tags": [
+      "#nksv_razbor"
+    ],
+    "publishedAt": "Wed, 08 Oct 2025 18:07:34 GMT"
+  },
+  {
+    "id": "4hzwvv-6",
+    "title": "🖼 📌 Как читать этот канал?",
+    "excerpt": "📌 Как читать этот канал ? Здесь я собираю то, что реально помогает разбираться в сложных темах и применять знания на практике. Форматы: — Разбор : что известно, что проверили, к чему пришли. — Статьи : объёмная информация, в виде статьи telegraph. — Гайд/Fix : пошагово, с откатом и частыми ошибками. — Миф : популярное утверждение → пров...",
+    "link": "https://t.me/nksvilya/38",
+    "image": "https://cdn4.telesco.pe/file/rPzbgvfWHKqjDTz55naTib70VyZkVvRoVpjGyg_B0L6MgbNTomTPpRpoyRNRYS_7MUPbJDbsiP1WsIC2gfDSU5oUwxScp2cMuCwRASG6k4NXyzRX3plqqohTER6jYf5PiJM3aM209Aflm5YdBxzNl9aSCemG1WafveNA5yXxUzryS7yBok_w26Fbth2Nll-eafg9-6x5kRmEEvCY3_Jtv7FXPh8se5BCteFOdMbQTJ61ELFQFCJwbUzeFzCoyvaMTj0FbxQodl21mNaYtlBDdrQZI7Y60yvKKP_ziTizfsoCdHxoE-K8StNiz0Z8g6I5Dufi62dyjOJRVYCtF9w6YA.jpg",
+    "tags": [
+      "#nksv_razbor",
+      "#nksv_article",
+      "#nksv_fix",
+      "#nksv_myth"
+    ],
+    "publishedAt": "Wed, 08 Oct 2025 16:10:55 GMT"
+  },
+  {
+    "id": "4hzwvs-7",
+    "title": "🖼 👋 Hello, world!",
+    "excerpt": "👋 Hello, world! @nksvilya — личный и, можно сказать, технический канал. Здесь будет информация, с которой я работаю и которая актуальна в моменте. 🗂 Формат свободный, без чёткого расписания, но с упором на интересную подачу.",
+    "link": "https://t.me/nksvilya/35",
+    "image": "https://cdn4.telesco.pe/file/LacRS6QkTQ4Wv1Q4rNj4XZkVOpZBheLWcj5epW3m342Fz6xL1FSv2B7N4VJodpVLSzMDpAF4vg1arVHvWuyBQiDRHN7tRoOSdYO971qRbD1cdV-0J0Ee0gxOjm1D4FViOiNQ_Y4xd0SHec36dxY1NRgRdWIsa9e6c20c7_0XlSslGFJDeaHq5caNWgbO9ITNkcUxZCXkPZoBX1WmjUGVaT7gbc4NDynengqOG2fUfMQ9ITa5P_k2Ntkt16B5rg6Jbz5O4ezLJkea6VKxRDz3sw63_j8WRu3iRh0O2POml_gjMBDo2hpvDvm9WbFPjlxGP_zYyZUZ51cV82S2wc4jAQ.jpg",
+    "tags": [],
+    "publishedAt": "Wed, 08 Oct 2025 15:27:08 GMT"
+  }
+]

@@ -1,251 +1,403 @@
 ﻿<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Портфолио Ilya Necrasov: ML и Frontend разработка.">
-  <title>Ilya Necrasov | Портфолио ML + Frontend</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,0,0">
-  <link rel="stylesheet" href="assets/css/tokens.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/sections.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container nav-shell">
-      <a class="brand" href="#hero" aria-label="На главную">
-        <img src="assets/img/logo-avatar.svg" alt="Логотип">
-      </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
-        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-      </button>
-      <div class="header-tools" id="site-menu">
-        <nav class="site-nav" aria-label="Навигация по странице">
-          <a href="#about"><span class="material-symbols-outlined" aria-hidden="true">person</span>Обо мне</a>
-          <a href="#projects"><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>Проекты</a>
-          <a href="#its-u"><span class="material-symbols-outlined" aria-hidden="true">memory</span>Это ты</a>
-          <a href="#contacts"><span class="material-symbols-outlined" aria-hidden="true">mail</span>Контакты</a>
-        </nav>
-        <a class="btn btn-ghost header-blog-link" href="blog.html"><span class="material-symbols-outlined" aria-hidden="true">article</span>Читать блог</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section id="hero" class="section hero-section section-light">
-      <div class="container hero-layout">
-        <article class="hero-avatar-box">
-          <img src="assets/img/avatar.png" alt="Фото Ilya Necrasov" class="hero-avatar">
-          <div class="hero-avatar-foot">
-            <span class="material-symbols-outlined" aria-hidden="true">verified</span>
-            <p>GenAI Application Engineer + Frontend Engineer</p>
-          </div>
-        </article>
-        <article class="hero-intro panel">
-          <img class="hero-logo" src="assets/img/logo.svg" alt="Логотип проекта">
-          <p class="hero-subtitle">Работаю на стыке GenAI и фронтенда: RAG-системы, агентные сценарии и интеграция в существующие веб-продукты.</p>
-          <ul class="hero-highlights">
-            <li><span class="material-symbols-outlined" aria-hidden="true">terminal</span>RAG-системы</li>
-            <li><span class="material-symbols-outlined" aria-hidden="true">auto_graph</span>AI-агенты</li>
-            <li><span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span>Frontend-интеграция в продукт</li>
-          </ul>
-          <div class="hero-actions">
-            <a class="btn" href="#projects">Смотреть проекты</a>
-            <a class="btn btn-ghost" href="#contacts">Связаться</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="about" class="section section-light">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Обо мне</p>
-          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">face</span>Обо мне</h2>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Портфолио Ilya Necrasov: ML и Frontend разработка." />
+    <title>Ilya Necrasov | Портфолио ML + Frontend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,0,0"
+    />
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/sections.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-shell">
+        <a class="brand" href="#hero" aria-label="На главную">
+          <img src="assets/img/logo-avatar.svg" alt="Логотип" />
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          aria-label="Open menu"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
+        <div class="header-tools" id="site-menu">
+          <nav class="site-nav" aria-label="Навигация по странице">
+            <a href="#about"
+              ><span class="material-symbols-outlined" aria-hidden="true">person</span>Обо мне</a
+            >
+            <a href="#projects"
+              ><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span
+              >Проекты</a
+            >
+            <a href="#its-u"
+              ><span class="material-symbols-outlined" aria-hidden="true">memory</span>Это ты</a
+            >
+            <a href="#contacts"
+              ><span class="material-symbols-outlined" aria-hidden="true">mail</span>Контакты</a
+            >
+          </nav>
+          <a class="btn btn-ghost header-blog-link" href="blog.html"
+            ><span class="material-symbols-outlined" aria-hidden="true">article</span>Читать блог</a
+          >
         </div>
-        <div class="bento about-bento">
-          <article class="panel about-card about-main">
-            <h3>GenAI Application Engineer + Frontend</h3>
-            <p>GenAI Application Engineer - это проектирование AI-функций для продукта: RAG, агентные сценарии и интеграционные пайплайны. Frontend - это клиентская часть, интерфейсы и UX. Могу работать в каждом направлении отдельно и объединять их, когда нужна аккуратная интеграция в существующий сервис.</p>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="section hero-section section-light">
+        <div class="container hero-layout">
+          <article class="hero-avatar-box">
+            <img src="assets/img/avatar.png" alt="Фото Ilya Necrasov" class="hero-avatar" />
+            <div class="hero-avatar-foot">
+              <span class="material-symbols-outlined" aria-hidden="true">verified</span>
+              <p>GenAI Application Engineer + Frontend Engineer</p>
+            </div>
           </article>
-          <article class="panel about-card about-focus">
-            <h3>Что в фокусе</h3>
-            <ul>
-              <li>RAG и retrieval-пайплайны</li>
-              <li>Агентные сценарии и работа с инструментами</li>
-              <li>Интерфейсы для внутренних систем</li>
+          <article class="hero-intro panel">
+            <img class="hero-logo" src="assets/img/logo.svg" alt="Логотип проекта" />
+            <p class="hero-subtitle">
+              Работаю на стыке GenAI и фронтенда: RAG-системы, агентные сценарии и интеграция в
+              существующие веб-продукты.
+            </p>
+            <ul class="hero-highlights">
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">terminal</span
+                >RAG-системы
+              </li>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">auto_graph</span
+                >AI-агенты
+              </li>
+              <li>
+                <span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span
+                >Frontend-интеграция в продукт
+              </li>
             </ul>
-          </article>
-          <article class="panel about-card about-stack">
-            <h3>Технологии</h3>
-            <ul class="chip-list">
-              <li>TypeScript</li>
-              <li>Python</li>
-              <li>React</li>
-              <li>Node.js</li>
-              <li>Qdrant</li>
-              <li>OpenSearch</li>
-              <li>LangChain</li>
-            </ul>
-          </article>
-          <article class="panel about-card about-now">
-            <h3>UX/UI опыт</h3>
-            <p>Долгий практический опыт в UX/UI-дизайне: сценарии, прототипы, структура интерфейсов и визуальные системы.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section section-dark">
-      <div class="container">
-        <div class="section-head section-head-dark">
-          <p class="eyebrow">Проекты</p>
-          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Проекты</h2>
-          <p class="section-lead section-lead-dark">Подборка кейсов на стыке ML и Frontend: от аналитики поведения до production-интерфейсов с живыми данными.</p>
-        </div>
-        <div class="bento projects-grid" id="projects-grid" aria-live="polite"></div>
-        <div class="projects-actions">
-          <button class="btn projects-more" id="projects-more" type="button" hidden>Показать больше</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="its-u" class="section section-light itsu-section">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Это ты</p>
-          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">neurology</span>Это ты</h2>
-          <p class="section-lead">Мини-паспорт твоего окружения: браузер, устройство и процент поддержки ключевых веб-возможностей.</p>
-        </div>
-        <article class="fingerprint-window panel" aria-label="Обзор браузера и системы">
-          <header class="window-head">
-            <div class="window-title">
-              <span class="window-dot"></span>
-              <span>C:\fingerprint.exe</span>
+            <div class="hero-actions">
+              <a class="btn" href="#projects">Смотреть проекты</a>
+              <a class="btn btn-ghost" href="#contacts">Связаться</a>
             </div>
-            <div class="window-controls" aria-hidden="true">
-              <span class="wc-yellow"></span>
-              <span class="wc-green"></span>
-              <span class="wc-red"></span>
-            </div>
-          </header>
-          <div class="window-tabs" role="tablist" aria-label="Вкладки паспорта">
-            <button class="window-tab is-active" type="button" role="tab" aria-selected="true" data-tab-target="overview">Обзор</button>
-            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="browser">Браузер</button>
-            <button class="window-tab" type="button" role="tab" aria-selected="false" data-tab-target="system">Система</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="section section-light">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">Обо мне</p>
+            <h2 class="section-title section-title-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">face</span>Обо мне
+            </h2>
           </div>
-          <div class="window-body" id="window-body">
-            <div class="tab-loader" id="tab-loader" hidden>
-              <div class="tab-loader-ring" aria-hidden="true"></div>
-            </div>
-            <section class="window-panel is-active" role="tabpanel" data-tab-panel="overview">
-              <div class="overview-grid">
-                <article class="status-card">
-                  <h3><span class="material-symbols-outlined" aria-hidden="true">badge</span>ID устройства</h3>
-                  <p id="device-id">вычисление...</p>
-                </article>
-                <article class="status-card">
-                  <h3><span class="material-symbols-outlined" aria-hidden="true">network_check</span>Поддержка возможностей</h3>
-                  <div class="support-bar">
-                    <span id="feature-progress"></span>
-                  </div>
-                  <p><strong id="feature-percent">0%</strong> | <span id="feature-count">0 / 0 возможностей</span></p>
-                </article>
-                <article class="status-card">
-                  <h3><span class="material-symbols-outlined" aria-hidden="true">gpp_maybe</span>Уровень подозрительности UA</h3>
-                  <p class="status-pill" id="ua-suspicion">нет</p>
-                  <p id="ua-summary">Проверка паттернов user agent.</p>
-                </article>
-                <article class="status-card status-summary">
-                  <h3><span class="material-symbols-outlined" aria-hidden="true">hub</span>Сводка окружения</h3>
-                  <dl>
-                    <div><dt>Основа</dt><dd id="overview-core">-</dd></div>
-                    <div><dt>Рендер</dt><dd id="overview-render">-</dd></div>
-                    <div><dt>Локаль</dt><dd id="overview-locale">-</dd></div>
-                  </dl>
-                </article>
-                <article class="status-card status-summary">
-                  <h3><span class="material-symbols-outlined" aria-hidden="true">shield_person</span>Приватность и безопасность</h3>
-                  <dl>
-                    <div><dt>Профиль</dt><dd id="overview-privacy">-</dd></div>
-                    <div><dt>Разрешения</dt><dd id="overview-perms">-</dd></div>
-                    <div><dt>Изоляция</dt><dd id="overview-isolation">-</dd></div>
-                  </dl>
-                </article>
-                <article class="status-card status-summary">
-                  <h3><span class="material-symbols-outlined" aria-hidden="true">database</span>Хранилище и медиа</h3>
-                  <dl>
-                    <div><dt>Хранилище</dt><dd id="overview-storage">-</dd></div>
-                    <div><dt>Медиа</dt><dd id="overview-media">-</dd></div>
-                    <div><dt>Батарея</dt><dd id="overview-battery">-</dd></div>
-                  </dl>
-                </article>
-              </div>
-            </section>
-            <section class="window-panel" role="tabpanel" data-tab-panel="browser">
-              <div class="panel-meta">
-                <h3><span class="material-symbols-outlined" aria-hidden="true">language</span>Профиль браузера</h3>
-                <p>Точный снимок клиентской среды, движка, подключения и доступных интерфейсов браузера.</p>
-              </div>
-              <dl class="detail-list" id="browser-details"></dl>
-            </section>
-            <section class="window-panel" role="tabpanel" data-tab-panel="system">
-              <div class="panel-meta">
-                <h3><span class="material-symbols-outlined" aria-hidden="true">memory</span>Профиль системы</h3>
-                <p>Аппаратные и системные параметры, локаль, приватность, разрешения и контекст запуска.</p>
-              </div>
-              <dl class="detail-list" id="system-details"></dl>
-              <h3 class="matrix-title"><span class="material-symbols-outlined" aria-hidden="true">deployed_code</span>Матрица возможностей</h3>
-              <div class="feature-grid" id="feature-list"></div>
-            </section>
+          <div class="bento about-bento">
+            <article class="panel about-card about-main">
+              <h3>GenAI Application Engineer + Frontend</h3>
+              <p>
+                GenAI Application Engineer - это проектирование AI-функций для продукта: RAG,
+                агентные сценарии и интеграционные пайплайны. Frontend - это клиентская часть,
+                интерфейсы и UX. Могу работать в каждом направлении отдельно и объединять их, когда
+                нужна аккуратная интеграция в существующий сервис.
+              </p>
+            </article>
+            <article class="panel about-card about-focus">
+              <h3>Что в фокусе</h3>
+              <ul>
+                <li>RAG и retrieval-пайплайны</li>
+                <li>Агентные сценарии и работа с инструментами</li>
+                <li>Интерфейсы для внутренних систем</li>
+              </ul>
+            </article>
+            <article class="panel about-card about-stack">
+              <h3>Технологии</h3>
+              <ul class="chip-list">
+                <li>TypeScript</li>
+                <li>Python</li>
+                <li>React</li>
+                <li>Node.js</li>
+                <li>Qdrant</li>
+                <li>OpenSearch</li>
+                <li>LangChain</li>
+              </ul>
+            </article>
+            <article class="panel about-card about-now">
+              <h3>UX/UI опыт</h3>
+              <p>
+                Долгий практический опыт в UX/UI-дизайне: сценарии, прототипы, структура интерфейсов
+                и визуальные системы.
+              </p>
+            </article>
           </div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <section id="contacts" class="section section-dark">
+      <section id="projects" class="section section-dark">
+        <div class="container">
+          <div class="section-head section-head-dark">
+            <p class="eyebrow">Проекты</p>
+            <h2 class="section-title section-title-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Проекты
+            </h2>
+            <p class="section-lead section-lead-dark">
+              Подборка кейсов на стыке ML и Frontend: от аналитики поведения до
+              production-интерфейсов с живыми данными.
+            </p>
+          </div>
+          <div class="bento projects-grid" id="projects-grid" aria-live="polite"></div>
+          <div class="projects-actions">
+            <button class="btn projects-more" id="projects-more" type="button" hidden>
+              Показать больше
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="its-u" class="section section-light itsu-section">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">Это ты</p>
+            <h2 class="section-title section-title-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">neurology</span>Это ты
+            </h2>
+            <p class="section-lead">
+              Мини-паспорт твоего окружения: браузер, устройство и процент поддержки ключевых
+              веб-возможностей.
+            </p>
+          </div>
+          <article class="fingerprint-window panel" aria-label="Обзор браузера и системы">
+            <header class="window-head">
+              <div class="window-title">
+                <span class="window-dot"></span>
+                <span>C:\fingerprint.exe</span>
+              </div>
+              <div class="window-controls" aria-hidden="true">
+                <span class="wc-yellow"></span>
+                <span class="wc-green"></span>
+                <span class="wc-red"></span>
+              </div>
+            </header>
+            <div class="window-tabs" role="tablist" aria-label="Вкладки паспорта">
+              <button
+                class="window-tab is-active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-tab-target="overview"
+              >
+                Обзор
+              </button>
+              <button
+                class="window-tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-tab-target="browser"
+              >
+                Браузер
+              </button>
+              <button
+                class="window-tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-tab-target="system"
+              >
+                Система
+              </button>
+            </div>
+            <div class="window-body" id="window-body">
+              <div class="tab-loader" id="tab-loader" hidden>
+                <div class="tab-loader-ring" aria-hidden="true"></div>
+              </div>
+              <section class="window-panel is-active" role="tabpanel" data-tab-panel="overview">
+                <div class="overview-grid">
+                  <article class="status-card">
+                    <h3>
+                      <span class="material-symbols-outlined" aria-hidden="true">badge</span>ID
+                      устройства
+                    </h3>
+                    <p id="device-id">вычисление...</p>
+                  </article>
+                  <article class="status-card">
+                    <h3>
+                      <span class="material-symbols-outlined" aria-hidden="true">network_check</span
+                      >Поддержка возможностей
+                    </h3>
+                    <div class="support-bar">
+                      <span id="feature-progress"></span>
+                    </div>
+                    <p>
+                      <strong id="feature-percent">0%</strong> |
+                      <span id="feature-count">0 / 0 возможностей</span>
+                    </p>
+                  </article>
+                  <article class="status-card">
+                    <h3>
+                      <span class="material-symbols-outlined" aria-hidden="true">gpp_maybe</span
+                      >Уровень подозрительности UA
+                    </h3>
+                    <p class="status-pill" id="ua-suspicion">нет</p>
+                    <p id="ua-summary">Проверка паттернов user agent.</p>
+                  </article>
+                  <article class="status-card status-summary">
+                    <h3>
+                      <span class="material-symbols-outlined" aria-hidden="true">hub</span>Сводка
+                      окружения
+                    </h3>
+                    <dl>
+                      <div>
+                        <dt>Основа</dt>
+                        <dd id="overview-core">-</dd>
+                      </div>
+                      <div>
+                        <dt>Рендер</dt>
+                        <dd id="overview-render">-</dd>
+                      </div>
+                      <div>
+                        <dt>Локаль</dt>
+                        <dd id="overview-locale">-</dd>
+                      </div>
+                    </dl>
+                  </article>
+                  <article class="status-card status-summary">
+                    <h3>
+                      <span class="material-symbols-outlined" aria-hidden="true">shield_person</span
+                      >Приватность и безопасность
+                    </h3>
+                    <dl>
+                      <div>
+                        <dt>Профиль</dt>
+                        <dd id="overview-privacy">-</dd>
+                      </div>
+                      <div>
+                        <dt>Разрешения</dt>
+                        <dd id="overview-perms">-</dd>
+                      </div>
+                      <div>
+                        <dt>Изоляция</dt>
+                        <dd id="overview-isolation">-</dd>
+                      </div>
+                    </dl>
+                  </article>
+                  <article class="status-card status-summary">
+                    <h3>
+                      <span class="material-symbols-outlined" aria-hidden="true">database</span
+                      >Хранилище и медиа
+                    </h3>
+                    <dl>
+                      <div>
+                        <dt>Хранилище</dt>
+                        <dd id="overview-storage">-</dd>
+                      </div>
+                      <div>
+                        <dt>Медиа</dt>
+                        <dd id="overview-media">-</dd>
+                      </div>
+                      <div>
+                        <dt>Батарея</dt>
+                        <dd id="overview-battery">-</dd>
+                      </div>
+                    </dl>
+                  </article>
+                </div>
+              </section>
+              <section class="window-panel" role="tabpanel" data-tab-panel="browser">
+                <div class="panel-meta">
+                  <h3>
+                    <span class="material-symbols-outlined" aria-hidden="true">language</span
+                    >Профиль браузера
+                  </h3>
+                  <p>
+                    Точный снимок клиентской среды, движка, подключения и доступных интерфейсов
+                    браузера.
+                  </p>
+                </div>
+                <dl class="detail-list" id="browser-details"></dl>
+              </section>
+              <section class="window-panel" role="tabpanel" data-tab-panel="system">
+                <div class="panel-meta">
+                  <h3>
+                    <span class="material-symbols-outlined" aria-hidden="true">memory</span>Профиль
+                    системы
+                  </h3>
+                  <p>
+                    Аппаратные и системные параметры, локаль, приватность, разрешения и контекст
+                    запуска.
+                  </p>
+                </div>
+                <dl class="detail-list" id="system-details"></dl>
+                <h3 class="matrix-title">
+                  <span class="material-symbols-outlined" aria-hidden="true">deployed_code</span
+                  >Матрица возможностей
+                </h3>
+                <div class="feature-grid" id="feature-list"></div>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contacts" class="section section-dark">
+        <div class="container">
+          <div class="section-head section-head-dark">
+            <p class="eyebrow">Контакты</p>
+            <h2 class="section-title section-title-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">alternate_email</span
+              >Контакты
+            </h2>
+            <p class="section-lead section-lead-dark">Каналы связи.</p>
+          </div>
+          <div class="bento contacts-bento">
+            <article class="panel-dark contacts-main">
+              <h3>Связь</h3>
+              <p>Почта для рабочих и личных сообщений.</p>
+              <a class="btn contacts-mail" href="mailto:evart2006@gmail.com">evart2006@gmail.com</a>
+            </article>
+            <article class="panel-dark contact-item">
+              <h3><span class="material-symbols-outlined" aria-hidden="true">code</span>GitHub</h3>
+              <a href="https://github.com/necrasov-ilya" target="_blank" rel="noreferrer noopener"
+                >necrasov-ilya</a
+              >
+            </article>
+            <article class="panel-dark contact-item">
+              <h3>
+                <span class="material-symbols-outlined" aria-hidden="true">send</span>Telegram
+              </h3>
+              <a href="https://t.me/NKSV_ILYA" target="_blank" rel="noreferrer noopener"
+                >@NKSV_ILYA</a
+              >
+            </article>
+            <article class="panel-dark contact-item">
+              <h3>
+                <span class="material-symbols-outlined" aria-hidden="true">article</span>Мой блог
+              </h3>
+              <a href="blog.html">Открыть блог</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
       <div class="container">
-        <div class="section-head section-head-dark">
-          <p class="eyebrow">Контакты</p>
-          <h2 class="section-title section-title-icon"><span class="material-symbols-outlined" aria-hidden="true">alternate_email</span>Контакты</h2>
-          <p class="section-lead section-lead-dark">Каналы связи.</p>
-        </div>
-        <div class="bento contacts-bento">
-          <article class="panel-dark contacts-main">
-            <h3>Связь</h3>
-            <p>Почта для рабочих и личных сообщений.</p>
-            <a class="btn contacts-mail" href="mailto:evart2006@gmail.com">evart2006@gmail.com</a>
-          </article>
-          <article class="panel-dark contact-item">
-            <h3><span class="material-symbols-outlined" aria-hidden="true">code</span>GitHub</h3>
-            <a href="https://github.com/necrasov-ilya" target="_blank" rel="noreferrer noopener">necrasov-ilya</a>
-          </article>
-          <article class="panel-dark contact-item">
-            <h3><span class="material-symbols-outlined" aria-hidden="true">send</span>Telegram</h3>
-            <a href="https://t.me/NKSV_ILYA" target="_blank" rel="noreferrer noopener">@NKSV_ILYA</a>
-          </article>
-          <article class="panel-dark contact-item">
-            <h3><span class="material-symbols-outlined" aria-hidden="true">article</span>Мой блог</h3>
-            <a href="blog.html">Открыть блог</a>
-          </article>
-        </div>
+        <p>© <span id="year"></span> Ilya Necrasov.</p>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> Ilya Necrasov.</p>
-    </div>
-  </footer>
-
-  <script src="assets/js/header.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/projects.js" defer></script>
-  <script src="assets/js/its-u.js" defer></script>
-</body>
+    <script type="module" src="assets/js/pages/index-page.js"></script>
+  </body>
 </html>

@@ -99,7 +99,9 @@ body.blog-page {
 .blog-refresh-btn .material-symbols-outlined,
 .blog-refresh-icon {
   font-size: 1rem;
-  transition: transform 220ms ease, opacity 220ms ease;
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
 }
 
 .blog-refresh-btn::before {
@@ -107,12 +109,7 @@ body.blog-page {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(
-    115deg,
-    transparent 25%,
-    rgba(201, 36, 85, 0.2) 50%,
-    transparent 75%
-  );
+  background: linear-gradient(115deg, transparent 25%, rgba(201, 36, 85, 0.2) 50%, transparent 75%);
   transform: translateX(-140%);
   opacity: 0;
 }

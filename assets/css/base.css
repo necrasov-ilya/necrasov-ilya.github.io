@@ -1,4 +1,4 @@
-﻿* {
+* {
   box-sizing: border-box;
 }
 
@@ -61,7 +61,9 @@ a {
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 440ms ease, transform 440ms ease;
+  transition:
+    opacity 440ms ease,
+    transform 440ms ease;
 }
 
 .reveal.is-visible {

@@ -39,14 +39,26 @@
     }
 
     const headerOffset = header ? header.offsetHeight : 0;
-    const marker = window.scrollY + headerOffset + 28;
+    const viewportTop = headerOffset + 8;
+    const viewportBottom = window.innerHeight;
 
     let active = sectionMap[0];
+    let maxVisibleHeight = -Infinity;
+
     sectionMap.forEach((item) => {
-      if (marker >= item.section.offsetTop) {
+      const rect = item.section.getBoundingClientRect();
+      const visibleHeight = Math.min(rect.bottom, viewportBottom) - Math.max(rect.top, viewportTop);
+
+      if (visibleHeight > maxVisibleHeight) {
+        maxVisibleHeight = visibleHeight;
         active = item;
       }
     });
+
+    const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (scrolledToBottom) {
+      active = sectionMap[sectionMap.length - 1];
+    }
 
     navLinks.forEach((link) => link.classList.remove("is-active"));
     active.link.classList.add("is-active");

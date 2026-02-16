@@ -1,4 +1,81 @@
-import { escapeHtml } from "../../shared/format.js";
+import { escapeHtml, sanitizeUrl } from "../../shared/format.js";
+
+const FALLBACK_CONTENT = "Текст публикации недоступен.";
+const PARAGRAPH_TARGET_LENGTH = 420;
+const PARAGRAPH_MIN_LENGTH = 220;
+
+const splitChunkBySentences = (chunk) => {
+  const normalizedChunk = String(chunk ?? "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!normalizedChunk) {
+    return [];
+  }
+
+  if (normalizedChunk.length <= PARAGRAPH_TARGET_LENGTH) {
+    return [normalizedChunk];
+  }
+
+  const sentences = normalizedChunk
+    .match(/[^.!?]+(?:[.!?]+|$)/g)
+    ?.map((sentence) => sentence.trim())
+    .filter(Boolean) || [normalizedChunk];
+
+  const paragraphs = [];
+  let currentParagraph = "";
+
+  sentences.forEach((sentence) => {
+    const candidate = currentParagraph ? `${currentParagraph} ${sentence}` : sentence;
+
+    if (
+      candidate.length > PARAGRAPH_TARGET_LENGTH &&
+      currentParagraph.length >= PARAGRAPH_MIN_LENGTH
+    ) {
+      paragraphs.push(currentParagraph.trim());
+      currentParagraph = sentence;
+      return;
+    }
+
+    currentParagraph = candidate;
+  });
+
+  if (currentParagraph) {
+    paragraphs.push(currentParagraph.trim());
+  }
+
+  if (paragraphs.length === 1 && normalizedChunk.length > PARAGRAPH_TARGET_LENGTH * 1.35) {
+    const midpoint = Math.floor(normalizedChunk.length / 2);
+    const splitPoint = normalizedChunk.indexOf(" ", midpoint);
+
+    if (splitPoint > 0) {
+      return [
+        normalizedChunk.slice(0, splitPoint).trim(),
+        normalizedChunk.slice(splitPoint + 1).trim(),
+      ];
+    }
+  }
+
+  return paragraphs;
+};
+
+const createContentMarkup = (text) => {
+  const chunks = String(text ?? "")
+    .replace(/\r\n?/g, "\n")
+    .split(/\n{2,}/)
+    .map((chunk) => chunk.trim())
+    .filter(Boolean);
+
+  const paragraphs = chunks.flatMap(splitChunkBySentences);
+
+  if (paragraphs.length === 0) {
+    return `<p class="blog-content-paragraph">${escapeHtml(FALLBACK_CONTENT)}</p>`;
+  }
+
+  return paragraphs
+    .map((paragraph) => `<p class="blog-content-paragraph">${escapeHtml(paragraph)}</p>`)
+    .join("");
+};
 
 const createBlogCard = (post, index, entering = false) => {
   const isFeatured = index === 0;
@@ -12,30 +89,49 @@ const createBlogCard = (post, index, entering = false) => {
     cardClasses.push("is-entering");
   }
 
-  const media = post.image
-    ? `<a class="blog-card-media" href="${escapeHtml(post.link)}" target="_blank" rel="noreferrer noopener"><img src="${escapeHtml(post.image)}" alt="" referrerpolicy="no-referrer"></a>`
+  const link = sanitizeUrl(post?.link, { fallback: "#" });
+  const image = sanitizeUrl(post?.image, { fallback: "" });
+
+  const media = image
+    ? `<a class="blog-card-media" href="${link}" target="_blank" rel="noreferrer noopener"><img src="${image}" alt="" referrerpolicy="no-referrer"></a>`
     : "";
 
-  const tags = post.tags.length
-    ? `<ul class="blog-tags">${post.tags.map((tag) => `<li>${escapeHtml(tag)}</li>`).join("")}</ul>`
-    : '<ul class="blog-tags"></ul>';
+  const tags =
+    Array.isArray(post?.tags) && post.tags.length
+      ? `<ul class="blog-tags">${post.tags.map((tag) => `<li>${escapeHtml(tag)}</li>`).join("")}</ul>`
+      : '<ul class="blog-tags"></ul>';
+
+  const excerpt = escapeHtml(post?.excerpt || FALLBACK_CONTENT);
+  const contentRaw = String(post?.content || post?.excerpt || FALLBACK_CONTENT).trim();
+  const hasInlineContent = Boolean(contentRaw);
 
   return `
-    <article class="${cardClasses.join(" ")}">
+    <article class="${cardClasses.join(" ")}" data-blog-index="${index}">
       ${media}
       <div class="blog-card-meta">
-        <span class="blog-date">${escapeHtml(post.dateLabel)}</span>
-        <span class="blog-read">${escapeHtml(post.readLabel)}</span>
+        <span class="blog-date">${escapeHtml(post?.dateLabel)}</span>
+        <span class="blog-read">${escapeHtml(post?.readLabel)}</span>
       </div>
-      <h3>${escapeHtml(post.title)}</h3>
-      <p class="blog-excerpt">${escapeHtml(post.excerpt)}</p>
+      <h3>${escapeHtml(post?.title)}</h3>
+      <p class="blog-excerpt">${excerpt}</p>
+      <div class="blog-content-wrap" data-blog-content aria-hidden="true"${hasInlineContent ? "" : " hidden"}>
+        <div class="blog-content-inner">
+          <div class="blog-content">${createContentMarkup(contentRaw)}</div>
+        </div>
+      </div>
       <div class="blog-card-footer">
         ${tags}
-        <a class="blog-link" href="${escapeHtml(post.link)}" target="_blank" rel="noreferrer noopener">Читать в Telegram</a>
+        <div class="blog-card-links">
+          <a class="blog-link" href="${link}" target="_blank" rel="noreferrer noopener">Читать в Telegram</a>
+          <button class="blog-inline-toggle" type="button" data-blog-read-toggle aria-expanded="false"${hasInlineContent ? "" : " hidden"}>Прочитать здесь</button>
+        </div>
       </div>
     </article>
   `;
 };
+
+const createBlogCardsMarkup = (posts, { startIndex = 0, entering = false } = {}) =>
+  posts.map((post, offset) => createBlogCard(post, startIndex + offset, entering)).join("");
 
 export const renderBlogUnavailable = (root, channelUrl) => {
   root.innerHTML = `
@@ -56,48 +152,20 @@ export const renderBlogLoading = (root) => {
   `;
 };
 
-export const renderBlogPosts = ({
-  root,
-  posts,
-  visibleCount,
-  previousCount = 0,
-  animateNewCards = false,
-}) => {
-  const visiblePosts = posts.slice(0, visibleCount);
-
-  root.innerHTML = visiblePosts
-    .map((post, index) => createBlogCard(post, index, animateNewCards && index >= previousCount))
-    .join("");
+export const renderBlogPostsReplace = ({ root, posts }) => {
+  root.innerHTML = createBlogCardsMarkup(posts, { startIndex: 0, entering: false });
 };
 
-export const setMoreButtonState = ({ button, visibleCount, totalCount }) => {
-  if (!button) {
+export const renderBlogPostsAppend = ({ root, posts, startIndex = 0 }) => {
+  if (!Array.isArray(posts) || posts.length === 0) {
     return;
   }
 
-  button.hidden = visibleCount >= totalCount;
-};
-
-export const animateFeedExpansion = ({ root, fromHeight, toHeight }) => {
-  if (toHeight <= fromHeight) {
-    return;
-  }
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return;
-  }
-
-  root.style.height = `${fromHeight}px`;
-  root.style.overflow = "hidden";
-  root.style.transition = "height 420ms cubic-bezier(0.22, 1, 0.36, 1)";
-
-  window.requestAnimationFrame(() => {
-    root.style.height = `${toHeight}px`;
-  });
-
-  window.setTimeout(() => {
-    root.style.height = "";
-    root.style.overflow = "";
-    root.style.transition = "";
-  }, 460);
+  root.insertAdjacentHTML(
+    "beforeend",
+    createBlogCardsMarkup(posts, {
+      startIndex,
+      entering: true,
+    }),
+  );
 };

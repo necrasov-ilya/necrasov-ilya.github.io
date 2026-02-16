@@ -43,6 +43,15 @@ test("blog page: cards render, show more and refresh work", async ({ page }) => 
   await expect(page.locator("#blog-feed")).toBeVisible();
   await expect(page.locator("#blog-feed .blog-card").first()).toBeVisible({ timeout: 15_000 });
 
+  const firstCard = page.locator("#blog-feed .blog-card").first();
+  const readHereButton = firstCard.locator(".blog-inline-toggle");
+  await expect(readHereButton).toBeVisible();
+  await expect(firstCard).not.toHaveClass(/is-expanded/);
+  await readHereButton.click();
+  await expect(firstCard).toHaveClass(/is-expanded/);
+  await readHereButton.click();
+  await expect(firstCard).not.toHaveClass(/is-expanded/);
+
   const cardsBefore = await page.locator("#blog-feed .blog-card").count();
   const countText = (await page.locator("#blog-count").textContent()) || "0";
   const totalPosts = Number.parseInt(countText, 10) || 0;

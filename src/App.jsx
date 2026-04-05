@@ -1,6 +1,8 @@
 import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
+import HeroNavCard from './components/HeroNavCard';
 import { heroSceneCombos } from './content/heroMedia';
+import { heroNavigationItems } from './content/navigationContent';
 
 const introStepMs = 320;
 const introFinalHoldMs = 420;
@@ -15,6 +17,7 @@ function App() {
   const [isIntroComplete, setIsIntroComplete] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [isCompactViewport, setIsCompactViewport] = useState(false);
+  const [activeNavId, setActiveNavId] = useState(null);
 
   const selectedScene = useMemo(() => {
     const index = Math.floor(Math.random() * heroSceneCombos.length);
@@ -125,6 +128,19 @@ function App() {
       window.removeEventListener('pointerleave', handlePointerLeave);
     };
   }, [isIntroComplete, splitTarget]);
+
+  const handleNavigate = (item) => {
+    if (isCompactViewport && activeNavId !== item.id) {
+      setActiveNavId(item.id);
+      return;
+    }
+
+    const target = document.getElementById(item.id);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <main className="page-shell">
@@ -250,6 +266,63 @@ function App() {
             <span className="hero-seam__glow" />
           </motion.div>
 
+          {!isCompactViewport && (
+            <motion.nav
+              className="hero-nav"
+              style={{ pointerEvents: isIntroComplete ? 'auto' : 'none' }}
+              initial={false}
+              animate={
+                isIntroComplete
+                  ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+                  : { opacity: 0, y: 28, filter: 'blur(10px)' }
+              }
+              transition={{
+                duration: 0.48,
+                ease: [0.22, 1, 0.36, 1],
+                delay: isIntroComplete ? 0.14 : 0,
+              }}
+              onMouseLeave={() => setActiveNavId(null)}
+              aria-label="Primary sections"
+            >
+              <div className="hero-nav__deck">
+                {heroNavigationItems.map((item) => (
+                  <HeroNavCard
+                    key={item.id}
+                    item={item}
+                    isActive={activeNavId === item.id}
+                    onActivate={setActiveNavId}
+                    onNavigate={handleNavigate}
+                  />
+                ))}
+              </div>
+            </motion.nav>
+          )}
+
+          {isCompactViewport && (
+            <motion.div
+              className="hero-scroll-cue"
+              initial={false}
+              animate={
+                isIntroComplete
+                  ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+                  : { opacity: 0, y: 12, filter: 'blur(8px)' }
+              }
+              transition={{
+                duration: 0.42,
+                ease: [0.22, 1, 0.36, 1],
+                delay: isIntroComplete ? 0.16 : 0,
+              }}
+              aria-hidden="true"
+            >
+              <motion.span
+                className="hero-scroll-cue__line"
+                animate={{ scaleX: [0.72, 1, 0.72], opacity: [0.48, 1, 0.48] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <span className="hero-scroll-cue__label">листайте</span>
+            </motion.div>
+          )}
+
           {showIntro && (
             <motion.div
               className="hero-intro"
@@ -280,6 +353,38 @@ function App() {
           )}
         </div>
       </section>
+
+      <div className="page-sections">
+        {heroNavigationItems.map((item) => (
+          <section
+            key={item.id}
+            id={item.id}
+            className={`content-section content-section--${item.id}`}
+            aria-labelledby={`${item.id}-title`}
+          >
+            <div className="content-section__panel">
+              <div className="content-section__copy">
+                <span className="content-section__eyebrow">{item.sectionEyebrow}</span>
+                <h2 id={`${item.id}-title`} className="content-section__title">
+                  {item.sectionTitle}
+                </h2>
+                <p className="content-section__description">{item.sectionDescription}</p>
+              </div>
+
+              <div className="content-section__cluster" aria-hidden="true">
+                {item.sectionBullets.map((entry, index) => (
+                  <div
+                    key={entry}
+                    className={`content-section__bubble content-section__bubble--${index + 1}`}
+                  >
+                    <span>{entry}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        ))}
+      </div>
     </main>
   );
 }

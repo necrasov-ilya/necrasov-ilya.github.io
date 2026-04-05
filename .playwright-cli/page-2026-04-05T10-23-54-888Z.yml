@@ -1,0 +1,74 @@
+- main [ref=e3]:
+  - heading "NKSV hero" [level=1] [ref=e4]
+  - region "NKSV split hero" [ref=e5]:
+    - generic [ref=e6]:
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img "NKSV"
+      - navigation "Primary sections":
+        - generic:
+          - button "profile layer Обо мне":
+            - generic:
+              - generic:
+                - generic: "01"
+              - generic:
+                - generic: profile layer
+                - generic: Обо мне
+              - generic: /
+          - 'button "cases deck Проекты Кейсы и эксперименты в формате крупной карусели: каждый проект как отдельная сцена со своим ритмом и интерфейсом. Открыть кейсы" [expanded]':
+            - generic:
+              - generic:
+                - generic: "02"
+              - generic:
+                - generic: cases deck
+                - generic: Проекты
+              - generic: /
+            - generic:
+              - paragraph: "Кейсы и эксперименты в формате крупной карусели: каждый проект как отдельная сцена со своим ритмом и интерфейсом."
+              - generic:
+                - generic: case studies
+                - generic: portfolio
+                - generic: interactive demos
+              - generic: Открыть кейсы
+          - button "contact orbit Контакты":
+            - generic:
+              - generic:
+                - generic: "03"
+              - generic:
+                - generic: contact orbit
+                - generic: Контакты
+              - generic: /
+  - generic [ref=e13]:
+    - region "Обо мне" [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - text: profile layer
+          - heading "Обо мне" [level=2] [ref=e17]
+          - paragraph [ref=e18]: Этот блок станет входом в биографию, подход и визуальный манифест. Здесь логично раскрыть, кто ты, как думаешь о продукте и почему интерфейсы у тебя ощущаются не шаблонно.
+        - generic [ref=e19]:
+          - generic [ref=e21]: подход
+          - generic [ref=e23]: роль
+          - generic [ref=e25]: стек
+    - region "Проекты" [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - text: cases deck
+          - heading "Проекты" [level=2] [ref=e29]
+          - paragraph [ref=e30]: "Здесь дальше лучше собрать крупную horizontal-carousel структуру: по одному выразительному проекту на экран с раскрывающимися деталями, медиа и навигацией по кейсам."
+        - generic [ref=e31]:
+          - generic [ref=e33]: карусель
+          - generic [ref=e35]: кейсы
+          - generic [ref=e37]: демо
+    - region "Контакты" [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - text: contact orbit
+          - heading "Контакты" [level=2] [ref=e41]
+          - paragraph [ref=e42]: "Финальный слой страницы стоит сделать лаконичным: контакты, соцсети, короткий CTA и чистая завершающая сцена без информационного шума."
+        - generic [ref=e43]:
+          - generic [ref=e45]: email
+          - generic [ref=e47]: social
+          - generic [ref=e49]: cta

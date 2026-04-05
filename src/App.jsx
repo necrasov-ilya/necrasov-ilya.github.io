@@ -1,103 +1,188 @@
-import { motion } from 'framer-motion';
-import avatar from '../assets/img/avatar.png';
-import logo from '../assets/img/logo-avatar.svg';
+import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+import { heroIntroShots, heroSceneCombos } from './content/heroMedia';
 
-const reveal = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.75,
-      ease: [0.22, 1, 0.36, 1],
-      delay,
-    },
-  }),
-};
+const introStepMs = 160;
+const introDurationMs = 980;
+const introFadeMs = 420;
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function shuffleArray(items) {
+  const next = [...items];
+
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [next[index], next[randomIndex]] = [next[randomIndex], next[index]];
+  }
+
+  return next;
+}
 
 function App() {
+  const [introIndex, setIntroIndex] = useState(0);
+  const [isIntroComplete, setIsIntroComplete] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
+
+  const introSequence = useMemo(() => shuffleArray(heroIntroShots).slice(0, 6), []);
+  const selectedScene = useMemo(() => {
+    const index = Math.floor(Math.random() * heroSceneCombos.length);
+    return heroSceneCombos[index];
+  }, []);
+
+  const splitTarget = useMotionValue(50);
+  const splitY = useSpring(splitTarget, {
+    stiffness: 185,
+    damping: 29,
+    mass: 0.24,
+  });
+
+  const topClip = useMotionTemplate`polygon(0 0, 100% 0, 100% ${splitY}%, 0 ${splitY}%)`;
+  const bottomClip = useMotionTemplate`polygon(0 ${splitY}%, 100% ${splitY}%, 100% 100%, 0 100%)`;
+  const seamTop = useMotionTemplate`${splitY}%`;
+
+  useEffect(() => {
+    const stepTimer = window.setInterval(() => {
+      setIntroIndex((current) => {
+        if (current >= introSequence.length - 1) {
+          return current;
+        }
+
+        return current + 1;
+      });
+    }, introStepMs);
+
+    const completeTimer = window.setTimeout(() => {
+      setIsIntroComplete(true);
+    }, introDurationMs);
+
+    return () => {
+      window.clearInterval(stepTimer);
+      window.clearTimeout(completeTimer);
+    };
+  }, [introSequence.length]);
+
+  useEffect(() => {
+    if (!isIntroComplete) {
+      splitTarget.set(50);
+      return undefined;
+    }
+
+    const canTrackPointer =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (!canTrackPointer) {
+      splitTarget.set(50);
+      return undefined;
+    }
+
+    const handlePointerMove = (event) => {
+      const next = (event.clientY / window.innerHeight) * 100;
+      splitTarget.set(clamp(next, 24, 76));
+    };
+
+    const handlePointerLeave = () => {
+      splitTarget.set(50);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerleave', handlePointerLeave);
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerleave', handlePointerLeave);
+    };
+  }, [isIntroComplete, splitTarget]);
+
   return (
     <main className="page-shell">
       <div className="page-noise" aria-hidden="true" />
-      <motion.header
-        className="site-header"
-        initial="hidden"
-        animate="visible"
-        variants={reveal}
-      >
-        <img className="site-mark" src={logo} alt="Логотип" />
-        <span className="site-kicker">portfolio in progress</span>
-      </motion.header>
+      <h1 className="sr-only">NKSV hero</h1>
 
-      <section className="hero">
-        <motion.div
-          className="hero-copy"
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
-          variants={reveal}
-        >
-          <p className="eyebrow">Илья Некрасов</p>
-          <h1>Новый сайт-визитка для портфолио и проектов.</h1>
-          <p className="hero-text">
-            Каркас поднят на React + Vite. Дальше сюда лягут проектные блоки,
-            анимационные паттерны и переработанная система интерактивных
-            компонентов.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-link" href="#roadmap">
-              План сборки
-            </a>
-            <span className="secondary-link secondary-link--static">
-              Спецификация эффекта сохранена в <code>docs/</code>
-            </span>
-          </div>
-        </motion.div>
+      <section className="hero-stage" aria-label="NKSV split hero">
+        <div className="hero-stage__frame">
+          <motion.div className="hero-scene hero-scene--light" style={{ clipPath: topClip }}>
+            <div
+              className="hero-scene__still"
+              style={{ backgroundImage: `url(${selectedScene.lightStill})` }}
+            />
+            <div className="hero-scene__wash hero-scene__wash--light" />
+          </motion.div>
 
-        <motion.div
-          className="hero-portrait"
-          initial="hidden"
-          animate="visible"
-          custom={0.2}
-          variants={reveal}
-        >
-          <div className="portrait-frame">
-            <img src={avatar} alt="Портрет Ильи Некрасова" />
-          </div>
-          <div className="portrait-glow" aria-hidden="true" />
-        </motion.div>
+          <motion.div className="hero-scene hero-scene--dark" style={{ clipPath: bottomClip }}>
+            <div
+              className="hero-scene__still"
+              style={{ backgroundImage: `url(${selectedScene.darkStill})` }}
+            />
+            <div className="hero-scene__wash hero-scene__wash--dark" />
+          </motion.div>
+
+          <motion.div
+            className="hero-logo hero-logo--full hero-logo--filled"
+            style={{ clipPath: topClip }}
+          >
+            <img src={selectedScene.fullFilledLogo} alt="" aria-hidden="true" />
+          </motion.div>
+
+          <motion.div
+            className="hero-logo hero-logo--full hero-logo--outline"
+            style={{ clipPath: bottomClip }}
+          >
+            <img src={selectedScene.fullOutlineLogo} alt="" aria-hidden="true" />
+          </motion.div>
+
+          <motion.div
+            className="hero-logo hero-logo--mark hero-logo--filled"
+            style={{ clipPath: topClip }}
+          >
+            <img src={selectedScene.markFilledLogo} alt="" aria-hidden="true" />
+          </motion.div>
+
+          <motion.div
+            className="hero-logo hero-logo--mark hero-logo--outline"
+            style={{ clipPath: bottomClip }}
+          >
+            <img src={selectedScene.markOutlineLogo} alt="" aria-hidden="true" />
+          </motion.div>
+
+          <motion.div className="hero-seam" style={{ top: seamTop }} aria-hidden="true">
+            <span className="hero-seam__line" />
+            <span className="hero-seam__glow" />
+          </motion.div>
+
+          {showIntro && (
+            <motion.div
+              className="hero-intro"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isIntroComplete ? 0 : 1 }}
+              transition={{ duration: introFadeMs / 1000, ease: [0.22, 1, 0.36, 1] }}
+              onAnimationComplete={() => {
+                if (isIntroComplete) {
+                  setShowIntro(false);
+                }
+              }}
+              aria-hidden="true"
+            >
+              {introSequence.map((shot, index) => (
+                <video
+                  key={shot.id}
+                  className={`hero-intro__shot ${introIndex === index ? 'is-active' : ''}`}
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                  preload="auto"
+                  src={shot.src}
+                />
+              ))}
+              <div className="hero-intro__veil" />
+            </motion.div>
+          )}
+        </div>
       </section>
-
-      <motion.section
-        id="roadmap"
-        className="roadmap"
-        initial="hidden"
-        animate="visible"
-        custom={0.3}
-        variants={reveal}
-      >
-        <article className="roadmap-card">
-          <span className="roadmap-index">01</span>
-          <h2>Основа проекта</h2>
-          <p>Подняли Vite, React и базовую файловую структуру без Tailwind.</p>
-        </article>
-        <article className="roadmap-card">
-          <span className="roadmap-index">02</span>
-          <h2>Библиотека эффектов</h2>
-          <p>
-            Описали механику активной боковой кнопки как отдельный reusable
-            паттерн.
-          </p>
-        </article>
-        <article className="roadmap-card">
-          <span className="roadmap-index">03</span>
-          <h2>Дальше</h2>
-          <p>
-            Следующим шагом можно собрать чистую версию `ExpandingSideButton` и
-            начать раскладывать hero, проекты и секции портфолио.
-          </p>
-        </article>
-      </motion.section>
     </main>
   );
 }

@@ -1,36 +1,37 @@
 import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
-import { heroIntroShots, heroSceneCombos } from './content/heroMedia';
+import { heroSceneCombos } from './content/heroMedia';
 
-const introStepMs = 160;
-const introDurationMs = 980;
-const introFadeMs = 420;
+const introStepMs = 320;
+const introFinalHoldMs = 420;
+const introFadeMs = 360;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
-}
-
-function shuffleArray(items) {
-  const next = [...items];
-
-  for (let index = next.length - 1; index > 0; index -= 1) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [next[index], next[randomIndex]] = [next[randomIndex], next[index]];
-  }
-
-  return next;
 }
 
 function App() {
   const [introIndex, setIntroIndex] = useState(0);
   const [isIntroComplete, setIsIntroComplete] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
+  const [isCompactViewport, setIsCompactViewport] = useState(false);
 
-  const introSequence = useMemo(() => shuffleArray(heroIntroShots).slice(0, 6), []);
   const selectedScene = useMemo(() => {
     const index = Math.floor(Math.random() * heroSceneCombos.length);
     return heroSceneCombos[index];
   }, []);
+  const introSequence = useMemo(
+    () => [
+      { id: `${selectedScene.id}-light`, src: selectedScene.lightIntro },
+      { id: `${selectedScene.id}-dark`, src: selectedScene.darkIntro },
+      { id: `${selectedScene.id}-light-return`, src: selectedScene.lightIntro },
+    ],
+    [selectedScene],
+  );
+  const introDurationMs = useMemo(
+    () => introStepMs * Math.max(introSequence.length - 1, 0) + introFinalHoldMs,
+    [introSequence.length],
+  );
 
   const splitTarget = useMotionValue(50);
   const splitY = useSpring(splitTarget, {
@@ -42,6 +43,34 @@ function App() {
   const topClip = useMotionTemplate`polygon(0 0, 100% 0, 100% ${splitY}%, 0 ${splitY}%)`;
   const bottomClip = useMotionTemplate`polygon(0 ${splitY}%, 100% ${splitY}%, 100% 100%, 0 100%)`;
   const seamTop = useMotionTemplate`${splitY}%`;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const mediaQuery = window.matchMedia('(max-width: 860px), (max-height: 620px)');
+
+    const applyViewportMode = (event) => {
+      setIsCompactViewport(event.matches);
+    };
+
+    setIsCompactViewport(mediaQuery.matches);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', applyViewportMode);
+
+      return () => {
+        mediaQuery.removeEventListener('change', applyViewportMode);
+      };
+    }
+
+    mediaQuery.addListener(applyViewportMode);
+
+    return () => {
+      mediaQuery.removeListener(applyViewportMode);
+    };
+  }, []);
 
   useEffect(() => {
     const stepTimer = window.setInterval(() => {
@@ -120,32 +149,100 @@ function App() {
             <div className="hero-scene__wash hero-scene__wash--dark" />
           </motion.div>
 
-          <motion.div
-            className="hero-logo hero-logo--full hero-logo--filled"
-            style={{ clipPath: topClip }}
-          >
-            <img src={selectedScene.fullFilledLogo} alt="" aria-hidden="true" />
-          </motion.div>
+          {!isCompactViewport && (
+            <>
+              <motion.div
+                className="hero-logo hero-logo--full hero-logo--filled"
+                style={{ clipPath: topClip }}
+                initial={false}
+                animate={
+                  isIntroComplete
+                    ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                    : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                }
+                transition={{
+                  duration: 0.46,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: isIntroComplete ? 0.05 : 0,
+                }}
+              >
+                <img src={selectedScene.fullFilledLogo} alt="" aria-hidden="true" />
+              </motion.div>
+
+              <motion.div
+                className="hero-logo hero-logo--full hero-logo--outline"
+                style={{ clipPath: bottomClip }}
+                initial={false}
+                animate={
+                  isIntroComplete
+                    ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                    : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                }
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: isIntroComplete ? 0.08 : 0,
+                }}
+              >
+                <img src={selectedScene.fullOutlineLogo} alt="" aria-hidden="true" />
+              </motion.div>
+            </>
+          )}
+
+          {isCompactViewport && (
+            <>
+              <motion.div
+                className="hero-logo hero-logo--mark-split hero-logo--filled"
+                style={{ clipPath: topClip }}
+                initial={false}
+                animate={
+                  isIntroComplete
+                    ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                    : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                }
+                transition={{
+                  duration: 0.42,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: isIntroComplete ? 0.05 : 0,
+                }}
+              >
+                <img src={selectedScene.markFilledLogo} alt="" aria-hidden="true" />
+              </motion.div>
+
+              <motion.div
+                className="hero-logo hero-logo--mark-split hero-logo--outline"
+                style={{ clipPath: bottomClip }}
+                initial={false}
+                animate={
+                  isIntroComplete
+                    ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                    : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                }
+                transition={{
+                  duration: 0.46,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: isIntroComplete ? 0.08 : 0,
+                }}
+              >
+                <img src={selectedScene.markOutlineLogo} alt="" aria-hidden="true" />
+              </motion.div>
+            </>
+          )}
 
           <motion.div
-            className="hero-logo hero-logo--full hero-logo--outline"
-            style={{ clipPath: bottomClip }}
+            className="hero-logo hero-logo--mark-intro"
+            initial={false}
+            animate={
+              isIntroComplete
+                ? { opacity: 0, scale: 0.86, y: 10, filter: 'blur(6px)' }
+                : { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+            }
+            transition={{
+              duration: 0.42,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
-            <img src={selectedScene.fullOutlineLogo} alt="" aria-hidden="true" />
-          </motion.div>
-
-          <motion.div
-            className="hero-logo hero-logo--mark hero-logo--filled"
-            style={{ clipPath: topClip }}
-          >
-            <img src={selectedScene.markFilledLogo} alt="" aria-hidden="true" />
-          </motion.div>
-
-          <motion.div
-            className="hero-logo hero-logo--mark hero-logo--outline"
-            style={{ clipPath: bottomClip }}
-          >
-            <img src={selectedScene.markOutlineLogo} alt="" aria-hidden="true" />
+            <img src={selectedScene.markFilledLogo} alt="NKSV" />
           </motion.div>
 
           <motion.div className="hero-seam" style={{ top: seamTop }} aria-hidden="true">

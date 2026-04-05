@@ -139,6 +139,7 @@ video {
   display: grid;
   place-items: center;
   pointer-events: none;
+  transform-origin: center;
 }
 
 .hero-logo--filled img,
@@ -147,15 +148,17 @@ video {
 }
 
 .hero-logo--full img {
-  width: min(78vw, 1120px);
+  width: min(92vw, 1360px);
 }
 
-.hero-logo--mark {
-  display: none;
+.hero-logo--mark-intro {
+  z-index: 9;
 }
 
-.hero-logo--mark img {
-  width: min(46vw, 320px);
+.hero-logo--mark-intro img,
+.hero-logo--mark-split img {
+  width: min(26vw, 240px);
+  filter: drop-shadow(0 12px 40px rgba(201, 36, 85, 0.18));
 }
 
 .hero-seam {
@@ -163,26 +166,26 @@ video {
   width: 100%;
   z-index: 5;
   pointer-events: none;
-  transform: translateY(-50%);
+  transform: translateY(-1px);
 }
 
 .hero-seam__line,
 .hero-seam__glow {
   display: block;
-  width: 100%;
 }
 
 .hero-seam__line {
-  height: 1px;
-  background:
-    linear-gradient(90deg, rgba(201, 36, 85, 0), rgba(201, 36, 85, 0.84) 14%, rgba(201, 36, 85, 0.96) 50%, rgba(201, 36, 85, 0.84) 86%, rgba(201, 36, 85, 0));
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.92) 14%, rgba(255, 255, 255, 0.98) 50%, rgba(255, 255, 255, 0.92) 86%, rgba(255, 255, 255, 0));
 }
 
 .hero-seam__glow {
-  height: 28px;
-  margin-top: -14px;
-  background: radial-gradient(circle at center, rgba(201, 36, 85, 0.22), transparent 70%);
-  filter: blur(11px);
+  width: 100%;
+  height: 18px;
+  margin-top: -8px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 72%);
+  filter: blur(8px);
 }
 
 .hero-intro {
@@ -196,8 +199,8 @@ video {
   opacity: 0;
   transform: scale(1.04);
   transition:
-    opacity 130ms linear,
-    transform 420ms ease;
+    opacity 220ms ease,
+    transform 520ms ease;
 }
 
 .hero-intro__shot.is-active {
@@ -226,12 +229,12 @@ video {
     border-radius: 24px;
   }
 
-  .hero-logo--full {
-    display: none;
+  .hero-logo--full img {
+    width: min(90vw, 1020px);
   }
 
-  .hero-logo--mark {
-    display: grid;
+  .hero-logo--mark-intro img,
+  .hero-logo--mark-split img {
+    width: min(42vw, 250px);
   }
-
 }

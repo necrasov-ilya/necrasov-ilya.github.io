@@ -1,0 +1,237 @@
+.page-shell {
+  position: relative;
+  min-height: 100vh;
+  padding: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top, rgba(201, 36, 85, 0.08), transparent 34%),
+    linear-gradient(180deg, #09090a 0%, #101012 100%);
+}
+
+.page-noise {
+  position: fixed;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 4px 4px;
+  mix-blend-mode: overlay;
+}
+
+.hero-stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: calc(100vh - 36px);
+}
+
+.hero-stage__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 30px 120px rgba(0, 0, 0, 0.42);
+  background: #0d0d0f;
+}
+
+.hero-scene,
+.hero-logo,
+.hero-intro,
+.hero-seam,
+.hero-stage__desktop {
+  position: absolute;
+}
+
+.hero-scene,
+.hero-logo,
+.hero-intro,
+.hero-stage__desktop {
+  inset: 0;
+}
+
+.hero-scene__still,
+.hero-intro__shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-scene__still {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1.02);
+}
+
+.hero-scene__wash {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-scene__wash--light {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 243, 0.72),
+      rgba(255, 250, 243, 0.2) 42%,
+      transparent 100%
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16), transparent 58%);
+}
+
+.hero-scene__wash--dark {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(8, 8, 10, 0.16) 18%,
+      rgba(6, 6, 8, 0.78) 100%
+    ),
+    linear-gradient(90deg, rgba(201, 36, 85, 0.06), transparent 38%);
+}
+
+.hero-logo {
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transform-origin: center;
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  filter: blur(6px);
+  transition:
+    opacity 460ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 460ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-logo.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.hero-logo--filled img,
+.hero-logo--outline img {
+  filter: drop-shadow(0 10px 36px rgba(201, 36, 85, 0.14));
+}
+
+.hero-logo--full img {
+  width: min(92vw, 1360px);
+}
+
+.hero-logo--mark-split img,
+.hero-logo--mark-intro img {
+  width: min(26vw, 240px);
+  filter: drop-shadow(0 12px 40px rgba(201, 36, 85, 0.18));
+}
+
+.hero-logo--mark-intro {
+  z-index: 9;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.hero-seam {
+  left: 0;
+  width: 100%;
+  z-index: 5;
+  pointer-events: none;
+  transform: translateY(-1px);
+}
+
+.hero-seam__line,
+.hero-seam__glow {
+  display: block;
+}
+
+.hero-seam__line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.92) 14%,
+    rgba(255, 255, 255, 0.98) 50%,
+    rgba(255, 255, 255, 0.92) 86%,
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.hero-seam__glow {
+  width: 100%;
+  height: 18px;
+  margin-top: -8px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 72%);
+  filter: blur(8px);
+}
+
+.hero-stage__desktop {
+  z-index: 6;
+  will-change: opacity, transform;
+}
+
+.hero-intro {
+  z-index: 8;
+  pointer-events: none;
+  background: #09090a;
+}
+
+.hero-intro__shot {
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 220ms ease,
+    transform 520ms ease;
+}
+
+.hero-intro__shot.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-intro__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.14),
+      transparent 42%,
+      rgba(8, 8, 10, 0.12)
+    ),
+    radial-gradient(circle at center, transparent 44%, rgba(8, 8, 10, 0.12));
+}
+
+@media (max-width: 960px), (max-height: 700px) {
+  .page-shell {
+    padding: 12px;
+  }
+
+  .hero-stage {
+    height: calc(100vh - 24px);
+  }
+
+  .hero-stage__frame {
+    border-radius: 16px;
+  }
+
+  .hero-logo--full img {
+    width: min(90vw, 1020px);
+  }
+
+  .hero-logo--mark-split img,
+  .hero-logo--mark-intro img {
+    width: min(42vw, 250px);
+  }
+}

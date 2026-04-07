@@ -1,0 +1,94 @@
+.desktop-shell {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.desktop-grid,
+.desktop-vignette,
+.desktop-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.desktop-grid {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.015) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 2px, transparent 2px);
+  background-size: 38px 38px, 38px 38px, 152px 152px, 152px 152px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.82), transparent 96%);
+  opacity: 0.22;
+}
+
+.desktop-vignette {
+  box-shadow: inset 0 0 160px rgba(5, 5, 8, 0.16);
+}
+
+.desktop-glow {
+  display: none;
+}
+
+.desktop-glow--one {
+  inset: auto auto 12% 6%;
+  width: 320px;
+  height: 220px;
+  background: rgba(201, 36, 85, 0.14);
+}
+
+.desktop-glow--two {
+  inset: 10% 3% auto auto;
+  width: 260px;
+  height: 220px;
+  background: rgba(125, 231, 213, 0.08);
+}
+
+.desktop-brand {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: rgba(18, 18, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 18px 30px rgba(0, 0, 0, 0.22);
+  z-index: 3;
+}
+
+.desktop-brand img {
+  width: 92px;
+  opacity: 0.92;
+  image-rendering: pixelated;
+}
+
+.desktop-brand span {
+  font-family: 'Silkscreen', monospace;
+  font-size: 0.7rem;
+  color: rgba(248, 239, 242, 0.7);
+}
+
+@media (max-width: 960px), (max-height: 700px) {
+  .desktop-shell {
+    overflow: auto;
+    padding-bottom: 88px;
+  }
+
+  .desktop-brand {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    justify-content: space-between;
+  }
+
+  .desktop-brand img {
+    width: 72px;
+  }
+}

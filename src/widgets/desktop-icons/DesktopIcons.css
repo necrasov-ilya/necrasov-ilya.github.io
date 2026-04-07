@@ -1,0 +1,68 @@
+.desktop-icons {
+  position: absolute;
+  top: 120px;
+  left: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(110px, 1fr));
+  gap: 0.9rem;
+  width: min(280px, calc(100vw - 44px));
+  z-index: 2;
+}
+
+.desktop-icon {
+  padding: 0.9rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 18, 24, 0.76);
+  text-align: left;
+  display: grid;
+  gap: 0.45rem;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.desktop-icon:hover {
+  transform: translate(-2px, -2px);
+  border-color: var(--accent-bright);
+}
+
+.desktop-icon__badge {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: rgba(28, 28, 35, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 0;
+}
+
+.desktop-icon strong {
+  font-family: 'Silkscreen', monospace;
+  font-size: 0.72rem;
+}
+
+.desktop-icon span:last-child {
+  font-size: 0.72rem;
+  color: rgba(248, 239, 242, 0.54);
+}
+
+.desktop-icon.is-open {
+  border-color: var(--accent-bright);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 125, 165, 0.18),
+    0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 940px) {
+  .desktop-icons {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 84px 12px 0;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

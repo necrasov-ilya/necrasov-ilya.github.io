@@ -11,7 +11,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     0 28px 72px rgba(0, 0, 0, 0.42);
   transform-origin: center;
-  animation: window-enter 220ms steps(8, end);
+  will-change: transform, opacity, filter;
 }
 
 .window-shell.is-focused {
@@ -30,6 +30,7 @@
   background: rgba(26, 26, 33, 0.94);
   cursor: grab;
   user-select: none;
+  touch-action: none;
 }
 
 .window-title {
@@ -102,6 +103,12 @@
   );
 }
 
+.window-actions button,
+.window-resize-handle {
+  user-select: none;
+  touch-action: none;
+}
+
 .window-actions__minimize span {
   width: 0.8rem;
   height: 0.12rem;
@@ -140,16 +147,93 @@
   overflow: auto;
 }
 
-@keyframes window-enter {
-  from {
-    opacity: 0;
-    transform: scale(0.98) translateY(16px);
-  }
+.window-shell[data-app-id='blog'] .window-body {
+  overflow: hidden;
+}
 
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+.window-resize-handle {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  z-index: 4;
+}
+
+.window-resize-handle--north,
+.window-resize-handle--south {
+  left: 14px;
+  right: 14px;
+  height: 10px;
+}
+
+.window-resize-handle--north {
+  top: 0;
+  cursor: ns-resize;
+}
+
+.window-resize-handle--south {
+  bottom: 0;
+  cursor: ns-resize;
+}
+
+.window-resize-handle--east,
+.window-resize-handle--west {
+  top: 14px;
+  bottom: 14px;
+  width: 10px;
+}
+
+.window-resize-handle--east {
+  right: 0;
+  cursor: ew-resize;
+}
+
+.window-resize-handle--west {
+  left: 0;
+  cursor: ew-resize;
+}
+
+.window-resize-handle--north-east,
+.window-resize-handle--north-west,
+.window-resize-handle--south-east,
+.window-resize-handle--south-west {
+  width: 16px;
+  height: 16px;
+}
+
+.window-resize-handle--north-east {
+  top: 0;
+  right: 0;
+  cursor: nesw-resize;
+}
+
+.window-resize-handle--north-west {
+  top: 0;
+  left: 0;
+  cursor: nwse-resize;
+}
+
+.window-resize-handle--south-east {
+  right: 0;
+  bottom: 0;
+  cursor: nwse-resize;
+}
+
+.window-resize-handle--south-east::before {
+  content: '';
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 10px;
+  height: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.window-resize-handle--south-west {
+  left: 0;
+  bottom: 0;
+  cursor: nesw-resize;
 }
 
 @media (max-width: 940px) {
@@ -160,5 +244,9 @@
     width: calc(100% - 24px) !important;
     height: min(78vh, 760px) !important;
     margin: 88px 12px 0;
+  }
+
+  .window-resize-handle {
+    display: none;
   }
 }

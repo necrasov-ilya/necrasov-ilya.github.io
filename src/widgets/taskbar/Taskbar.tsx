@@ -36,7 +36,7 @@ export function Taskbar({
           type="button"
         >
           <img alt="" src="/media/hero/logo/logo-nksv-mark-filled.svg" />
-          <span>Start</span>
+          <span>Пуск</span>
         </button>
 
         <div className="taskbar__apps">
@@ -54,7 +54,7 @@ export function Taskbar({
               type="button"
             >
               <AppIcon icon={app.icon} size={16} />
-              <span>{app.title}</span>
+              <span>{app.shortTitle}</span>
             </button>
           ))}
         </div>

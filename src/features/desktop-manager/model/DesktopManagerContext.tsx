@@ -6,12 +6,19 @@ import {
   type ReactNode,
 } from 'react';
 import {
-  createWindowRect,
   clampWindowRect,
+  createWindowRect,
   fitWindowToBounds,
   getInitialDesktopBounds,
+  resizeWindowRect,
 } from '../lib/window-geometry';
-import type { AppId, DesktopBounds, WindowInstance } from '../../../shared/types/desktop';
+import type {
+  AppId,
+  DesktopBounds,
+  WindowInstance,
+  WindowRect,
+  WindowResizeDirection,
+} from '../../../shared/types/desktop';
 import { DesktopManagerStore } from './desktopManagerStore';
 
 function getNextZIndex(zIndexRef: MutableRefObject<number>) {
@@ -129,14 +136,37 @@ export function DesktopManagerProvider({ children }: { children: ReactNode }) {
 
         return {
           ...windowState,
-          ...clampWindowRect({
-            x: nextX,
-            y: nextY,
-            width: windowState.width,
-            height: windowState.height,
-          }, desktopBounds),
+          ...clampWindowRect(
+            {
+              x: nextX,
+              y: nextY,
+              width: windowState.width,
+              height: windowState.height,
+            },
+            desktopBounds,
+            appId,
+          ),
         };
       }),
+    );
+  }
+
+  function resizeApp(
+    appId: AppId,
+    direction: WindowResizeDirection,
+    originRect: WindowRect,
+    deltaX: number,
+    deltaY: number,
+  ) {
+    setWindows((current) =>
+      current.map((windowState) =>
+        windowState.appId === appId
+          ? {
+              ...windowState,
+              ...resizeWindowRect(originRect, appId, desktopBounds, direction, deltaX, deltaY),
+            }
+          : windowState,
+      ),
     );
   }
 
@@ -152,6 +182,7 @@ export function DesktopManagerProvider({ children }: { children: ReactNode }) {
         minimizeApp,
         toggleFromTaskbar,
         moveApp,
+        resizeApp,
         setStartMenuOpen,
         setDesktopBounds,
       }}

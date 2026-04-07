@@ -1,7 +1,8 @@
 export type AppId =
   | 'about'
   | 'projects'
-  | 'lab'
+  | 'blog'
+  | 'system'
   | 'gallery'
   | 'contact'
   | 'neon-xo'
@@ -10,11 +11,22 @@ export type AppId =
 export type AppIconKey =
   | 'profile'
   | 'briefcase'
-  | 'brain'
+  | 'article'
+  | 'system'
   | 'gallery'
   | 'mail'
   | 'gamepad'
   | 'target';
+
+export type WindowResizeDirection =
+  | 'north'
+  | 'south'
+  | 'east'
+  | 'west'
+  | 'north-east'
+  | 'north-west'
+  | 'south-east'
+  | 'south-west';
 
 export interface WindowRect {
   x: number;
@@ -42,6 +54,10 @@ export interface AppDefinition {
   subtitle: string;
   tint: string;
   defaultSize: {
+    width: number;
+    height: number;
+  };
+  minSize: {
     width: number;
     height: number;
   };

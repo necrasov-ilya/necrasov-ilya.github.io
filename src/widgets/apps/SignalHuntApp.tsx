@@ -1,10 +1,38 @@
 import { useEffect, useState } from 'react';
 
+import { GameResultDialog } from '../../shared/ui/game-result-dialog/GameResultDialog';
+
 const GRID_SIZE = 16;
 const ROUND_TIME = 20;
 
+type RoundResult = {
+  description: string;
+  title: string;
+};
+
 function randomCellIndex() {
   return Math.floor(Math.random() * GRID_SIZE);
+}
+
+function getRoundResult(score: number, bestScore: number): RoundResult {
+  if (score === 0) {
+    return {
+      title: 'Сигнал ушёл',
+      description: 'Ты не успел поймать ни одной активной плитки. Хочешь сразу запустить новый раунд?',
+    };
+  }
+
+  if (score >= bestScore) {
+    return {
+      title: 'Новый лучший результат',
+      description: `Ты поймал ${score} сигнал${score === 1 ? '' : score < 5 ? 'а' : 'ов'}. Запустить ещё один раунд?`,
+    };
+  }
+
+  return {
+    title: 'Раунд завершён',
+    description: `Ты поймал ${score} сигнал${score === 1 ? '' : score < 5 ? 'а' : 'ов'}. Хочешь попробовать улучшить результат?`,
+  };
 }
 
 export function SignalHuntApp() {
@@ -17,6 +45,12 @@ export function SignalHuntApp() {
   });
 
   const { score, timeLeft, activeIndex, isRunning, bestScore } = game;
+  const roundResult = !isRunning && timeLeft === 0 ? getRoundResult(score, bestScore) : null;
+  const phaseLabel = isRunning
+    ? 'Раунд идёт.'
+    : timeLeft === 0
+      ? 'Раунд завершён.'
+      : 'Ждёт запуска.';
 
   useEffect(() => {
     if (!isRunning) {
@@ -89,33 +123,62 @@ export function SignalHuntApp() {
 
   return (
     <div className="app-pane app-pane--game">
-      <div className="game-header">
-        <div>
-          <div className="eyebrow">GAME / SIGNAL HUNT</div>
-          <h2>Поймай активный сигнал до того, как он уйдёт</h2>
-        </div>
-        <button className="ghost-button" onClick={startRound} type="button">
-          {isRunning ? 'Перезапуск' : 'Старт'}
-        </button>
-      </div>
+      <div className="game-shell game-shell--signal">
+        <section className="game-main">
+          <div className="game-header">
+            <div className="eyebrow">Игра / Сигнал</div>
+            <h2>Лови активную плитку вовремя</h2>
+            <p className="game-copy">
+              <strong>{phaseLabel}</strong> Активный сигнал прыгает по сетке каждые 650 мс, а раунд длится всего
+              {` ${ROUND_TIME} секунд.`}
+            </p>
+          </div>
 
-      <div className="score-strip">
-        <span>Счёт: {score}</span>
-        <span>Лучший: {bestScore}</span>
-        <span>Таймер: {timeLeft}s</span>
-      </div>
+          <div className="game-board-wrap">
+            <div className="signal-grid">
+              {Array.from({ length: GRID_SIZE }, (_, index) => (
+                <button
+                  aria-label={activeIndex === index ? `Активная клетка ${index + 1}` : `Пустая клетка ${index + 1}`}
+                  className={`signal-cell ${activeIndex === index ? 'is-active' : ''}`}
+                  key={index}
+                  onClick={() => handleCellClick(index)}
+                  type="button"
+                >
+                  <span />
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      <div className="signal-grid">
-        {Array.from({ length: GRID_SIZE }, (_, index) => (
-          <button
-            className={`signal-cell ${activeIndex === index ? 'is-active' : ''}`}
-            key={index}
-            onClick={() => handleCellClick(index)}
-            type="button"
-          >
-            <span />
+        <aside className="game-sidebar">
+          <button className="ghost-button" onClick={startRound} type="button">
+            {isRunning ? 'Перезапуск' : 'Старт'}
           </button>
-        ))}
+
+          <div className="score-strip score-strip--stacked">
+            <span>Счёт: {score}</span>
+            <span>Лучший: {bestScore}</span>
+            <span>Таймер: {timeLeft}s</span>
+          </div>
+
+          <div className="game-note">
+            Жми только по активной плитке. Как только таймер заканчивается, раунд закрывается и предлагает перезапуск.
+          </div>
+        </aside>
+
+        <GameResultDialog
+          actionLabel="Ещё раунд"
+          description={roundResult?.description ?? ''}
+          eyebrow="Раунд / Сигнал"
+          isOpen={Boolean(roundResult)}
+          onRestart={startRound}
+          stats={[
+            { label: 'Счёт', value: String(score) },
+            { label: 'Лучший', value: String(bestScore) },
+          ]}
+          title={roundResult?.title ?? ''}
+        />
       </div>
     </div>
   );

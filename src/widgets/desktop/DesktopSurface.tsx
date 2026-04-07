@@ -56,11 +56,6 @@ export function DesktopSurface() {
       <div aria-hidden="true" className="desktop-glow desktop-glow--one" />
       <div aria-hidden="true" className="desktop-glow desktop-glow--two" />
 
-      <div className="desktop-brand">
-        <img alt="NKSv outline logo" src="/media/hero/logo/logo-nksv-outline.svg" />
-        <span>custom workstation / build frontend-ml</span>
-      </div>
-
       <DesktopIcons apps={applicationCatalog} onOpen={openApp} windows={windows} />
       <StartMenu
         apps={applicationCatalog}

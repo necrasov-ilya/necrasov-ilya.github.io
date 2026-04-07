@@ -3,6 +3,7 @@
   left: 0;
   bottom: 58px;
   width: min(420px, calc(100vw - 40px));
+  max-height: min(720px, calc(100% - 84px));
   padding: 1rem;
   border-radius: 0 var(--radius-lg) 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -18,6 +19,8 @@
   pointer-events: none;
   transition: transform 180ms ease, opacity 180ms ease;
   z-index: 9;
+  overflow: auto;
+  scrollbar-width: thin;
 }
 
 .start-menu.is-open {

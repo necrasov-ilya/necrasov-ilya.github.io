@@ -1,12 +1,13 @@
 import type { AppId } from '../../shared/types/desktop';
 import { AboutApp } from './AboutApp';
 import './AppWindows.css';
+import { BlogApp } from './BlogApp';
 import { ContactApp } from './ContactApp';
 import { GalleryApp } from './GalleryApp';
-import { LabApp } from './LabApp';
 import { NeonXOApp } from './NeonXOApp';
 import { ProjectsApp } from './ProjectsApp';
 import { SignalHuntApp } from './SignalHuntApp';
+import { SystemApp } from './SystemApp';
 
 export function AppContent({ appId }: { appId: AppId }) {
   switch (appId) {
@@ -14,8 +15,10 @@ export function AppContent({ appId }: { appId: AppId }) {
       return <AboutApp />;
     case 'projects':
       return <ProjectsApp />;
-    case 'lab':
-      return <LabApp />;
+    case 'blog':
+      return <BlogApp />;
+    case 'system':
+      return <SystemApp />;
     case 'gallery':
       return <GalleryApp />;
     case 'contact':

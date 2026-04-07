@@ -1,5 +1,11 @@
 import { createContext } from 'react';
-import type { AppId, DesktopBounds, WindowInstance } from '../../../shared/types/desktop';
+import type {
+  AppId,
+  DesktopBounds,
+  WindowInstance,
+  WindowRect,
+  WindowResizeDirection,
+} from '../../../shared/types/desktop';
 
 export interface DesktopManagerValue {
   windows: WindowInstance[];
@@ -11,6 +17,13 @@ export interface DesktopManagerValue {
   minimizeApp: (appId: AppId) => void;
   toggleFromTaskbar: (appId: AppId) => void;
   moveApp: (appId: AppId, nextX: number, nextY: number) => void;
+  resizeApp: (
+    appId: AppId,
+    direction: WindowResizeDirection,
+    originRect: WindowRect,
+    deltaX: number,
+    deltaY: number,
+  ) => void;
   setStartMenuOpen: (value: boolean) => void;
   setDesktopBounds: (bounds: DesktopBounds) => void;
 }

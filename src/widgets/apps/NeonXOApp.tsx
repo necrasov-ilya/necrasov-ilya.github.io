@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 
+import { GameResultDialog } from '../../shared/ui/game-result-dialog/GameResultDialog';
+
 type CellValue = 'X' | 'O' | null;
+
+type RoundResult = {
+  description: string;
+  title: string;
+};
 
 const winningLines = [
   [0, 1, 2],
@@ -26,6 +33,7 @@ function getWinner(board: CellValue[]) {
 function pickBotMove(board: CellValue[]) {
   for (const [a, b, c] of winningLines) {
     const line = [board[a], board[b], board[c]];
+
     if (line.filter((value) => value === 'O').length === 2 && line.includes(null)) {
       return [a, b, c][line.indexOf(null)];
     }
@@ -33,6 +41,7 @@ function pickBotMove(board: CellValue[]) {
 
   for (const [a, b, c] of winningLines) {
     const line = [board[a], board[b], board[c]];
+
     if (line.filter((value) => value === 'X').length === 2 && line.includes(null)) {
       return [a, b, c][line.indexOf(null)];
     }
@@ -46,6 +55,31 @@ function pickBotMove(board: CellValue[]) {
   return priority.find((index) => board[index] === null) ?? -1;
 }
 
+function getRoundResult(winner: CellValue, isDraw: boolean): RoundResult | null {
+  if (winner === 'X') {
+    return {
+      title: 'Ты выиграл раунд',
+      description: 'Линия собрана раньше модели. Запускаем следующий раунд?',
+    };
+  }
+
+  if (winner === 'O') {
+    return {
+      title: 'Раунд за моделью',
+      description: 'Модель закрыла линию первой. Хочешь сыграть ещё раз?',
+    };
+  }
+
+  if (isDraw) {
+    return {
+      title: 'Ничья',
+      description: 'Поле закончилось без победителя. Начать заново?',
+    };
+  }
+
+  return null;
+}
+
 export function NeonXOApp() {
   const [game, setGame] = useState({
     board: Array(9).fill(null) as CellValue[],
@@ -54,21 +88,21 @@ export function NeonXOApp() {
   });
 
   const { board, xScore, oScore } = game;
-
   const winner = getWinner(board);
   const isDraw = !winner && board.every(Boolean);
+  const roundResult = getRoundResult(winner, isDraw);
   const canPlay = !winner && !isDraw;
   const xCount = board.filter((value) => value === 'X').length;
   const oCount = board.filter((value) => value === 'O').length;
-  const status = winner
+  const turnLabel = !canPlay
     ? winner === 'X'
-      ? 'Раунд за тобой.'
-      : 'Модель дожала раунд.'
-    : isDraw
-      ? 'Ничья. Плотный матч.'
-      : xCount === oCount
-        ? 'Твой ход. Ставь X.'
-        : 'Модель думает...';
+      ? 'Раунд взят тобой.'
+      : winner === 'O'
+        ? 'Раунд взяла модель.'
+        : 'Раунд завершился ничьей.'
+    : xCount === oCount
+      ? 'Сейчас твой ход.'
+      : 'Модель отвечает.';
 
   useEffect(() => {
     if (!canPlay || xCount !== oCount + 1) {
@@ -103,11 +137,7 @@ export function NeonXOApp() {
   }, [board, canPlay, oCount, xCount]);
 
   function handleCellClick(index: number) {
-    if (!canPlay || board[index] !== null) {
-      return;
-    }
-
-    if (xCount !== oCount) {
+    if (!canPlay || board[index] !== null || xCount !== oCount) {
       return;
     }
 
@@ -133,32 +163,61 @@ export function NeonXOApp() {
 
   return (
     <div className="app-pane app-pane--game">
-      <div className="game-header">
-        <div>
-          <div className="eyebrow">GAME / NEON XO</div>
-          <h2>{status}</h2>
-        </div>
-        <button className="ghost-button" onClick={resetBoard} type="button">
-          Новый раунд
-        </button>
-      </div>
+      <div className="game-shell game-shell--xo">
+        <section className="game-main">
+          <div className="game-header">
+            <div className="eyebrow">Игра / Неон XO</div>
+            <h2>Обыграй модель в 3×3</h2>
+            <p className="game-copy">
+              <strong>{turnLabel}</strong> Ставь <strong>X</strong>, модель отвечает через 320 мс и пытается
+              закрыть линию раньше тебя.
+            </p>
+          </div>
 
-      <div className="score-strip">
-        <span>Ты: {xScore}</span>
-        <span>Модель: {oScore}</span>
-      </div>
+          <div className="game-board-wrap">
+            <div className="xo-grid">
+              {board.map((cell, index) => (
+                <button
+                  aria-label={cell ? `Клетка ${index + 1}: ${cell}` : `Поставить X в клетку ${index + 1}`}
+                  className={`xo-cell ${cell ? 'is-filled' : ''}`}
+                  key={index}
+                  onClick={() => handleCellClick(index)}
+                  type="button"
+                >
+                  {cell}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      <div className="xo-grid">
-        {board.map((cell, index) => (
-          <button
-            className={`xo-cell ${cell ? 'is-filled' : ''}`}
-            key={index}
-            onClick={() => handleCellClick(index)}
-            type="button"
-          >
-            {cell}
+        <aside className="game-sidebar">
+          <button className="ghost-button" onClick={resetBoard} type="button">
+            Новый раунд
           </button>
-        ))}
+
+          <div className="score-strip score-strip--stacked">
+            <span>Ты: {xScore}</span>
+            <span>Модель: {oScore}</span>
+          </div>
+
+          <div className="game-note">
+            Забирай линию из трёх символов раньше модели. Ничья тоже завершает раунд и сразу переводит тебя к
+            перезапуску.
+          </div>
+        </aside>
+
+        <GameResultDialog
+          description={roundResult?.description ?? ''}
+          eyebrow="Раунд / Неон XO"
+          isOpen={Boolean(roundResult)}
+          onRestart={resetBoard}
+          stats={[
+            { label: 'Ты', value: String(xScore) },
+            { label: 'Модель', value: String(oScore) },
+          ]}
+          title={roundResult?.title ?? ''}
+        />
       </div>
     </div>
   );

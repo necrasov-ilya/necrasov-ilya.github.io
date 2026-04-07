@@ -1,51 +1,62 @@
-const projectCards = [
-  {
-    label: '01 / Product shells',
-    title: 'Desktop-like interfaces that feel tactile',
-    text: 'Люблю интерфейсы, в которых у пользователя есть чувство среды: окна, фокус, иерархия, слои и живые состояния вместо плоского лендинга.',
-  },
-  {
-    label: '02 / ML experience',
-    title: 'Model-aware flows, not just model-powered labels',
-    text: 'Проектирую сценарии так, чтобы ML становился частью UX: подсказка, confidence, iterative output, provenance и понятная обратная связь.',
-  },
-  {
-    label: '03 / Design engineering',
-    title: 'From visual direction to implementation details',
-    text: 'Сильный вкус в интерфейсе имеет смысл только тогда, когда он доживает до продакшена: токены, motion, responsive logic и аккуратная архитектура.',
-  },
-];
-
-const pipeline = [
-  'Discover: раскладываю задачу на сигналы пользователя, ограничения и продуктовые риски.',
-  'Shape: собираю визуальную систему, mood и интеракции, чтобы интерфейс имел собственный ритм.',
-  'Build: переношу это в код, не ломая структуру проекта и не превращая всё в монолит.',
-  'Refine: тестирую поток, читаемость, поведение состояний и ощущение от продукта как среды.',
-];
+import { repositories } from '../../entities/content/model/repositories';
 
 export function ProjectsApp() {
+  const latestRepository = repositories[0];
+
   return (
     <div className="app-pane">
-      <section className="stacked-grid">
-        {projectCards.map((card) => (
-          <article className="glass-card glass-card--accent" key={card.title}>
-            <div className="eyebrow">{card.label}</div>
-            <h2>{card.title}</h2>
-            <p>{card.text}</p>
+      <section className="repo-hero">
+        <div>
+          <div className="eyebrow">РЕПО / GITHUB</div>
+          <h2>Репозитории и рабочие наработки</h2>
+          <p>
+            Окно собирается из GitHub API на этапе синхронизации. Здесь нет захардкоженных карточек: только
+            актуальные репозитории, даты пушей и живые ссылки.
+          </p>
+        </div>
+
+        <div className="repo-stats">
+          <article>
+            <span>Репозиториев в выдаче</span>
+            <strong>{repositories.length}</strong>
           </article>
-        ))}
+          <article>
+            <span>Последнее обновление</span>
+            <strong>{latestRepository?.updatedLabel ?? 'Нет данных'}</strong>
+          </article>
+          <article>
+            <span>Источник</span>
+            <strong>GitHub API</strong>
+          </article>
+        </div>
       </section>
 
-      <section className="timeline-card">
-        <div className="eyebrow">Workflow</div>
-        <h2>Как я обычно довожу идею до рабочего интерфейса</h2>
-        <div className="timeline-list">
-          {pipeline.map((step) => (
-            <div className="timeline-item" key={step}>
-              {step}
+      <section className="repo-grid">
+        {repositories.map((repository) => (
+          <article className="repo-card" key={repository.id}>
+            <div className="repo-card__meta">
+              <span>{repository.year}</span>
+              <span>{repository.updatedLabel}</span>
             </div>
-          ))}
-        </div>
+            <h3>{repository.name}</h3>
+            <p>{repository.summary}</p>
+            <div className="blog-card__tags">
+              {repository.tags.map((tag) => (
+                <span key={`${repository.id}-${tag}`}>{tag}</span>
+              ))}
+            </div>
+            <div className="repo-card__links">
+              {repository.homepageUrl && (
+                <a href={repository.homepageUrl} rel="noreferrer" target="_blank">
+                  Демо
+                </a>
+              )}
+              <a href={repository.repositoryUrl} rel="noreferrer" target="_blank">
+                Код
+              </a>
+            </div>
+          </article>
+        ))}
       </section>
     </div>
   );

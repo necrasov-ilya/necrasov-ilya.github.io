@@ -4,11 +4,12 @@ export function ContactApp() {
   return (
     <div className="app-pane app-pane--contact">
       <section className="contact-hero">
-        <div className="eyebrow">CONTACT / READY TO SHIP</div>
-        <h2>Если нужен ML-проект с сильным интерфейсом, можно написать сюда.</h2>
+        <div className="eyebrow">КОНТАКТЫ / НА СВЯЗИ</div>
+        <h2>Если нужен ML-продукт с сильным интерфейсом, можно написать сюда.</h2>
         <p>
-          Предпочитаю разговоры, где уже есть продуктовая задача, ограничения и желание довести
-          ощущение от продукта до высокого уровня, а не просто “сделать страницу”.
+          Больше всего ценю разговоры, где уже есть продуктовая задача, ограничения и желание
+          довести ощущение от сервиса до высокого уровня, а не просто “сделать страницу” или
+          “воткнуть модель”.
         </p>
       </section>
 
@@ -25,7 +26,7 @@ export function ContactApp() {
           rel="noreferrer"
           target="_blank"
         >
-          <span>Repo</span>
+          <span>Исходники</span>
           <strong>desktop portfolio source</strong>
         </a>
       </div>

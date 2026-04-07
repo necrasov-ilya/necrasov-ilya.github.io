@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-04-07T18:49:55.346Z",
+  "repositories": [
+    {
+      "id": 1158362229,
+      "name": "necrasov-ilya.github.io",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/necrasov-ilya.github.io",
+      "homepage": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-04-07T15:55:35Z"
+    },
+    {
+      "id": 1158739483,
+      "name": "necrasov-ilya",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/necrasov-ilya",
+      "homepage": "",
+      "language": "",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-03-26T17:41:08Z"
+    },
+    {
+      "id": 1103826705,
+      "name": "art-style-attribution-lab",
+      "description": "Educational prototype for neural art attribution: a pipeline that classifies a painting’s style with a CNN, explains the result with an LLM, and generates new images in similar styles via ComfyUI.",
+      "htmlUrl": "https://github.com/necrasov-ilya/art-style-attribution-lab",
+      "homepage": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-12-17T20:59:51Z"
+    },
+    {
+      "id": 1114493228,
+      "name": "student-projects-showcase",
+      "description": "Lightweight static portfolio page for displaying academic projects with dynamic filtering by year.  Built with vanilla JavaScript and JSON-based content management.",
+      "htmlUrl": "https://github.com/necrasov-ilya/student-projects-showcase",
+      "homepage": "",
+      "language": "CSS",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-12-15T10:11:15Z"
+    },
+    {
+      "id": 1094383446,
+      "name": "DespamLy-Telegram-Bot",
+      "description": "An automatic content moderation system for Telegram using multiple systems. Production-ready solution for small and medium-sized businesses, with a simplified architecture without external dependencies, adapted to a multi-chat architecture, good accuracy/speed ratio for 90% of cases",
+      "htmlUrl": "https://github.com/necrasov-ilya/DespamLy-Telegram-Bot",
+      "homepage": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-11-19T08:10:19Z"
+    },
+    {
+      "id": 975329951,
+      "name": "LifeMart_Safety",
+      "description": "Anti-Spam bot for LifeMart",
+      "htmlUrl": "https://github.com/necrasov-ilya/LifeMart_Safety",
+      "homepage": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-11-11T15:56:16Z"
+    },
+    {
+      "id": 1046678874,
+      "name": "gpt-artifact-scrub",
+      "description": "Универсальный scrubber для GPT-текстов: чистит невидимые символы, правит пунктуацию и пробелы, сохраняет структуру Markdown.",
+      "htmlUrl": "https://github.com/necrasov-ilya/gpt-artifact-scrub",
+      "homepage": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-11-09T14:35:14Z"
+    },
+    {
+      "id": 1031257372,
+      "name": "nksv-folio-final",
+      "description": "Just my portfolio, now, it last, maybe :)",
+      "htmlUrl": "https://github.com/necrasov-ilya/nksv-folio-final",
+      "homepage": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-10-08T18:49:47Z"
+    },
+    {
+      "id": 1036597963,
+      "name": "custom-WoL-for-rassberry",
+      "description": "Telegram BOT for WoL ",
+      "htmlUrl": "https://github.com/necrasov-ilya/custom-WoL-for-rassberry",
+      "homepage": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-08-14T12:59:55Z"
+    },
+    {
+      "id": 1005008623,
+      "name": "segway-rights-checker",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/segway-rights-checker",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-08-05T09:10:47Z"
+    }
+  ]
+}

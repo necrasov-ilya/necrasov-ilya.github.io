@@ -1,35 +1,35 @@
 export const profile = {
   name: 'Илья Некрасов',
-  headline: 'ML Engineer x Frontend Designer',
+  headline: 'GenAI-инженерия + фронтенд',
   intro:
-    'Собираю продукты на стыке интерфейсов, визуального языка и applied ML. Люблю, когда сложная система ощущается как живая среда, а не набор экранов.',
+    'Проектирую AI-функции для продукта: RAG, агентные сценарии, интеграционные пайплайны и клиентские интерфейсы. Могу работать в каждом направлении отдельно и сводить их вместе, когда нужен аккуратный ML-продукт с сильным UX.',
   status:
-    'Ищу сильные команды, где можно одновременно проектировать UX, продумывать продуктовую механику и доводить implementation до аккуратного результата.',
+    'Сильнее всего интересуют продукты, где нужно одновременно думать про UX, данные и реализацию, а не просто “прикрутить модель” или “сверстать экран”.',
   focus: [
-    'Interactive UI',
-    'Design Systems',
-    'Generative UX',
-    'RAG & Eval',
-    'Motion-first Web',
-    'Product Thinking',
+    'RAG и retrieval-пайплайны',
+    'Агентные сценарии',
+    'Интерфейсы для внутренних систем',
+    'TypeScript + Python',
+    'Дизайн-системы',
+    'Продуктовая интеграция ML',
   ],
   facts: [
-    { label: 'Primary stack', value: 'React, TypeScript, Vite, Python' },
-    { label: 'ML focus', value: 'Embeddings, RAG, prototyping, eval loops' },
-    { label: 'Design angle', value: 'Interface systems, motion, visual hierarchy' },
+    { label: 'Основной стек', value: 'React, TypeScript, Vite, Python' },
+    { label: 'ML-фокус', value: 'RAG, агентные сценарии, прототипирование, eval loops' },
+    { label: 'UX/UI опыт', value: 'Сценарии, прототипы, интерфейсные системы и motion' },
   ],
   workstreams: [
     {
-      title: 'ML Systems',
-      text: 'Прототипы, где модель не спрятана за API-формой, а становится частью продукта и сценария.',
+      title: 'ML-системы',
+      text: 'Делаю прототипы, где модель не спрятана за API-формой, а становится частью продукта, сценария и пользовательского потока.',
     },
     {
-      title: 'Frontend Craft',
-      text: 'Интерфейсы с характером: продуманная композиция, микро-анимации, контраст и читаемая архитектура.',
+      title: 'Frontend-ремесло',
+      text: 'Собираю интерфейсы с характером: продуманная композиция, визуальная иерархия, понятные состояния и архитектура без монолита.',
     },
     {
-      title: 'Bridge Role',
-      text: 'Умею говорить и с дизайном, и с кодом, и с продуктом, поэтому быстро свожу идею в рабочий артефакт.',
+      title: 'Bridge-роль',
+      text: 'Могу одинаково уверенно говорить с дизайном, кодом и продуктом, поэтому быстро свожу идею в рабочий артефакт, а не в бесконечный концепт.',
     },
   ],
   links: [
@@ -43,12 +43,17 @@ export const profile = {
       value: 'evart2006@gmail.com',
       href: 'mailto:evart2006@gmail.com',
     },
+    {
+      label: 'Telegram',
+      value: '@nksvilya',
+      href: 'https://t.me/nksvilya',
+    },
   ],
 };
 
 export const galleryAssets = {
   wallpaper: '/media/hero/stills/dark/hero-still-dark-01.webp',
-  aboutHero: '/media/hero/stills/dark/hero-still-dark-02.webp',
+  aboutHero: '/media/hero/stills/dark/hero-still-dark-03.webp',
   darkStills: [
     '/media/hero/stills/dark/hero-still-dark-01.webp',
     '/media/hero/stills/dark/hero-still-dark-02.webp',

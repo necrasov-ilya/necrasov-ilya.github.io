@@ -34,7 +34,7 @@ export function StartMenu({ apps, isOpen, windows, onOpen }: StartMenuProps) {
                 <strong>{app.title}</strong>
                 <span>{app.subtitle}</span>
               </div>
-              <em>{isOpenNow ? 'open' : 'launch'}</em>
+              <em>{isOpenNow ? 'открыто' : 'запуск'}</em>
             </button>
           );
         })}

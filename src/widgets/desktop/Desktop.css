@@ -5,6 +5,22 @@
   isolation: isolate;
 }
 
+.desktop-windows {
+  position: relative;
+  z-index: 6;
+}
+
+.desktop-chrome {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+}
+
+.desktop-chrome > * {
+  pointer-events: auto;
+}
+
 .desktop-grid,
 .desktop-vignette,
 .desktop-glow {

@@ -57,21 +57,27 @@ export function DesktopSurface() {
       <div aria-hidden="true" className="desktop-glow desktop-glow--two" />
 
       <DesktopIcons apps={applicationCatalog} onOpen={openApp} windows={windows} />
-      <StartMenu
-        apps={applicationCatalog}
-        isOpen={isStartMenuOpen}
-        onOpen={openApp}
-        windows={windows}
-      />
-      <WindowStack />
-      <Taskbar
-        apps={applicationCatalog}
-        isStartMenuOpen={isStartMenuOpen}
-        onToggleStart={() => setStartMenuOpen(!isStartMenuOpen)}
-        onToggleWindow={toggleFromTaskbar}
-        time={time}
-        windows={windows}
-      />
+
+      <div className="desktop-windows">
+        <WindowStack />
+      </div>
+
+      <div className="desktop-chrome">
+        <StartMenu
+          apps={applicationCatalog}
+          isOpen={isStartMenuOpen}
+          onOpen={openApp}
+          windows={windows}
+        />
+        <Taskbar
+          apps={applicationCatalog}
+          isStartMenuOpen={isStartMenuOpen}
+          onToggleStart={() => setStartMenuOpen(!isStartMenuOpen)}
+          onToggleWindow={toggleFromTaskbar}
+          time={time}
+          windows={windows}
+        />
+      </div>
     </section>
   );
 }

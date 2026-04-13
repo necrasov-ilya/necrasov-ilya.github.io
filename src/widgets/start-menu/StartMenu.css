@@ -41,12 +41,13 @@
 
 .start-menu__profile img {
   display: block;
-  margin: auto;
   width: 64px;
   height: 64px;
+  flex-shrink: 0;
   object-fit: contain;
   object-position: center;
   image-rendering: pixelated;
+  transform: translateX(-4px);
 }
 
 .start-menu__profile strong,

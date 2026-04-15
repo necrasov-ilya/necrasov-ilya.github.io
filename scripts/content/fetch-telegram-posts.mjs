@@ -33,6 +33,8 @@ const OUTPUT_PATH = resolveRepoPath(
 );
 const SECTION_MARKER_PATTERN =
   /\s+(?=(?:\u{1F7E1}|\u{1F538}|\u{1F539}|\u{2705}|\u{2757}|\u26A0\uFE0F|\u2022))/gu;
+const INLINE_DASH_LIST_INTRO_PATTERN = /([:：])\s+(?=[\u2014\u2013-]\s+\p{L})/gu;
+const INLINE_DASH_LIST_ITEM_PATTERN = /\s+(?=[\u2014\u2013-]\s+\p{L}[^.\n]{0,48}[:：])/gu;
 const TRAILING_HASHTAGS_PATTERN = /\s*(?:#[A-Za-z0-9_\u0400-\u04FF]+\s*){2,}$/u;
 
 function normalizeSpaces(value) {
@@ -41,28 +43,43 @@ function normalizeSpaces(value) {
     .replace(/\s+/g, " ");
 }
 
+function normalizeBlockSpacing(value) {
+  return String(value ?? "")
+    .replace(/\r\n?/g, "\n")
+    .replace(/\u00A0/g, " ")
+    .split("\n")
+    .map((line) => line.replace(/[ \t]+/g, " ").trim())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function escapeRegExp(value) {
   return String(value ?? "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function stripLeadingDecorators(value) {
+function stripLeadingDecoratorsInline(value) {
   return normalizeSpaces(value).replace(/^[^\p{L}\p{N}]+/u, "");
 }
 
+function stripLeadingDecoratorsBlock(value) {
+  return normalizeBlockSpacing(value).replace(/^[^\p{L}\p{N}]+/u, "");
+}
+
 function stripTrailingHashtags(value) {
-  return normalizeSpaces(value).replace(TRAILING_HASHTAGS_PATTERN, "").trim();
+  return normalizeBlockSpacing(value).replace(TRAILING_HASHTAGS_PATTERN, "").trim();
 }
 
 function stripLeadingDuplicatedTitle(content, title) {
-  const normalizedContent = normalizeSpaces(content);
+  const normalizedContent = normalizeBlockSpacing(content);
   const normalizedTitle = normalizeSpaces(title);
 
   if (!normalizedContent || !normalizedTitle) {
     return normalizedContent;
   }
 
-  const contentCore = stripLeadingDecorators(normalizedContent);
-  const titleCore = stripLeadingDecorators(normalizedTitle);
+  const contentCore = stripLeadingDecoratorsBlock(normalizedContent);
+  const titleCore = stripLeadingDecoratorsInline(normalizedTitle);
 
   if (!contentCore || !titleCore) {
     return normalizedContent;
@@ -83,14 +100,15 @@ function formatReadableText(value) {
     .replace(/\r\n?/g, "\n")
     .replace(/\u00A0/g, " ")
     .replace(SECTION_MARKER_PATTERN, "\n\n")
-    .replace(/\s+\u2014\s+/g, "\n\n— ");
+    .replace(INLINE_DASH_LIST_INTRO_PATTERN, "$1\n\n")
+    .replace(INLINE_DASH_LIST_ITEM_PATTERN, "\n\n");
 
   const lines = normalized
     .split("\n")
     .map((line) =>
       line
         .replace(/[ \t]+/g, " ")
-        .replace(/\s+([,.;!?])/g, "$1")
+        .replace(/\s+([,.;!?:])/g, "$1")
         .replace(/\(\s+/g, "(")
         .replace(/\s+\)/g, ")")
         .trim(),
@@ -198,9 +216,9 @@ async function persistImage(imageUrl, postId, title) {
 
 function mapPost(item, index) {
   const rawTitle = stripHtml(item.title);
-  const titleSource = stripLeadingDecorators(rawTitle) || rawTitle;
+  const titleSource = stripLeadingDecoratorsInline(rawTitle) || rawTitle;
   const rawDescription = stripHtmlReadable(item.description);
-  const descriptionSource = stripLeadingDecorators(rawDescription) || rawDescription;
+  const descriptionSource = stripLeadingDecoratorsBlock(rawDescription) || rawDescription;
   const contentWithoutTitle = stripLeadingDuplicatedTitle(descriptionSource, titleSource);
   const contentWithoutTrailingTags = stripTrailingHashtags(contentWithoutTitle);
   const content = formatReadableText(contentWithoutTrailingTags);

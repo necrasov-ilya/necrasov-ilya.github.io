@@ -9,10 +9,6 @@ export function ProjectsApp() {
         <div>
           <div className="eyebrow">РЕПО / GITHUB</div>
           <h2>Репозитории и рабочие наработки</h2>
-          <p>
-            Окно собирается из GitHub API на этапе синхронизации. Здесь нет захардкоженных карточек: только
-            актуальные репозитории, даты пушей и живые ссылки.
-          </p>
         </div>
 
         <div className="repo-stats">

@@ -1,28 +1,50 @@
 :root {
   color-scheme: dark;
-  --bg-1: #07070c;
-  --bg-2: #10101a;
-  --bg-3: #181826;
-  --bg-4: #212134;
-  --panel-stroke: rgba(255, 255, 255, 0.14);
-  --text-1: #fff6f8;
-  --text-2: rgba(255, 246, 248, 0.78);
-  --text-3: rgba(255, 246, 248, 0.52);
+  --bg-1: #080808;
+  --bg-2: #101010;
+  --bg-3: #181818;
+  --bg-4: #202020;
+  --surface-0: #080808;
+  --surface-1: #101010;
+  --surface-2: #181818;
+  --surface-3: #202020;
+  --surface-4: #282828;
+  --surface-accent: #181818;
+  --surface-accent-soft: #202020;
+  --panel-stroke: #313131;
+  --border-soft: #313131;
+  --border-mid: #474747;
+  --border-accent: #c9245530;
+  --edge-highlight: rgba(255, 255, 255, 0.02);
+  --text-1: #f3f3f3;
+  --text-2: #a3a3a3;
+  --text-3: #747474;
   --accent: #c92455;
-  --accent-soft: rgba(201, 36, 85, 0.18);
-  --accent-bright: #ff7da5;
-  --accent-strong: #ff477f;
-  --mint: #7de7d5;
-  --pixel-border-light: #f9c9d8;
-  --pixel-border-mid: #7a3049;
-  --pixel-border-dark: #1d0f18;
-  --radius-xs: 0px;
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
-  --shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
-  font-family: 'IBM Plex Mono', monospace;
-  line-height: 1.45;
+  --accent-soft: #c9245530;
+  --accent-bright: #c92455;
+  --accent-strong: #c92455;
+  --success: #22c55e;
+  --info: #38bdf8;
+  --mint: var(--info);
+  --pixel-border-light: #f2d3dd;
+  --pixel-border-mid: #6f3748;
+  --pixel-border-dark: #201015;
+  --radius-xs: 8px;
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+  --shadow-sm:
+    inset 0 1px 0 var(--edge-highlight),
+    0 10px 22px rgba(0, 0, 0, 0.18);
+  --shadow-md:
+    inset 0 1px 0 var(--edge-highlight),
+    0 18px 38px rgba(0, 0, 0, 0.24);
+  --shadow-lg:
+    inset 0 1px 0 var(--edge-highlight),
+    0 26px 60px rgba(0, 0, 0, 0.34);
+  --shadow: var(--shadow-md);
+  font-family: 'IBM Plex Sans', sans-serif;
+  line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -72,9 +94,10 @@ img {
 }
 
 .eyebrow {
-  font-family: 'Silkscreen', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-3);
 }
@@ -87,8 +110,9 @@ img {
 }
 
 .pixel-heading {
-  font-family: 'Silkscreen', monospace;
-  letter-spacing: 0.04em;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .chip-list {
@@ -100,28 +124,23 @@ img {
 .chip {
   padding: 0.55rem 0.85rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(27, 27, 36, 0.88);
+  border: 0;
+  background: var(--surface-3);
   color: var(--text-2);
   font-size: 0.88rem;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
-    0 10px 24px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--shadow-sm);
 }
 
 .glass-card {
   padding: 1.2rem;
   border-radius: var(--radius-md);
-  background: rgba(18, 18, 24, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-1);
+  border: 0;
   box-shadow: var(--shadow);
-  outline: 1px solid rgba(255, 255, 255, 0.04);
-  outline-offset: -2px;
 }
 
 .glass-card--accent {
-  background: rgba(28, 17, 22, 0.94);
-  border-color: rgba(201, 36, 85, 0.28);
+  background: var(--surface-2);
 }
 
 .feature-list {
@@ -146,34 +165,37 @@ img {
   width: 0.42rem;
   height: 0.42rem;
   background: var(--accent-strong);
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.28);
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .ghost-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(24, 24, 32, 0.92);
+  border: 1px solid var(--border-soft);
+  background: var(--surface-3);
   padding: 0.8rem 1rem;
   border-radius: var(--radius-sm);
-  font-family: 'Silkscreen', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.78rem;
-  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
-    0 12px 28px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .ghost-button:hover {
   border-color: var(--accent-bright);
-  background: rgba(34, 22, 28, 0.94);
-  transform: translate(-1px, -1px);
+  background: var(--surface-4);
+  box-shadow: var(--shadow-md);
 }
 
 .ghost-button:active {
-  transform: translate(1px, 1px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (max-width: 940px) {

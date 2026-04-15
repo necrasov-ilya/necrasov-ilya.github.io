@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { blogPosts, telegramChannelUrl } from '../../entities/content/model/blog';
+import { useMediaQuery } from '../../shared/lib/useMediaQuery';
 
 export function BlogApp() {
   const [selectedId, setSelectedId] = useState(blogPosts[0]?.id ?? '');
-  const sidebarRef = useRef<HTMLElement | null>(null);
+  const [compactView, setCompactView] = useState<'article' | 'list'>('article');
   const articleRef = useRef<HTMLElement | null>(null);
+  const hasMountedRef = useRef(false);
+  const isCompactBlogLayout = useMediaQuery('(max-width: 760px)');
   const activePost = blogPosts.find((post) => post.id === selectedId) ?? blogPosts[0];
 
   useEffect(() => {
@@ -12,9 +15,26 @@ export function BlogApp() {
       return;
     }
 
-    sidebarRef.current?.scrollTo({ top: 0 });
-    articleRef.current?.scrollTo({ top: 0 });
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    articleRef.current?.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
   }, [selectedId]);
+
+  useEffect(() => {
+    if (!isCompactBlogLayout) {
+      setCompactView('article');
+    }
+  }, [isCompactBlogLayout]);
 
   if (blogPosts.length === 0) {
     return (
@@ -29,8 +49,12 @@ export function BlogApp() {
   }
 
   return (
-    <div className="app-pane app-pane--blog">
-      <aside className="blog-sidebar" ref={sidebarRef}>
+    <div
+      className={`app-pane app-pane--blog ${isCompactBlogLayout ? 'is-compact' : ''} ${
+        compactView === 'list' ? 'is-list-view' : 'is-article-view'
+      }`}
+    >
+      <aside className={`blog-sidebar ${isCompactBlogLayout && compactView !== 'list' ? 'is-hidden' : ''}`}>
         <div className="blog-sidebar__head">
           <div className="eyebrow">БЛОГ / КАНАЛ</div>
           <h2>Разборы, заметки и длинные посты</h2>
@@ -48,7 +72,13 @@ export function BlogApp() {
             <button
               className={`blog-card ${post.id === activePost.id ? 'is-active' : ''}`}
               key={post.id}
-              onClick={() => setSelectedId(post.id)}
+              onClick={() => {
+                setSelectedId(post.id);
+
+                if (isCompactBlogLayout) {
+                  setCompactView('article');
+                }
+              }}
               type="button"
             >
               {post.image ? (
@@ -74,8 +104,16 @@ export function BlogApp() {
         </div>
       </aside>
 
-      <article className="blog-article" ref={articleRef}>
+      <article
+        className={`blog-article ${isCompactBlogLayout && compactView !== 'article' ? 'is-hidden' : ''}`}
+        ref={articleRef}
+      >
         <div className="blog-article__head">
+          {isCompactBlogLayout ? (
+            <button className="ghost-button blog-article__back" onClick={() => setCompactView('list')} type="button">
+              К списку постов
+            </button>
+          ) : null}
           <div className="eyebrow">СТАТЬЯ / ЧТЕНИЕ</div>
           <h2>{activePost.title}</h2>
           <div className="blog-article__meta">
@@ -92,7 +130,7 @@ export function BlogApp() {
 
         <div className="blog-article__body">
           {activePost.paragraphs.map((paragraph, index) => (
-            <p key={`${activePost.id}-${index}`}>{paragraph}</p>
+            <p key={`${activePost.id}-paragraph-${index}`}>{paragraph}</p>
           ))}
         </div>
 

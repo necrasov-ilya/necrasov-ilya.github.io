@@ -38,6 +38,10 @@ const typedPayload = blogPostsPayload as GeneratedBlogPayload;
 export const blogGeneratedAt = typedPayload.generatedAt;
 export const telegramChannelUrl = typedPayload.channelUrl;
 
+function normalizeBlockText(value: string) {
+  return value.trim().replace(/\s+/g, ' ');
+}
+
 function compactExcerpt(title: string, excerpt: string) {
   const normalizedExcerpt = excerpt.trim().replace(/\s+/g, ' ');
 
@@ -51,19 +55,26 @@ function compactExcerpt(title: string, excerpt: string) {
     return normalizedExcerpt;
   }
 
-  const leadingTitlePattern = new RegExp(`^${escapedTitle}[\\s—–\\-:,.!?«»"()]*`, 'i');
+  const leadingTitlePattern = new RegExp(
+    `^${escapedTitle}[\\s\\u2013\\u2014\\-:,.!?\\u00AB\\u00BB"()]*`,
+    'i',
+  );
   const compact = normalizedExcerpt.replace(leadingTitlePattern, '').trim();
 
   return compact || normalizedExcerpt;
 }
 
+function buildParagraphs(content: string): string[] {
+  return content
+    .split(/\n{2,}/)
+    .map((part) => normalizeBlockText(part))
+    .filter(Boolean);
+}
+
 export const blogPosts: BlogPost[] = typedPayload.posts.map((post) => ({
   ...post,
   previewExcerpt: compactExcerpt(post.title, post.excerpt),
-  paragraphs: post.content
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean),
+  paragraphs: buildParagraphs(post.content),
   publishedLabel: formatDateRu(post.publishedAt),
   readLabel: estimateReadLabel(post.content),
 }));

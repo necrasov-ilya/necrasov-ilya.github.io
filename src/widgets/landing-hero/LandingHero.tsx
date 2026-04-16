@@ -26,7 +26,7 @@ export function LandingHero({ onOpenDesktop }: LandingHeroProps) {
 
           <div className="landing-hero__actions">
             <button className="landing-hero__cta" onClick={() => onOpenDesktop()} type="button">
-              <span>Узнать больше</span>
+              <span>Посмотреть больше</span>
               <span aria-hidden="true" className="landing-hero__cta-arrow">
                 →
               </span>

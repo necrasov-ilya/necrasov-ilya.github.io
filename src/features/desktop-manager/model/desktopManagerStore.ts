@@ -24,6 +24,7 @@ export interface DesktopManagerValue {
     deltaX: number,
     deltaY: number,
   ) => void;
+  resetDesktop: () => void;
   setStartMenuOpen: (value: boolean) => void;
   setDesktopBounds: (bounds: DesktopBounds) => void;
 }

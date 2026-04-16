@@ -29,11 +29,18 @@
   display: flex;
   align-items: center;
   gap: 0.9rem;
+  width: 100%;
   padding: 0.75rem;
   border-radius: var(--radius-sm);
   background: var(--surface-3);
-  border: 0;
+  border: 1px solid transparent;
+  text-align: left;
   box-shadow: var(--shadow-sm);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .start-menu__profile img {
@@ -54,6 +61,13 @@
 
 .start-menu__profile span {
   color: var(--text-3);
+}
+
+.start-menu__profile:hover {
+  border-color: var(--border-accent);
+  background: var(--surface-4);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .start-menu__apps {

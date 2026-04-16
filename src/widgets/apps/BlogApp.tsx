@@ -56,10 +56,6 @@ export function BlogApp() {
         <div className="blog-sidebar__head">
           <div className="eyebrow">БЛОГ / КАНАЛ</div>
           <h2>Разборы, заметки и длинные посты</h2>
-          <p>
-            Лента собирается из канала, изображения сохраняются локально, поэтому окно работает как
-            статическое приложение, а не как внешняя встройка.
-          </p>
           <a className="ghost-button blog-channel-link" href={telegramChannelUrl} rel="noreferrer" target="_blank">
             Открыть канал
           </a>

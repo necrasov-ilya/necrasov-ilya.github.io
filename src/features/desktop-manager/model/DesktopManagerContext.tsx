@@ -163,6 +163,12 @@ export function DesktopManagerProvider({ children }: { children: ReactNode }) {
     );
   }
 
+  function resetDesktop() {
+    nextZIndexRef.current = 20;
+    setStartMenuOpen(false);
+    setWindows([]);
+  }
+
   return (
     <DesktopManagerStore.Provider
       value={{
@@ -176,6 +182,7 @@ export function DesktopManagerProvider({ children }: { children: ReactNode }) {
         toggleFromTaskbar,
         moveApp,
         resizeApp,
+        resetDesktop,
         setStartMenuOpen,
         setDesktopBounds,
       }}

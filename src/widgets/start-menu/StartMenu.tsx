@@ -8,18 +8,19 @@ interface StartMenuProps {
   isOpen: boolean;
   windows: WindowInstance[];
   onOpen: (appId: AppId) => void;
+  onExitToLanding: () => void;
 }
 
-export function StartMenu({ apps, isOpen, windows, onOpen }: StartMenuProps) {
+export function StartMenu({ apps, isOpen, windows, onOpen, onExitToLanding }: StartMenuProps) {
   return (
     <aside className={`start-menu ${isOpen ? 'is-open' : ''}`}>
-      <div className="start-menu__profile">
+      <button className="start-menu__profile" onClick={onExitToLanding} type="button">
         <img alt="NKSV" src="/media/hero/logo/logo-nksv-mark-outlined.svg" />
         <div>
           <strong>{profile.name}</strong>
           <span>{profile.headline}</span>
         </div>
-      </div>
+      </button>
 
       <div className="start-menu__apps">
         {apps.map((app) => {

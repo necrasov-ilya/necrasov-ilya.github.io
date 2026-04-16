@@ -12,10 +12,17 @@ import { WindowStack } from '../window-stack/WindowStack';
 
 interface DesktopSurfaceProps {
   entryAppId?: AppId | null;
+  isLeavingDesktop?: boolean;
   onEntryAppHandled?: () => void;
+  onReturnToLanding: () => void;
 }
 
-export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: DesktopSurfaceProps) {
+export function DesktopSurface({
+  entryAppId = null,
+  isLeavingDesktop = false,
+  onEntryAppHandled,
+  onReturnToLanding,
+}: DesktopSurfaceProps) {
   const {
     windows,
     isStartMenuOpen,
@@ -70,6 +77,10 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
 
   const handleOpenApp = useCallback(
     (appId: AppId) => {
+      if (isLeavingDesktop) {
+        return;
+      }
+
       setStartMenuOpen(false);
       const existingWindow = windows.find((windowState) => windowState.appId === appId);
 
@@ -83,11 +94,15 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
 
       scrollToWindow(appId);
     },
-    [focusApp, isCompactDesktop, openApp, scrollToWindow, setStartMenuOpen, windows],
+    [focusApp, isCompactDesktop, isLeavingDesktop, openApp, scrollToWindow, setStartMenuOpen, windows],
   );
 
   const handleToggleWindow = useCallback(
     (appId: AppId) => {
+      if (isLeavingDesktop) {
+        return;
+      }
+
       if (isCompactDesktop) {
         setStartMenuOpen(false);
 
@@ -104,6 +119,7 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
     },
     [
       isCompactDesktop,
+      isLeavingDesktop,
       openApp,
       scrollToWindow,
       setStartMenuOpen,
@@ -142,7 +158,7 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
   }, [setDesktopBounds]);
 
   useEffect(() => {
-    if (!entryAppId) {
+    if (!entryAppId || isLeavingDesktop) {
       return;
     }
 
@@ -156,10 +172,19 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
 
     scrollToWindow(entryAppId);
     onEntryAppHandled?.();
-  }, [entryAppId, focusApp, isCompactDesktop, onEntryAppHandled, openApp, scrollToWindow, windows]);
+  }, [
+    entryAppId,
+    focusApp,
+    isCompactDesktop,
+    isLeavingDesktop,
+    onEntryAppHandled,
+    openApp,
+    scrollToWindow,
+    windows,
+  ]);
 
   return (
-    <section className="desktop-shell" ref={shellRef}>
+    <section className={`desktop-shell ${isLeavingDesktop ? 'is-leaving' : ''}`} ref={shellRef}>
       <div aria-hidden="true" className="desktop-grid" />
       <div aria-hidden="true" className="desktop-vignette" />
       <div aria-hidden="true" className="desktop-glow desktop-glow--one" />
@@ -174,6 +199,7 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
         <StartMenu
           apps={applicationCatalog}
           isOpen={isStartMenuOpen}
+          onExitToLanding={onReturnToLanding}
           onOpen={handleOpenApp}
           windows={windows}
         />

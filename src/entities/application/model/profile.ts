@@ -15,8 +15,14 @@ export const profile = {
   ],
   facts: [
     { label: 'Основной стек', value: 'React, TypeScript, Vite, Python' },
-    { label: 'ML-фокус', value: 'RAG, агентные сценарии, прототипирование, eval loops' },
-    { label: 'UX/UI опыт', value: 'Сценарии, прототипы, интерфейсные системы и motion' },
+    {
+      label: 'ML-фокус',
+      value: 'RAG, агентные сценарии, прототипирование, eval loops',
+    },
+    {
+      label: 'UX/UI опыт',
+      value: 'Сценарии, прототипы, интерфейсные системы и motion',
+    },
   ],
   workstreams: [
     {
@@ -40,8 +46,8 @@ export const profile = {
     },
     {
       label: 'Email',
-      value: 'evart2006@gmail.com',
-      href: 'mailto:evart2006@gmail.com',
+      value: 'ilya.e.nekrasov@yandex.ru',
+      href: 'mailto:ilya.e.nekrasov@yandex.ru',
     },
     {
       label: 'Telegram',

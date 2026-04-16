@@ -16,20 +16,17 @@ export function LandingHero({ onOpenDesktop }: LandingHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
         >
-          <p className="landing-hero__eyebrow">GENAI ENGINEER / FRONTEND SYSTEMS</p>
           <h1 className="landing-hero__title">
             <span className="landing-hero__title-line">Привет, я</span>
             <span className="landing-hero__title-line landing-hero__title-line--outline">
               Илья Некрасов
             </span>
           </h1>
-          <p className="landing-hero__lead">
-            Собираю GenAI-продукты, где модель, UX и интерфейс работают как одна система.
-          </p>
+          <p className="landing-hero__lead">Фронтенд веб разработчик живущий в России</p>
 
           <div className="landing-hero__actions">
             <button className="landing-hero__cta" onClick={() => onOpenDesktop()} type="button">
-              <span>Открыть desktop</span>
+              <span>Узнать больше</span>
               <span aria-hidden="true" className="landing-hero__cta-arrow">
                 →
               </span>

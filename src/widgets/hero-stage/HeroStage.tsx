@@ -7,9 +7,11 @@ const INTRO_FADE_S = 0.36;
 
 interface HeroStageProps {
   children: ReactNode;
+  landing: ReactNode;
+  desktopActive: boolean;
 }
 
-export function HeroStage({ children }: HeroStageProps) {
+export function HeroStage({ children, landing, desktopActive }: HeroStageProps) {
   const {
     introIndex,
     introSequence,
@@ -19,7 +21,9 @@ export function HeroStage({ children }: HeroStageProps) {
     selectedScene,
     showIntro,
     setShowIntro,
-  } = useHeroStage();
+  } = useHeroStage(desktopActive);
+  const isDesktopReady = desktopActive && isIntroComplete;
+  const isDesktopVisible = desktopActive;
   const splitTarget = useMotionValue(50);
   const splitY = useSpring(splitTarget, {
     stiffness: 185,
@@ -32,17 +36,17 @@ export function HeroStage({ children }: HeroStageProps) {
   const seamTop = useMotionTemplate`${splitY}%`;
 
   useEffect(() => {
-    if (!isWindowActive || isCompactViewport || !isIntroComplete) {
+    if (!desktopActive || !isWindowActive || isCompactViewport || !isIntroComplete) {
       splitTarget.set(50);
     }
-  }, [isCompactViewport, isIntroComplete, isWindowActive, splitTarget]);
+  }, [desktopActive, isCompactViewport, isIntroComplete, isWindowActive, splitTarget]);
 
   function clamp(value: number, min: number, max: number) {
     return Math.min(Math.max(value, min), max);
   }
 
   function handlePointerMove(event: ReactPointerEvent<HTMLElement>) {
-    if (!isIntroComplete || isCompactViewport || !isWindowActive) {
+    if (!desktopActive || !isIntroComplete || isCompactViewport || !isWindowActive) {
       return;
     }
 
@@ -65,7 +69,7 @@ export function HeroStage({ children }: HeroStageProps) {
   }
 
   function handlePointerLeave() {
-    if (!isIntroComplete || isCompactViewport) {
+    if (!desktopActive || !isIntroComplete || isCompactViewport) {
       return;
     }
 
@@ -75,134 +79,156 @@ export function HeroStage({ children }: HeroStageProps) {
   return (
     <section className="hero-stage" aria-label="NKSV split hero desktop">
       <div
-        className={`hero-stage__frame ${isIntroComplete ? 'is-ready' : ''}`}
+        className={`hero-stage__frame ${isDesktopReady ? 'is-ready' : ''} ${
+          desktopActive ? 'is-desktop-active' : 'is-landing-active'
+        }`}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
       >
-        <motion.div className="hero-scene hero-scene--light" style={{ clipPath: topClip }}>
-          <div
-            className="hero-scene__still"
-            style={{ backgroundImage: `url(${selectedScene.lightStill})` }}
-          />
-          <div className="hero-scene__wash hero-scene__wash--light" />
-        </motion.div>
-
-        <motion.div className="hero-scene hero-scene--dark" style={{ clipPath: bottomClip }}>
-          <div
-            className="hero-scene__still"
-            style={{ backgroundImage: `url(${selectedScene.darkStill})` }}
-          />
-          <div className="hero-scene__wash hero-scene__wash--dark" />
-        </motion.div>
-
-        {!isCompactViewport && (
+        {desktopActive && (
           <>
-            <motion.div
-              className={`hero-logo hero-logo--full hero-logo--filled ${
-                isIntroComplete ? 'is-visible' : ''
-              }`}
-              initial={false}
-              animate={
-                isIntroComplete
-                  ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
-                  : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
-              }
-              transition={{
-                duration: 0.46,
-                ease: [0.22, 1, 0.36, 1],
-                delay: isIntroComplete ? 0.05 : 0,
-              }}
-              style={{ clipPath: topClip }}
-            >
-              <img src={selectedScene.fullFilledLogo} alt="" aria-hidden="true" />
+            <motion.div className="hero-scene hero-scene--light" style={{ clipPath: topClip }}>
+              <div
+                className="hero-scene__still"
+                style={{ backgroundImage: `url(${selectedScene.lightStill})` }}
+              />
+              <div className="hero-scene__wash hero-scene__wash--light" />
             </motion.div>
 
+            <motion.div className="hero-scene hero-scene--dark" style={{ clipPath: bottomClip }}>
+              <div
+                className="hero-scene__still"
+                style={{ backgroundImage: `url(${selectedScene.darkStill})` }}
+              />
+              <div className="hero-scene__wash hero-scene__wash--dark" />
+            </motion.div>
+
+            {!isCompactViewport && (
+              <>
+                <motion.div
+                  className={`hero-logo hero-logo--full hero-logo--filled ${
+                    isDesktopReady ? 'is-visible' : ''
+                  }`}
+                  initial={false}
+                  animate={
+                    isDesktopReady
+                      ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                      : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                  }
+                  transition={{
+                    duration: 0.46,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: isDesktopReady ? 0.05 : 0,
+                  }}
+                  style={{ clipPath: topClip }}
+                >
+                  <img src={selectedScene.fullFilledLogo} alt="" aria-hidden="true" />
+                </motion.div>
+
+                <motion.div
+                  className={`hero-logo hero-logo--full hero-logo--outline ${
+                    isDesktopReady ? 'is-visible' : ''
+                  }`}
+                  initial={false}
+                  animate={
+                    isDesktopReady
+                      ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                      : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                  }
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: isDesktopReady ? 0.08 : 0,
+                  }}
+                  style={{ clipPath: bottomClip }}
+                >
+                  <img src={selectedScene.fullOutlineLogo} alt="" aria-hidden="true" />
+                </motion.div>
+              </>
+            )}
+
+            {isCompactViewport && (
+              <>
+                <motion.div
+                  className={`hero-logo hero-logo--mark-split hero-logo--filled ${
+                    isDesktopReady ? 'is-visible' : ''
+                  }`}
+                  initial={false}
+                  animate={
+                    isDesktopReady
+                      ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                      : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                  }
+                  transition={{
+                    duration: 0.42,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: isDesktopReady ? 0.05 : 0,
+                  }}
+                  style={{ clipPath: topClip }}
+                >
+                  <img src={selectedScene.markFilledLogo} alt="" aria-hidden="true" />
+                </motion.div>
+
+                <motion.div
+                  className={`hero-logo hero-logo--mark-split hero-logo--outline ${
+                    isDesktopReady ? 'is-visible' : ''
+                  }`}
+                  initial={false}
+                  animate={
+                    isDesktopReady
+                      ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
+                      : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
+                  }
+                  transition={{
+                    duration: 0.46,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: isDesktopReady ? 0.08 : 0,
+                  }}
+                  style={{ clipPath: bottomClip }}
+                >
+                  <img src={selectedScene.markOutlineLogo} alt="" aria-hidden="true" />
+                </motion.div>
+              </>
+            )}
+
             <motion.div
-              className={`hero-logo hero-logo--full hero-logo--outline ${
-                isIntroComplete ? 'is-visible' : ''
-              }`}
-              initial={false}
-              animate={
-                isIntroComplete
-                  ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
-                  : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
-              }
-              transition={{
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-                delay: isIntroComplete ? 0.08 : 0,
-              }}
-              style={{ clipPath: bottomClip }}
+              className="hero-seam"
+              animate={{ opacity: 1 }}
+              style={{ top: seamTop }}
+              aria-hidden="true"
             >
-              <img src={selectedScene.fullOutlineLogo} alt="" aria-hidden="true" />
+              <span className="hero-seam__line" />
+              <span className="hero-seam__glow" />
             </motion.div>
           </>
         )}
 
-        {isCompactViewport && (
-          <>
-            <motion.div
-              className={`hero-logo hero-logo--mark-split hero-logo--filled ${
-                isIntroComplete ? 'is-visible' : ''
-              }`}
-              initial={false}
-              animate={
-                isIntroComplete
-                  ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
-                  : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
-              }
-              transition={{
-                duration: 0.42,
-                ease: [0.22, 1, 0.36, 1],
-                delay: isIntroComplete ? 0.05 : 0,
-              }}
-              style={{ clipPath: topClip }}
-            >
-              <img src={selectedScene.markFilledLogo} alt="" aria-hidden="true" />
-            </motion.div>
-
-            <motion.div
-              className={`hero-logo hero-logo--mark-split hero-logo--outline ${
-                isIntroComplete ? 'is-visible' : ''
-              }`}
-              initial={false}
-              animate={
-                isIntroComplete
-                  ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
-                  : { opacity: 0, scale: 0.92, y: 10, filter: 'blur(6px)' }
-              }
-              transition={{
-                duration: 0.46,
-                ease: [0.22, 1, 0.36, 1],
-                delay: isIntroComplete ? 0.08 : 0,
-              }}
-              style={{ clipPath: bottomClip }}
-            >
-              <img src={selectedScene.markOutlineLogo} alt="" aria-hidden="true" />
-            </motion.div>
-          </>
+        {!desktopActive && (
+          <motion.div
+            className="hero-stage__landing"
+            initial={false}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {landing}
+          </motion.div>
         )}
-
-        <motion.div className="hero-seam" style={{ top: seamTop }} aria-hidden="true">
-          <span className="hero-seam__line" />
-          <span className="hero-seam__glow" />
-        </motion.div>
 
         <motion.div
           className="hero-stage__desktop"
           initial={false}
-          animate={isIntroComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          animate={isDesktopVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{
             duration: 0.48,
             ease: [0.22, 1, 0.36, 1],
-            delay: isIntroComplete ? 0.14 : 0,
+            delay: isDesktopVisible ? 0.04 : 0,
           }}
-          style={{ pointerEvents: isIntroComplete ? 'auto' : 'none' }}
+          style={{ pointerEvents: isDesktopReady ? 'auto' : 'none' }}
         >
           {children}
         </motion.div>
 
-        {showIntro && (
+        {desktopActive && showIntro && (
           <motion.div
             className="hero-intro"
             initial={{ opacity: 1 }}

@@ -19,8 +19,6 @@ export function useMediaQuery(query: string) {
       setMatches(event.matches);
     };
 
-    setMatches(mediaQuery.matches);
-
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', syncMatches);
 

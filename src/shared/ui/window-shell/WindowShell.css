@@ -237,7 +237,7 @@
     top: auto !important;
     width: calc(100% - 24px) !important;
     height: min(78vh, 760px) !important;
-    margin: 88px 12px 0;
+    margin: 24px 12px 0;
   }
 
   .window-resize-handle {

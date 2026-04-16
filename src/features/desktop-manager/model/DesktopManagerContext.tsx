@@ -31,14 +31,7 @@ export function DesktopManagerProvider({ children }: { children: ReactNode }) {
   const [desktopBounds, setDesktopBoundsState] = useState<DesktopBounds>(() =>
     getInitialDesktopBounds(),
   );
-  const [windows, setWindows] = useState<WindowInstance[]>(() => [
-    {
-      appId: 'about',
-      isMinimized: false,
-      zIndex: 20,
-      ...createWindowRect('about', 0, getInitialDesktopBounds()),
-    },
-  ]);
+  const [windows, setWindows] = useState<WindowInstance[]>([]);
   const [isStartMenuOpen, setStartMenuOpen] = useState(false);
 
   const setDesktopBounds = useCallback((bounds: DesktopBounds) => {

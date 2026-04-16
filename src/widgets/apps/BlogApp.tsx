@@ -9,6 +9,7 @@ export function BlogApp() {
   const hasMountedRef = useRef(false);
   const isCompactBlogLayout = useMediaQuery('(max-width: 760px)');
   const activePost = blogPosts.find((post) => post.id === selectedId) ?? blogPosts[0];
+  const currentView = isCompactBlogLayout ? compactView : 'article';
 
   useEffect(() => {
     if (!selectedId) {
@@ -30,12 +31,6 @@ export function BlogApp() {
     });
   }, [selectedId]);
 
-  useEffect(() => {
-    if (!isCompactBlogLayout) {
-      setCompactView('article');
-    }
-  }, [isCompactBlogLayout]);
-
   if (blogPosts.length === 0) {
     return (
       <div className="app-pane">
@@ -51,10 +46,10 @@ export function BlogApp() {
   return (
     <div
       className={`app-pane app-pane--blog ${isCompactBlogLayout ? 'is-compact' : ''} ${
-        compactView === 'list' ? 'is-list-view' : 'is-article-view'
+        currentView === 'list' ? 'is-list-view' : 'is-article-view'
       }`}
     >
-      <aside className={`blog-sidebar ${isCompactBlogLayout && compactView !== 'list' ? 'is-hidden' : ''}`}>
+      <aside className={`blog-sidebar ${isCompactBlogLayout && currentView !== 'list' ? 'is-hidden' : ''}`}>
         <div className="blog-sidebar__head">
           <div className="eyebrow">БЛОГ / КАНАЛ</div>
           <h2>Разборы, заметки и длинные посты</h2>
@@ -105,7 +100,7 @@ export function BlogApp() {
       </aside>
 
       <article
-        className={`blog-article ${isCompactBlogLayout && compactView !== 'article' ? 'is-hidden' : ''}`}
+        className={`blog-article ${isCompactBlogLayout && currentView !== 'article' ? 'is-hidden' : ''}`}
         ref={articleRef}
       >
         <div className="blog-article__head">

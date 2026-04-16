@@ -40,6 +40,7 @@
 .hero-logo,
 .hero-intro,
 .hero-seam,
+.hero-stage__landing,
 .hero-stage__desktop {
   position: absolute;
 }
@@ -47,6 +48,7 @@
 .hero-scene,
 .hero-logo,
 .hero-intro,
+.hero-stage__landing,
 .hero-stage__desktop {
   inset: 0;
 }
@@ -169,9 +171,14 @@
   filter: blur(8px);
 }
 
+.hero-stage__landing,
 .hero-stage__desktop {
   z-index: 6;
   will-change: opacity, transform;
+}
+
+.hero-stage__landing {
+  z-index: 7;
 }
 
 .hero-intro {

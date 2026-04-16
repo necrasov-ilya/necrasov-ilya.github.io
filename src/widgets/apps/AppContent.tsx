@@ -1,5 +1,4 @@
 import type { AppId } from '../../shared/types/desktop';
-import { AboutApp } from './AboutApp';
 import './AppWindows.css';
 import { BlogApp } from './BlogApp';
 import { ContactApp } from './ContactApp';
@@ -11,8 +10,6 @@ import { SystemApp } from './SystemApp';
 
 export function AppContent({ appId }: { appId: AppId }) {
   switch (appId) {
-    case 'about':
-      return <AboutApp />;
     case 'projects':
       return <ProjectsApp />;
     case 'blog':

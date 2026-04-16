@@ -119,8 +119,8 @@ export function createWindowRect(
   }
 
   const cascadeStep = openCount % 4;
-  const offsetX = appId === 'about' ? 0 : 24 * cascadeStep;
-  const offsetY = appId === 'about' ? 0 : 18 * cascadeStep;
+  const offsetX = 24 * cascadeStep;
+  const offsetY = 18 * cascadeStep;
 
   return clampWindowRect(
     {

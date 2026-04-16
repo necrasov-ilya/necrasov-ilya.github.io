@@ -54,6 +54,7 @@ export const profile = {
 export const galleryAssets = {
   wallpaper: '/media/hero/stills/dark/hero-still-dark-01.webp',
   aboutHero: '/media/hero/stills/dark/hero-still-dark-03.webp',
+  heroSilhouette: '/media/hero/logo/hero-silhouette-white.png',
   darkStills: [
     '/media/hero/stills/dark/hero-still-dark-01.webp',
     '/media/hero/stills/dark/hero-still-dark-02.webp',

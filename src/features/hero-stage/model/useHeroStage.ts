@@ -4,10 +4,10 @@ import { heroSceneCombos } from '../../../entities/application/model/heroScenes'
 const INTRO_STEP_MS = 320;
 const INTRO_FINAL_HOLD_MS = 420;
 
-export function useHeroStage() {
+export function useHeroStage(desktopActive: boolean) {
   const [introIndex, setIntroIndex] = useState(0);
   const [isIntroComplete, setIsIntroComplete] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
   const [isCompactViewport, setIsCompactViewport] = useState(() => {
     if (typeof window === 'undefined') {
       return false;
@@ -69,25 +69,39 @@ export function useHeroStage() {
   }, []);
 
   useEffect(() => {
-    const stepTimer = window.setInterval(() => {
-      setIntroIndex((current) => {
-        if (current >= introSequence.length - 1) {
-          return current;
-        }
+    if (!desktopActive || typeof window === 'undefined') {
+      return undefined;
+    }
 
-        return current + 1;
-      });
-    }, INTRO_STEP_MS);
+    let stepTimer = 0;
+    let completeTimer = 0;
 
-    const completeTimer = window.setTimeout(() => {
-      setIsIntroComplete(true);
-    }, introDurationMs);
+    const kickoffTimer = window.setTimeout(() => {
+      setIntroIndex(0);
+      setIsIntroComplete(false);
+      setShowIntro(true);
+
+      stepTimer = window.setInterval(() => {
+        setIntroIndex((current) => {
+          if (current >= introSequence.length - 1) {
+            return current;
+          }
+
+          return current + 1;
+        });
+      }, INTRO_STEP_MS);
+
+      completeTimer = window.setTimeout(() => {
+        setIsIntroComplete(true);
+      }, introDurationMs);
+    }, 0);
 
     return () => {
+      window.clearTimeout(kickoffTimer);
       window.clearInterval(stepTimer);
       window.clearTimeout(completeTimer);
     };
-  }, [introDurationMs, introSequence.length]);
+  }, [desktopActive, introDurationMs, introSequence.length]);
 
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {

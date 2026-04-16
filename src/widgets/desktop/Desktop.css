@@ -69,4 +69,8 @@
     overflow: auto;
     padding-bottom: 88px;
   }
+
+  .desktop-windows--compact {
+    position: relative;
+  }
 }

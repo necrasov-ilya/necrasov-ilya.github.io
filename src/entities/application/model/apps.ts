@@ -35,17 +35,6 @@ export const applicationCatalog: AppDefinition[] = [
     launchLabel: 'Паспорт',
   },
   {
-    id: 'gallery',
-    icon: 'gallery',
-    title: 'Медиаархив',
-    shortTitle: 'Медиа',
-    subtitle: 'Лого, hero-кадры и визуальные материалы',
-    tint: '#8fd0ff',
-    defaultSize: { width: 930, height: 610 },
-    minSize: { width: 760, height: 500 },
-    launchLabel: 'Ассеты',
-  },
-  {
     id: 'contact',
     icon: 'mail',
     title: 'Контакты',

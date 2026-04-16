@@ -133,7 +133,7 @@
 @media (max-width: 940px) {
   .taskbar {
     position: fixed;
-    padding: 0.45rem 0.5rem;
+    padding: 0.45rem 0.5rem calc(0.45rem + env(safe-area-inset-bottom, 0px));
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
   }
@@ -155,7 +155,7 @@
 @media (max-width: 720px) {
   .taskbar {
     gap: 0.55rem;
-    padding: 0.4rem 0.45rem;
+    padding: 0.4rem 0.45rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
   }
 
   .start-button,

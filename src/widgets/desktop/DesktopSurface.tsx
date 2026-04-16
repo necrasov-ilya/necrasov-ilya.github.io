@@ -74,14 +74,16 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
       const existingWindow = windows.find((windowState) => windowState.appId === appId);
 
       if (existingWindow) {
-        focusApp(appId);
+        if (!isCompactDesktop) {
+          focusApp(appId);
+        }
       } else {
         openApp(appId);
       }
 
       scrollToWindow(appId);
     },
-    [focusApp, openApp, scrollToWindow, setStartMenuOpen, windows],
+    [focusApp, isCompactDesktop, openApp, scrollToWindow, setStartMenuOpen, windows],
   );
 
   const handleToggleWindow = useCallback(
@@ -91,9 +93,7 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
 
         const existingWindow = windows.find((windowState) => windowState.appId === appId);
 
-        if (existingWindow) {
-          focusApp(appId);
-        } else {
+        if (!existingWindow) {
           openApp(appId);
         }
       } else {
@@ -103,7 +103,6 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
       scrollToWindow(appId);
     },
     [
-      focusApp,
       isCompactDesktop,
       openApp,
       scrollToWindow,
@@ -149,15 +148,15 @@ export function DesktopSurface({ entryAppId = null, onEntryAppHandled }: Desktop
 
     const existingWindow = windows.find((windowState) => windowState.appId === entryAppId);
 
-    if (existingWindow) {
+    if (existingWindow && !isCompactDesktop) {
       focusApp(entryAppId);
-    } else {
+    } else if (!existingWindow) {
       openApp(entryAppId);
     }
 
     scrollToWindow(entryAppId);
     onEntryAppHandled?.();
-  }, [entryAppId, focusApp, onEntryAppHandled, openApp, scrollToWindow, windows]);
+  }, [entryAppId, focusApp, isCompactDesktop, onEntryAppHandled, openApp, scrollToWindow, windows]);
 
   return (
     <section className="desktop-shell" ref={shellRef}>

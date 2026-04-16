@@ -46,18 +46,30 @@
 
 .landing-hero__title {
   margin: 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
   font-size: clamp(3.8rem, 8vw, 6.9rem);
   line-height: 0.88;
   letter-spacing: -0.08em;
 }
 
 .landing-hero__title-line {
-  display: block;
+  display: inline-block;
 }
 
 .landing-hero__title-line--outline {
   color: transparent;
   -webkit-text-stroke: 1.5px rgba(243, 243, 243, 0.92);
+  transition:
+    color 180ms ease,
+    -webkit-text-stroke-color 180ms ease;
+}
+
+.landing-hero__title-line--outline:hover {
+  color: var(--text-1);
+  -webkit-text-stroke-color: transparent;
 }
 
 .landing-hero__lead {
@@ -96,14 +108,15 @@
 
 .landing-hero__silhouette {
   position: absolute;
-  right: clamp(-2rem, 2vw, 1rem);
-  bottom: -1rem;
+  right: clamp(0.75rem, 3vw, 2.25rem);
+  bottom: 0;
   z-index: 1;
-  width: min(30vw, 420px);
-  max-height: 72%;
+  width: clamp(260px, 30vw, 420px);
+  max-height: min(76%, 760px);
   object-fit: contain;
   object-position: bottom right;
-  pointer-events: none;
+  pointer-events: auto;
+  will-change: opacity, transform, filter;
 }
 
 @media (max-width: 1100px) {
@@ -113,12 +126,40 @@
   }
 
   .landing-hero__silhouette {
-    width: min(34vw, 360px);
-    opacity: 0.06 !important;
+    right: 1rem;
+    width: clamp(220px, 31vw, 340px);
+    max-height: min(70%, 680px);
   }
 }
 
-@media (max-width: 940px), (max-height: 760px) {
+@media (max-height: 760px) and (min-width: 941px) {
+  .landing-hero__body {
+    padding-left: clamp(1rem, 5vw, 5rem);
+    padding-right: clamp(1rem, 5vw, 5rem);
+  }
+
+  .landing-hero__copy {
+    width: min(100%, 52rem);
+    padding-bottom: 0;
+  }
+
+  .landing-hero__title {
+    font-size: clamp(3.1rem, 7vw, 5.4rem);
+  }
+
+  .landing-hero__lead {
+    width: min(100%, 30rem);
+    font-size: 1rem;
+  }
+
+  .landing-hero__silhouette {
+    right: 0.75rem;
+    width: clamp(210px, 23vw, 300px);
+    max-height: min(62%, 480px);
+  }
+}
+
+@media (max-width: 940px) {
   .landing-hero {
     overflow: hidden;
   }
@@ -149,7 +190,7 @@
   }
 
   .landing-hero__silhouette {
-    right: -2rem;
+    right: -1rem;
     width: min(44vw, 260px);
     max-height: 42%;
   }
@@ -172,6 +213,5 @@
   .landing-hero__silhouette {
     width: min(48vw, 220px);
     max-height: 34%;
-    opacity: 0.05 !important;
   }
 }

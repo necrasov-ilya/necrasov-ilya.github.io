@@ -69,6 +69,10 @@ export function WindowShell({
   const isCompact = isCompactViewport(desktopBounds);
 
   function handleShellPointerDown(event: ReactPointerEvent<HTMLElement>) {
+    if (isCompact) {
+      return;
+    }
+
     const target = event.target as HTMLElement;
 
     if (target.closest('.window-header, .window-resize-handle')) {
@@ -121,11 +125,11 @@ export function WindowShell({
       return;
     }
 
-    onFocus();
-
     if (isCompact) {
       return;
     }
+
+    onFocus();
 
     const startX = event.clientX;
     const startY = event.clientY;

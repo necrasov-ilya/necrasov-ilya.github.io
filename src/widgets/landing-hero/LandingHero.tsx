@@ -40,15 +40,18 @@ export function LandingHero({ onOpenDesktop }: LandingHeroProps) {
         <motion.img
           alt=""
           aria-hidden="true"
-          animate={{ y: [0, -8, 0] }}
+          animate={{ opacity: 0.1, y: [0, -8, 0] }}
           className="landing-hero__silhouette"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0, y: 0 }}
           src={galleryAssets.heroSilhouette}
           transition={{
             opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.18 },
             y: { duration: 9, ease: 'easeInOut', repeat: Infinity },
           }}
-          style={{ opacity: 0.08 }}
+          whileHover={{
+            opacity: 0.96,
+            filter: 'drop-shadow(0 0 24px rgba(255, 255, 255, 0.16))',
+          }}
         />
       </div>
     </section>

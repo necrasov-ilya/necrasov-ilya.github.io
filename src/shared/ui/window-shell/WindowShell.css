@@ -4,6 +4,7 @@
   flex-direction: column;
   border-radius: calc(var(--radius-md) + 2px);
   overflow: hidden;
+  overscroll-behavior: contain;
   background: var(--surface-1);
   border: 0;
   box-shadow: var(--shadow-lg);
@@ -97,7 +98,11 @@
   box-shadow: var(--shadow-md);
 }
 
-.window-actions button,
+.window-actions button {
+  user-select: none;
+  touch-action: manipulation;
+}
+
 .window-resize-handle {
   user-select: none;
   touch-action: none;
@@ -139,6 +144,9 @@
   flex: 1;
   min-height: 0;
   overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
 }
 
 .window-shell[data-app-id='blog'] .window-body {
@@ -236,8 +244,20 @@
     left: auto !important;
     top: auto !important;
     width: calc(100% - 24px) !important;
-    height: min(78vh, 760px) !important;
+    height: auto !important;
     margin: 24px 12px 0;
+    overscroll-behavior: auto;
+  }
+
+  .window-header {
+    cursor: default;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .window-body,
+  .window-shell[data-app-id='blog'] .window-body {
+    overflow: visible;
+    overscroll-behavior: auto;
   }
 
   .window-resize-handle {

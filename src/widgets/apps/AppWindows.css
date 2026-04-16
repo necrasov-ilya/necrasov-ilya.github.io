@@ -544,6 +544,9 @@
   min-height: 0;
   min-width: 0;
   overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
 }
 
 .blog-sidebar {
@@ -813,6 +816,9 @@
   align-items: start;
   min-width: 0;
   overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
 }
 
 .game-result-backdrop {
@@ -1143,17 +1149,6 @@
   color: var(--text-3);
 }
 
-@media (max-width: 1320px) {
-  .app-pane--blog:not(.is-compact) {
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(240px, 320px) minmax(0, 1fr);
-  }
-
-  .blog-list {
-    max-height: none;
-  }
-}
-
 @media (max-width: 1100px) {
   .hero-panel,
   .repo-hero,
@@ -1220,8 +1215,9 @@
 
   .blog-sidebar,
   .blog-article {
-    height: 100%;
+    height: auto;
     padding: 1rem;
+    overflow: visible;
   }
 
   .blog-card__image,

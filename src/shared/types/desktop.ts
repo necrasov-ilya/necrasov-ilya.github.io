@@ -2,7 +2,6 @@ export type AppId =
   | 'projects'
   | 'blog'
   | 'system'
-  | 'gallery'
   | 'contact'
   | 'neon-xo'
   | 'signal-hunt';
@@ -12,7 +11,6 @@ export type AppIconKey =
   | 'briefcase'
   | 'article'
   | 'system'
-  | 'gallery'
   | 'mail'
   | 'gamepad'
   | 'target';

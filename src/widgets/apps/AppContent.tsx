@@ -2,7 +2,6 @@ import type { AppId } from '../../shared/types/desktop';
 import './AppWindows.css';
 import { BlogApp } from './BlogApp';
 import { ContactApp } from './ContactApp';
-import { GalleryApp } from './GalleryApp';
 import { NeonXOApp } from './NeonXOApp';
 import { ProjectsApp } from './ProjectsApp';
 import { SignalHuntApp } from './SignalHuntApp';
@@ -16,8 +15,6 @@ export function AppContent({ appId }: { appId: AppId }) {
       return <BlogApp />;
     case 'system':
       return <SystemApp />;
-    case 'gallery':
-      return <GalleryApp />;
     case 'contact':
       return <ContactApp />;
     case 'neon-xo':

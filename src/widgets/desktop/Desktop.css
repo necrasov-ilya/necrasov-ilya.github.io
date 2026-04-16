@@ -67,7 +67,9 @@
 @media (max-width: 960px), (max-height: 700px) {
   .desktop-shell {
     overflow: auto;
-    padding-bottom: 88px;
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   .desktop-windows--compact {

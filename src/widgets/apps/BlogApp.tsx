@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { blogPosts, telegramChannelUrl } from '../../entities/content/model/blog';
-import { useMediaQuery } from '../../shared/lib/useMediaQuery';
+import { useElementWidth } from '../../shared/lib/useElementWidth';
 
 export function BlogApp() {
   const [selectedId, setSelectedId] = useState(blogPosts[0]?.id ?? '');
   const [compactView, setCompactView] = useState<'article' | 'list'>('article');
+  const paneRef = useRef<HTMLDivElement | null>(null);
   const articleRef = useRef<HTMLElement | null>(null);
   const hasMountedRef = useRef(false);
-  const isCompactBlogLayout = useMediaQuery('(max-width: 760px)');
+  const paneWidth = useElementWidth(paneRef);
+  const isCompactBlogLayout = paneWidth > 0 && paneWidth <= 1040;
   const activePost = blogPosts.find((post) => post.id === selectedId) ?? blogPosts[0];
   const currentView = isCompactBlogLayout ? compactView : 'article';
 
@@ -45,6 +47,7 @@ export function BlogApp() {
 
   return (
     <div
+      ref={paneRef}
       className={`app-pane app-pane--blog ${isCompactBlogLayout ? 'is-compact' : ''} ${
         currentView === 'list' ? 'is-list-view' : 'is-article-view'
       }`}

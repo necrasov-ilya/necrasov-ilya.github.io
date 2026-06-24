@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import type { PointerEvent as ReactPointerEvent, ReactNode } from 'react';
+import { useLayoutEffect, useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react';
 import { isCompactViewport } from '../../../features/desktop-manager/lib/window-geometry';
 import { useDesktopManager } from '../../../features/desktop-manager/model/useDesktopManager';
 import type {
@@ -27,6 +27,15 @@ interface WindowShellProps {
   onClose: () => void;
   children: ReactNode;
 }
+
+const SNAP_THRESHOLD = -12;
+const SNAP_SAFE_Y = 24;
+const SNAP_DURATION = 320;
+
+const ENTER_ANIMATION = { opacity: 0, scale: 0.985, y: 18, filter: 'blur(4px)' };
+const IDLE_ANIMATION = { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' };
+const EXIT_ANIMATION = { opacity: 0, scale: 0.985, y: 18, filter: 'blur(4px)' };
+const WINDOW_TRANSITION = { duration: 0.2, ease: [0.18, 0.78, 0.22, 1] as const };
 
 const resizeHandles: Array<{ direction: WindowResizeDirection; className: string; cursor: string }> = [
   { direction: 'north', className: 'window-resize-handle--north', cursor: 'ns-resize' },
@@ -67,6 +76,17 @@ export function WindowShell({
 }: WindowShellProps) {
   const { desktopBounds } = useDesktopManager();
   const isCompact = isCompactViewport(desktopBounds);
+  const shellRef = useRef<HTMLElement | null>(null);
+
+  useLayoutEffect(() => {
+    const el = shellRef.current;
+    if (!el) return;
+    el.style.left = `${windowState.x}px`;
+    el.style.top = `${windowState.y}px`;
+    el.style.width = `${windowState.width}px`;
+    el.style.height = `${windowState.height}px`;
+    el.style.zIndex = String(windowState.zIndex);
+  }, [windowState.x, windowState.y, windowState.width, windowState.height, windowState.zIndex]);
 
   function handleShellPointerDown(event: ReactPointerEvent<HTMLElement>) {
     if (isCompact) {
@@ -86,6 +106,7 @@ export function WindowShell({
     event: ReactPointerEvent<HTMLElement>,
     cursor: string,
     onPointerMoveFrame: (moveEvent: PointerEvent) => void,
+    onEnd?: () => void,
   ) {
     event.preventDefault();
     const pointerId = event.pointerId;
@@ -109,6 +130,7 @@ export function WindowShell({
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
       window.removeEventListener('pointercancel', handlePointerUp);
+      onEnd?.();
     }
 
     window.addEventListener('pointermove', handlePointerMove);
@@ -135,10 +157,34 @@ export function WindowShell({
     const startY = event.clientY;
     const originX = windowState.x;
     const originY = windowState.y;
+    let lastX = originX;
+    let lastY = originY;
 
-    registerPointerDrag(event, 'grabbing', (moveEvent) => {
-      onMove(originX + moveEvent.clientX - startX, originY + moveEvent.clientY - startY);
-    });
+    registerPointerDrag(
+      event,
+      'grabbing',
+      (moveEvent) => {
+        lastX = originX + moveEvent.clientX - startX;
+        lastY = originY + moveEvent.clientY - startY;
+        onMove(lastX, lastY);
+      },
+      () => {
+        if (lastY < SNAP_THRESHOLD) {
+          const element = shellRef.current;
+          if (element) {
+            element.style.transition = `top ${SNAP_DURATION}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+            onMove(lastX, SNAP_SAFE_Y);
+            window.setTimeout(() => {
+              if (shellRef.current) {
+                shellRef.current.style.transition = '';
+              }
+            }, SNAP_DURATION + 40);
+          } else {
+            onMove(lastX, SNAP_SAFE_Y);
+          }
+        }
+      },
+    );
   }
 
   function handleResizePointerDown(
@@ -178,21 +224,15 @@ export function WindowShell({
 
   return (
     <motion.section
-      animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+      animate={IDLE_ANIMATION}
       className={`window-shell ${isFocused ? 'is-focused' : ''}`}
       data-app-id={app.id}
       data-hero-lock="true"
-      exit={{ opacity: 0, scale: 0.985, y: 18, filter: 'blur(4px)' }}
-      initial={{ opacity: 0, scale: 0.985, y: 18, filter: 'blur(4px)' }}
+      exit={EXIT_ANIMATION}
+      initial={ENTER_ANIMATION}
       onPointerDown={handleShellPointerDown}
-      style={{
-        left: `${windowState.x}px`,
-        top: `${windowState.y}px`,
-        width: `${windowState.width}px`,
-        height: `${windowState.height}px`,
-        zIndex: windowState.zIndex,
-      }}
-      transition={{ duration: 0.2, ease: [0.18, 0.78, 0.22, 1] }}
+      ref={shellRef}
+      transition={WINDOW_TRANSITION}
     >
       <header className="window-header" onPointerDown={handleHeaderPointerDown}>
         <div className="window-title">

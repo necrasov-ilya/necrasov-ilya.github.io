@@ -12,6 +12,7 @@
 .desktop-windows {
   position: relative;
   z-index: 6;
+  overflow: visible;
 }
 
 .desktop-chrome {

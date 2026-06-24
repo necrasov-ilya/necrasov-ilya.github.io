@@ -34,7 +34,7 @@
   height: 100%;
   overflow: hidden;
   isolation: isolate;
-  border-radius: 34px;
+  border-radius: 34px 34px 30px 30px;
   border: 0;
   box-shadow: var(--shadow-lg);
   background: var(--surface-1);
@@ -227,6 +227,12 @@
   .hero-logo--mark-split img,
   .hero-logo--mark-intro img {
     width: min(42vw, 250px);
+  }
+}
+
+@media (max-width: 940px) {
+  .hero-stage__frame {
+    border-radius: 24px 24px 24px 24px;
   }
 }
 

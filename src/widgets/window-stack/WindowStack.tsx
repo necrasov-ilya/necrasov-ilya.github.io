@@ -10,9 +10,7 @@ export function WindowStack() {
     useDesktopManager();
   const isCompactDesktop = isCompactViewport(desktopBounds);
   const topWindow = Math.max(...windows.map((item) => item.zIndex), 0);
-  const visibleWindows = windows
-    .filter((windowState) => !windowState.isMinimized)
-    .sort((left, right) => left.zIndex - right.zIndex);
+  const visibleWindows = windows.filter((windowState) => !windowState.isMinimized);
 
   return (
     <AnimatePresence>

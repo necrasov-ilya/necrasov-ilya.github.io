@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from 'react';
 import {
-  clampWindowRect,
+  clampDragRect,
   createWindowRect,
   fitWindowToBounds,
   getInitialDesktopBounds,
@@ -49,13 +49,27 @@ export function DesktopManagerProvider({ children }: { children: ReactNode }) {
   }, []);
 
   function focusApp(appId: AppId) {
-    setWindows((current) =>
-      current.map((windowState) =>
+    setWindows((current) => {
+      const existing = current.find((windowState) => windowState.appId === appId);
+
+      if (!existing) {
+        return current;
+      }
+
+      const topWindow = current
+        .filter((windowState) => !windowState.isMinimized)
+        .sort((left, right) => right.zIndex - left.zIndex)[0];
+
+      if (topWindow?.appId === appId && !existing.isMinimized) {
+        return current;
+      }
+
+      return current.map((windowState) =>
         windowState.appId === appId
           ? { ...windowState, isMinimized: false, zIndex: getNextZIndex(nextZIndexRef) }
           : windowState,
-      ),
-    );
+      );
+    });
   }
 
   function openApp(appId: AppId) {
@@ -129,7 +143,7 @@ export function DesktopManagerProvider({ children }: { children: ReactNode }) {
 
         return {
           ...windowState,
-          ...clampWindowRect(
+          ...clampDragRect(
             {
               x: nextX,
               y: nextY,

@@ -12,6 +12,8 @@ const MOBILE_MARGIN = 12;
 const TASKBAR_CLEARANCE = 86;
 const COMPACT_BREAKPOINT = 940;
 const COMPACT_HEIGHT = 620;
+const DRAG_KEEP_X = 60;
+const DRAG_KEEP_Y = 48;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
@@ -88,6 +90,35 @@ export function clampWindowRect(rect: WindowRect, bounds: DesktopBounds, appId: 
   };
 }
 
+export function clampDragRect(
+  rect: WindowRect,
+  bounds: DesktopBounds,
+  appId: AppId,
+): WindowRect {
+  if (isCompactViewport(bounds)) {
+    return clampWindowRect(rect, bounds, appId);
+  }
+
+  const { width, height } = rect;
+  const availableWidth = bounds.width - DESKTOP_MARGIN * 2;
+  const availableHeight = bounds.height - TASKBAR_CLEARANCE - DESKTOP_MARGIN;
+
+  if (width >= availableWidth || height >= availableHeight) {
+    return clampWindowRect(rect, bounds, appId);
+  }
+
+  const minX = DRAG_KEEP_X - width;
+  const maxX = bounds.width - DRAG_KEEP_X;
+  const maxY = bounds.height - TASKBAR_CLEARANCE - DRAG_KEEP_Y;
+
+  return {
+    x: clamp(rect.x, minX, maxX),
+    y: Math.min(rect.y, maxY),
+    width,
+    height,
+  };
+}
+
 function getSizedRect(appId: AppId, bounds: DesktopBounds) {
   const app = getApplication(appId);
   const constraints = getWindowConstraints(appId, bounds);
@@ -156,35 +187,41 @@ export function resizeWindowRect(
     return clampWindowRect(originRect, bounds, appId);
   }
 
+  const constraints = getWindowConstraints(appId, bounds);
+
   let left = originRect.x;
   let top = originRect.y;
   let right = originRect.x + originRect.width;
   let bottom = originRect.y + originRect.height;
 
   if (direction.includes('east')) {
-    right += deltaX;
+    right = originRect.x + originRect.width + deltaX;
+    right = clamp(right, left + constraints.minWidth, left + constraints.maxWidth);
+    right = Math.min(right, bounds.width - constraints.margin);
   }
 
   if (direction.includes('west')) {
-    left += deltaX;
+    left = originRect.x + deltaX;
+    left = clamp(left, right - constraints.maxWidth, right - constraints.minWidth);
+    left = Math.max(left, constraints.margin);
   }
 
   if (direction.includes('south')) {
-    bottom += deltaY;
+    bottom = originRect.y + originRect.height + deltaY;
+    bottom = clamp(bottom, top + constraints.minHeight, top + constraints.maxHeight);
+    bottom = Math.min(bottom, bounds.height - TASKBAR_CLEARANCE);
   }
 
   if (direction.includes('north')) {
-    top += deltaY;
+    top = originRect.y + deltaY;
+    top = clamp(top, bottom - constraints.maxHeight, bottom - constraints.minHeight);
+    top = Math.max(top, constraints.margin);
   }
 
-  return clampWindowRect(
-    {
-      x: left,
-      y: top,
-      width: right - left,
-      height: bottom - top,
-    },
-    bounds,
-    appId,
-  );
+  return {
+    x: left,
+    y: top,
+    width: right - left,
+    height: bottom - top,
+  };
 }

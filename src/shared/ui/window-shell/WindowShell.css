@@ -238,6 +238,12 @@
   cursor: nesw-resize;
 }
 
+@media (min-width: 941px) and (min-height: 621px) {
+  .window-shell[data-app-id='portfolio'] .window-body {
+    container-type: size;
+  }
+}
+
 @media (max-width: 940px) {
   .window-shell {
     position: relative;

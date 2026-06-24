@@ -7,17 +7,9 @@ const INTRO_FADE_S = 0.36;
 
 interface HeroStageProps {
   children: ReactNode;
-  landing: ReactNode;
-  desktopActive: boolean;
-  isLeavingDesktop?: boolean;
 }
 
-export function HeroStage({
-  children,
-  landing,
-  desktopActive,
-  isLeavingDesktop = false,
-}: HeroStageProps) {
+export function HeroStage({ children }: HeroStageProps) {
   const {
     introIndex,
     introSequence,
@@ -27,10 +19,8 @@ export function HeroStage({
     selectedScene,
     showIntro,
     setShowIntro,
-  } = useHeroStage(desktopActive);
-  const shouldShowLanding = !desktopActive || isLeavingDesktop;
-  const isDesktopReady = desktopActive && isIntroComplete && !isLeavingDesktop;
-  const isDesktopVisible = desktopActive;
+  } = useHeroStage();
+  const isDesktopReady = isIntroComplete;
   const splitTarget = useMotionValue(50);
   const splitY = useSpring(splitTarget, {
     stiffness: 185,
@@ -43,14 +33,12 @@ export function HeroStage({
   const seamTop = useMotionTemplate`${splitY}%`;
 
   useEffect(() => {
-    if (!desktopActive || isLeavingDesktop || !isWindowActive || isCompactViewport || !isIntroComplete) {
+    if (!isWindowActive || isCompactViewport || !isIntroComplete) {
       splitTarget.set(50);
     }
   }, [
-    desktopActive,
     isCompactViewport,
     isIntroComplete,
-    isLeavingDesktop,
     isWindowActive,
     splitTarget,
   ]);
@@ -60,7 +48,7 @@ export function HeroStage({
   }
 
   function handlePointerMove(event: ReactPointerEvent<HTMLElement>) {
-    if (!desktopActive || isLeavingDesktop || !isIntroComplete || isCompactViewport || !isWindowActive) {
+    if (!isIntroComplete || isCompactViewport || !isWindowActive) {
       return;
     }
 
@@ -83,7 +71,7 @@ export function HeroStage({
   }
 
   function handlePointerLeave() {
-    if (!desktopActive || isLeavingDesktop || !isIntroComplete || isCompactViewport) {
+    if (!isIntroComplete || isCompactViewport) {
       return;
     }
 
@@ -93,16 +81,13 @@ export function HeroStage({
   return (
     <section className="hero-stage" aria-label="NKSV split hero desktop">
       <div
-        className={`hero-stage__frame ${isDesktopReady ? 'is-ready' : ''} ${
-          desktopActive ? 'is-desktop-active' : 'is-landing-active'
-        } ${isLeavingDesktop ? 'is-desktop-leaving' : ''}`}
+        className={`hero-stage__frame is-desktop-active ${isDesktopReady ? 'is-ready' : ''}`}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
       >
-        {desktopActive && (
-          <>
+        <>
             <motion.div
-              animate={{ opacity: isLeavingDesktop ? 0.12 : 1 }}
+              animate={{ opacity: 1 }}
               className="hero-scene hero-scene--light"
               style={{ clipPath: topClip }}
               transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
@@ -115,7 +100,7 @@ export function HeroStage({
             </motion.div>
 
             <motion.div
-              animate={{ opacity: isLeavingDesktop ? 0.16 : 1 }}
+              animate={{ opacity: 1 }}
               className="hero-scene hero-scene--dark"
               style={{ clipPath: bottomClip }}
               transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
@@ -216,7 +201,7 @@ export function HeroStage({
             )}
 
             <motion.div
-              animate={{ opacity: isLeavingDesktop ? 0 : 1 }}
+              animate={{ opacity: 1 }}
               className="hero-seam"
               style={{ top: seamTop }}
               transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
@@ -225,46 +210,23 @@ export function HeroStage({
               <span className="hero-seam__line" />
               <span className="hero-seam__glow" />
             </motion.div>
-          </>
-        )}
-
-        {shouldShowLanding && (
-          <motion.div
-            className="hero-stage__landing"
-            initial={false}
-            animate={
-              isLeavingDesktop
-                ? { opacity: 1, y: 0, scale: 1 }
-                : { opacity: 1, y: 0, scale: 1 }
-            }
-            style={{ pointerEvents: desktopActive ? 'none' : 'auto' }}
-            transition={{ duration: isLeavingDesktop ? 0.54 : 0.28, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {landing}
-          </motion.div>
-        )}
+        </>
 
         <motion.div
           className="hero-stage__desktop"
           initial={false}
-          animate={
-            isDesktopVisible
-              ? isLeavingDesktop
-                ? { opacity: 0, y: 36, scale: 0.968, filter: 'blur(10px)' }
-                : { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }
-              : { opacity: 0, y: 24, scale: 0.985, filter: 'blur(6px)' }
-          }
+          animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
           transition={{
-            duration: isLeavingDesktop ? 0.58 : 0.48,
+            duration: 0.48,
             ease: [0.22, 1, 0.36, 1],
-            delay: isDesktopVisible && !isLeavingDesktop ? 0.04 : 0,
+            delay: 0.04,
           }}
           style={{ pointerEvents: isDesktopReady ? 'auto' : 'none' }}
         >
           {children}
         </motion.div>
 
-        {desktopActive && showIntro && !isLeavingDesktop && (
+        {showIntro && (
           <motion.div
             className="hero-intro"
             initial={{ opacity: 1 }}

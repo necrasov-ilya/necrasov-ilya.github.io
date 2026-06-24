@@ -3,12 +3,15 @@ import './AppWindows.css';
 import { BlogApp } from './BlogApp';
 import { ContactApp } from './ContactApp';
 import { NeonXOApp } from './NeonXOApp';
+import { PortfolioApp } from './PortfolioApp';
 import { ProjectsApp } from './ProjectsApp';
 import { SignalHuntApp } from './SignalHuntApp';
 import { SystemApp } from './SystemApp';
 
 export function AppContent({ appId }: { appId: AppId }) {
   switch (appId) {
+    case 'portfolio':
+      return <PortfolioApp />;
     case 'projects':
       return <ProjectsApp />;
     case 'blog':

@@ -60,6 +60,54 @@
     0 14px 28px rgba(0, 0, 0, 0.2);
 }
 
+.desktop-icon--featured {
+  grid-column: 1 / -1;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 0.85rem;
+  min-height: 110px;
+  padding: 1rem;
+  border-color: var(--accent-bright);
+  background: var(--surface-1);
+  box-shadow:
+    inset 0 0 0 1px var(--border-accent),
+    0 18px 36px rgba(0, 0, 0, 0.28);
+}
+
+.desktop-icon--featured:hover {
+  transform: translateY(-2px);
+}
+
+.desktop-icon--featured .desktop-icon__badge {
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+.desktop-icon__badge--featured {
+  width: 3.35rem;
+  height: 3.35rem;
+  padding: 0.65rem;
+  border-color: var(--border-accent);
+  background: var(--surface-3);
+  transform: translateY(-2px);
+}
+
+.desktop-icon__badge--featured img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.desktop-icon--featured strong {
+  align-self: end;
+  font-size: 0.92rem;
+}
+
+.desktop-icon--featured > span:last-child {
+  align-self: start;
+  color: var(--text-2);
+}
+
 @media (max-width: 940px) {
   .desktop-icons {
     position: relative;

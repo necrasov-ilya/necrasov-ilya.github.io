@@ -1,4 +1,5 @@
 export type AppId =
+  | 'portfolio'
   | 'projects'
   | 'blog'
   | 'system'

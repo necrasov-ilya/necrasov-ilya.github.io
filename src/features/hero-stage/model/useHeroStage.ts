@@ -4,10 +4,10 @@ import { heroSceneCombos } from '../../../entities/application/model/heroScenes'
 const INTRO_STEP_MS = 320;
 const INTRO_FINAL_HOLD_MS = 420;
 
-export function useHeroStage(desktopActive: boolean) {
+export function useHeroStage() {
   const [introIndex, setIntroIndex] = useState(0);
   const [isIntroComplete, setIsIntroComplete] = useState(false);
-  const [showIntro, setShowIntro] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
   const [isCompactViewport, setIsCompactViewport] = useState(() => {
     if (typeof window === 'undefined') {
       return false;
@@ -69,7 +69,7 @@ export function useHeroStage(desktopActive: boolean) {
   }, []);
 
   useEffect(() => {
-    if (!desktopActive || typeof window === 'undefined') {
+    if (typeof window === 'undefined') {
       return undefined;
     }
 
@@ -101,7 +101,7 @@ export function useHeroStage(desktopActive: boolean) {
       window.clearInterval(stepTimer);
       window.clearTimeout(completeTimer);
     };
-  }, [desktopActive, introDurationMs, introSequence.length]);
+  }, [introDurationMs, introSequence.length]);
 
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {

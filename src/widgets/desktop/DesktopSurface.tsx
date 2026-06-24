@@ -12,16 +12,12 @@ import { WindowStack } from '../window-stack/WindowStack';
 
 interface DesktopSurfaceProps {
   entryAppId?: AppId | null;
-  isLeavingDesktop?: boolean;
   onEntryAppHandled?: () => void;
-  onReturnToLanding: () => void;
 }
 
 export function DesktopSurface({
   entryAppId = null,
-  isLeavingDesktop = false,
   onEntryAppHandled,
-  onReturnToLanding,
 }: DesktopSurfaceProps) {
   const {
     windows,
@@ -77,10 +73,6 @@ export function DesktopSurface({
 
   const handleOpenApp = useCallback(
     (appId: AppId) => {
-      if (isLeavingDesktop) {
-        return;
-      }
-
       setStartMenuOpen(false);
       const existingWindow = windows.find((windowState) => windowState.appId === appId);
 
@@ -94,15 +86,11 @@ export function DesktopSurface({
 
       scrollToWindow(appId);
     },
-    [focusApp, isCompactDesktop, isLeavingDesktop, openApp, scrollToWindow, setStartMenuOpen, windows],
+    [focusApp, isCompactDesktop, openApp, scrollToWindow, setStartMenuOpen, windows],
   );
 
   const handleToggleWindow = useCallback(
     (appId: AppId) => {
-      if (isLeavingDesktop) {
-        return;
-      }
-
       if (isCompactDesktop) {
         setStartMenuOpen(false);
 
@@ -119,7 +107,6 @@ export function DesktopSurface({
     },
     [
       isCompactDesktop,
-      isLeavingDesktop,
       openApp,
       scrollToWindow,
       setStartMenuOpen,
@@ -158,7 +145,7 @@ export function DesktopSurface({
   }, [setDesktopBounds]);
 
   useEffect(() => {
-    if (!entryAppId || isLeavingDesktop) {
+    if (!entryAppId) {
       return;
     }
 
@@ -176,7 +163,6 @@ export function DesktopSurface({
     entryAppId,
     focusApp,
     isCompactDesktop,
-    isLeavingDesktop,
     onEntryAppHandled,
     openApp,
     scrollToWindow,
@@ -184,7 +170,7 @@ export function DesktopSurface({
   ]);
 
   return (
-    <section className={`desktop-shell ${isLeavingDesktop ? 'is-leaving' : ''}`} ref={shellRef}>
+    <section className="desktop-shell" ref={shellRef}>
       <div aria-hidden="true" className="desktop-grid" />
       <div aria-hidden="true" className="desktop-vignette" />
       <div aria-hidden="true" className="desktop-glow desktop-glow--one" />
@@ -199,8 +185,8 @@ export function DesktopSurface({
         <StartMenu
           apps={applicationCatalog}
           isOpen={isStartMenuOpen}
-          onExitToLanding={onReturnToLanding}
           onOpen={handleOpenApp}
+          onOpenPortfolio={() => handleOpenApp('portfolio')}
           windows={windows}
         />
         <Taskbar

@@ -2,6 +2,17 @@ import type { AppDefinition, AppId } from '../../../shared/types/desktop';
 
 export const applicationCatalog: AppDefinition[] = [
   {
+    id: 'portfolio',
+    icon: 'profile',
+    title: 'Обо мне',
+    shortTitle: 'Обо мне',
+    subtitle: 'Профиль, специализация и контакты',
+    tint: '#ac2954',
+    defaultSize: { width: 1480, height: 900 },
+    minSize: { width: 1040, height: 720 },
+    launchLabel: 'Портфолио',
+  },
+  {
     id: 'projects',
     icon: 'briefcase',
     title: 'Репозитории',

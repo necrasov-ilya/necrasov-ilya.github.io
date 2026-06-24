@@ -9,10 +9,6 @@
     filter 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.desktop-shell.is-leaving {
-  pointer-events: none;
-}
-
 .desktop-windows {
   position: relative;
   z-index: 6;
@@ -27,12 +23,6 @@
 
 .desktop-chrome > * {
   pointer-events: auto;
-}
-
-.desktop-shell.is-leaving .desktop-icons,
-.desktop-shell.is-leaving .desktop-chrome,
-.desktop-shell.is-leaving .desktop-windows {
-  pointer-events: none;
 }
 
 .desktop-grid,

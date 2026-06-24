@@ -111,10 +111,10 @@ export function PortfolioApp() {
               <article className="portfolio-panel portfolio-about-card portfolio-about-main">
                 <h3>GenAI Application Engineer + Frontend</h3>
                 <p>
-                  GenAI Application Engineer — это проектирование AI-функций для продукта: RAG,
-                  агентные сценарии и интеграционные пайплайны. Frontend — это клиентская часть,
-                  интерфейсы и UX. Могу работать в каждом направлении отдельно и объединять их,
-                  когда нужна аккуратная интеграция в существующий сервис.
+                  Работаю на пересечении двух сфер. Строю RAG-системы, агентные сценарии и
+                  пайплайны для AI-функций. Параллельно пишу клиентскую часть, интерфейсы и UX.
+                  Сильная база в обоих направлениях позволяет вести связку от прототипа до
+                  продакшена и аккуратно встраивать AI-логику в существующий сервис.
                 </p>
               </article>
 
@@ -162,8 +162,8 @@ export function PortfolioApp() {
               <article className="portfolio-panel-dark portfolio-contacts-main">
                 <h3>Связь</h3>
                 <p>Почта для рабочих и личных сообщений.</p>
-                <a className="portfolio-button" href="mailto:evart2006@gmail.com">
-                  evart2006@gmail.com
+                <a className="portfolio-button" href="mailto:ilya.e.nekrasov@yandex.ru">
+                  ilya.e.nekrasov@yandex.ru
                 </a>
               </article>
 

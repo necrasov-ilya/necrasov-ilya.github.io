@@ -34,8 +34,19 @@ const SNAP_DURATION = 320;
 
 const ENTER_ANIMATION = { opacity: 0, scale: 0.985, y: 18, filter: 'blur(4px)' };
 const IDLE_ANIMATION = { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' };
-const EXIT_ANIMATION = { opacity: 0, scale: 0.985, y: 18, filter: 'blur(4px)' };
+const EXIT_DESKTOP = { opacity: 0, scale: 0.985, y: 18, filter: 'blur(4px)' };
+const EXIT_COMPACT = { opacity: 0, scale: 0.96, height: 0, marginTop: 0, paddingTop: 0, paddingBottom: 0 };
 const WINDOW_TRANSITION = { duration: 0.2, ease: [0.18, 0.78, 0.22, 1] as const };
+const COMPACT_EXIT_TRANSITION = {
+  duration: 0.3,
+  ease: [0.22, 1, 0.36, 1] as const,
+  opacity: { duration: 0.22, ease: 'easeOut' as const },
+  scale: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+  height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+  marginTop: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+  paddingTop: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+  paddingBottom: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+};
 
 const resizeHandles: Array<{ direction: WindowResizeDirection; className: string; cursor: string }> = [
   { direction: 'north', className: 'window-resize-handle--north', cursor: 'ns-resize' },
@@ -81,12 +92,27 @@ export function WindowShell({
   useLayoutEffect(() => {
     const el = shellRef.current;
     if (!el) return;
-    el.style.left = `${windowState.x}px`;
-    el.style.top = `${windowState.y}px`;
-    el.style.width = `${windowState.width}px`;
-    el.style.height = `${windowState.height}px`;
-    el.style.zIndex = String(windowState.zIndex);
-  }, [windowState.x, windowState.y, windowState.width, windowState.height, windowState.zIndex]);
+    if (isCompact) {
+      el.style.zIndex = String(windowState.zIndex);
+      el.style.left = '';
+      el.style.top = '';
+      el.style.width = '';
+      el.style.height = '';
+    } else {
+      el.style.left = `${windowState.x}px`;
+      el.style.top = `${windowState.y}px`;
+      el.style.width = `${windowState.width}px`;
+      el.style.height = `${windowState.height}px`;
+      el.style.zIndex = String(windowState.zIndex);
+    }
+  }, [
+    isCompact,
+    windowState.x,
+    windowState.y,
+    windowState.width,
+    windowState.height,
+    windowState.zIndex,
+  ]);
 
   function handleShellPointerDown(event: ReactPointerEvent<HTMLElement>) {
     if (isCompact) {
@@ -228,7 +254,7 @@ export function WindowShell({
       className={`window-shell ${isFocused ? 'is-focused' : ''}`}
       data-app-id={app.id}
       data-hero-lock="true"
-      exit={EXIT_ANIMATION}
+      exit={isCompact ? { ...EXIT_COMPACT, transition: COMPACT_EXIT_TRANSITION } : EXIT_DESKTOP}
       initial={ENTER_ANIMATION}
       onPointerDown={handleShellPointerDown}
       ref={shellRef}

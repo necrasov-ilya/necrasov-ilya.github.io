@@ -1,0 +1,7 @@
+services:
+  nksv-portfolio:
+    build: .
+    container_name: nksv-portfolio
+    ports:
+      - "8080:80"
+    restart: unless-stopped

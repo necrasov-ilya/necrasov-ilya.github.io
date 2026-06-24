@@ -24,6 +24,7 @@ export function DesktopSurface({
     isStartMenuOpen,
     openApp,
     focusApp,
+    minimizeApp,
     setStartMenuOpen,
     toggleFromTaskbar,
     setDesktopBounds,
@@ -98,6 +99,10 @@ export function DesktopSurface({
 
         if (!existingWindow) {
           openApp(appId);
+        } else if (!existingWindow.isMinimized) {
+          minimizeApp(appId);
+        } else {
+          focusApp(appId);
         }
       } else {
         toggleFromTaskbar(appId);
@@ -106,7 +111,9 @@ export function DesktopSurface({
       scrollToWindow(appId);
     },
     [
+      focusApp,
       isCompactDesktop,
+      minimizeApp,
       openApp,
       scrollToWindow,
       setStartMenuOpen,
@@ -168,6 +175,55 @@ export function DesktopSurface({
     scrollToWindow,
     windows,
   ]);
+
+  useEffect(() => {
+    if (!isCompactDesktop || !shellRef.current) {
+      return undefined;
+    }
+
+    const shell = shellRef.current;
+    let touchStartY = 0;
+    let isPulling = false;
+    let reloadTriggered = false;
+
+    function onTouchStart(event: TouchEvent) {
+      if (shell.scrollTop <= 0) {
+        touchStartY = event.touches[0].clientY;
+        isPulling = true;
+        reloadTriggered = false;
+      } else {
+        isPulling = false;
+      }
+    }
+
+    function onTouchMove(event: TouchEvent) {
+      if (!isPulling || reloadTriggered) {
+        return;
+      }
+
+      const pullDistance = event.touches[0].clientY - touchStartY;
+
+      if (pullDistance > 90) {
+        reloadTriggered = true;
+        isPulling = false;
+        window.location.reload();
+      }
+    }
+
+    function onTouchEnd() {
+      isPulling = false;
+    }
+
+    shell.addEventListener('touchstart', onTouchStart, { passive: true });
+    shell.addEventListener('touchmove', onTouchMove, { passive: true });
+    shell.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      shell.removeEventListener('touchstart', onTouchStart);
+      shell.removeEventListener('touchmove', onTouchMove);
+      shell.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [isCompactDesktop]);
 
   return (
     <section className="desktop-shell" ref={shellRef}>

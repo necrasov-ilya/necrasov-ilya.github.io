@@ -160,6 +160,8 @@
   .taskbar {
     gap: 0.55rem;
     padding: 0.4rem 0.45rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
   }
 
   .start-button,
@@ -188,6 +190,11 @@
 }
 
 @media (max-width: 560px) {
+  .taskbar {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
   .taskbar-app {
     flex-basis: 90px;
     padding: 0 0.55rem;

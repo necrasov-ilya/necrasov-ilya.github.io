@@ -78,7 +78,7 @@ export function DesktopSurface({
       const existingWindow = windows.find((windowState) => windowState.appId === appId);
 
       if (existingWindow) {
-        if (!isCompactDesktop) {
+        if (!isCompactDesktop || existingWindow.isMinimized) {
           focusApp(appId);
         }
       } else {

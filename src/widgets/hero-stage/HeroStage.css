@@ -246,3 +246,15 @@
     box-shadow: none;
   }
 }
+
+@media (max-width: 720px) {
+  .hero-stage__frame {
+    border-radius: 16px 16px 16px 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-stage__frame {
+    border-radius: 15px 15px 15px 15px;
+  }
+}

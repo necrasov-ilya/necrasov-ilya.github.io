@@ -187,7 +187,7 @@ function getCanvasFingerprint() {
       return 'Н/Д';
     }
 
-    context.fillStyle = '#c92455';
+    context.fillStyle = '#ac2954';
     context.fillRect(12, 12, 84, 30);
     context.fillStyle = '#0a0a11';
     context.font = '16px monospace';

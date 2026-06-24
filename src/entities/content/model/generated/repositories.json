@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-16T17:44:01.814Z",
+  "generatedAt": "2026-06-24T18:49:01.106Z",
   "repositories": [
     {
       "id": 1158362229,
@@ -10,7 +10,95 @@
       "language": "JavaScript",
       "topics": [],
       "stars": 0,
-      "pushedAt": "2026-04-16T17:05:57Z"
+      "pushedAt": "2026-06-24T18:45:33Z"
+    },
+    {
+      "id": 1277356858,
+      "name": "nksv-volume",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/nksv-volume",
+      "homepage": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-06-24T16:19:42Z"
+    },
+    {
+      "id": 1264308031,
+      "name": "khmurchik-community-bot",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/khmurchik-community-bot",
+      "homepage": "",
+      "language": "Go",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-06-12T17:25:43Z"
+    },
+    {
+      "id": 1248152536,
+      "name": "dijkstra-bellman-backtracking-lab",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/dijkstra-bellman-backtracking-lab",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-06-08T14:00:50Z"
+    },
+    {
+      "id": 1255078681,
+      "name": "osnova-ai",
+      "description": "Android-приложение для генерации структурированных конспектов из live-потока камеры с использованием OCR, VLM и LLM-пайплайна.",
+      "htmlUrl": "https://github.com/necrasov-ilya/osnova-ai",
+      "homepage": "",
+      "language": "Kotlin",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-05-31T17:06:30Z"
+    },
+    {
+      "id": 1245692167,
+      "name": "stable-audio-3-macos-portable",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/stable-audio-3-macos-portable",
+      "homepage": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 2,
+      "pushedAt": "2026-05-27T06:47:11Z"
+    },
+    {
+      "id": 1243700619,
+      "name": "grounded-knowledge-contacts",
+      "description": "Just landing for defense in 19.05.2026",
+      "htmlUrl": "https://github.com/necrasov-ilya/grounded-knowledge-contacts",
+      "homepage": "",
+      "language": "CSS",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-05-20T08:44:06Z"
+    },
+    {
+      "id": 1233942583,
+      "name": "grounded-assistant-surveys",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/grounded-assistant-surveys",
+      "homepage": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-05-09T15:30:49Z"
+    },
+    {
+      "id": 1222376362,
+      "name": "com.nksvilya.ycj-a0002",
+      "description": "",
+      "htmlUrl": "https://github.com/necrasov-ilya/com.nksvilya.ycj-a0002",
+      "homepage": "",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-04-28T04:50:15Z"
     },
     {
       "id": 1211245557,
@@ -21,7 +109,7 @@
       "language": "TypeScript",
       "topics": [],
       "stars": 0,
-      "pushedAt": "2026-04-15T15:12:27Z"
+      "pushedAt": "2026-04-23T13:47:41Z"
     },
     {
       "id": 1158739483,
@@ -32,7 +120,7 @@
       "language": "",
       "topics": [],
       "stars": 0,
-      "pushedAt": "2026-03-26T17:41:08Z"
+      "pushedAt": "2026-04-18T15:30:42Z"
     },
     {
       "id": 1103826705,
@@ -88,17 +176,6 @@
       "topics": [],
       "stars": 0,
       "pushedAt": "2025-11-09T14:35:14Z"
-    },
-    {
-      "id": 1031257372,
-      "name": "nksv-folio-final",
-      "description": "Just my portfolio, now, it last, maybe :)",
-      "htmlUrl": "https://github.com/necrasov-ilya/nksv-folio-final",
-      "homepage": "",
-      "language": "JavaScript",
-      "topics": [],
-      "stars": 0,
-      "pushedAt": "2025-10-08T18:49:47Z"
     },
     {
       "id": 1036597963,

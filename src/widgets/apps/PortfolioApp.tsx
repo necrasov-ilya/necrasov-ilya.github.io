@@ -62,8 +62,8 @@ export function PortfolioApp() {
                 src="/media/hero/logo/logo-nksv-filled.svg"
               />
               <p className="portfolio-hero-subtitle">
-                Работаю на стыке GenAI и фронтенда: RAG-системы, агентные сценарии и интеграция в
-                существующие веб-продукты.
+                RAG-системы, агентные сценарии и интеграция AI-логики в существующие
+                веб-продукты.
               </p>
               <ul className="portfolio-hero-highlights">
                 <li>

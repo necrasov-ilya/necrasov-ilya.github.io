@@ -232,7 +232,7 @@
 
 @media (max-width: 940px) {
   .hero-stage__frame {
-    border-radius: 24px 24px 24px 24px;
+    border-radius: 24px 24px 0 0;
   }
 }
 
@@ -249,12 +249,12 @@
 
 @media (max-width: 720px) {
   .hero-stage__frame {
-    border-radius: 16px 16px 16px 16px;
+    border-radius: 16px 16px 0 0;
   }
 }
 
 @media (max-width: 560px) {
   .hero-stage__frame {
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 15px 15px 0 0;
   }
 }

@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.docker
+artifacts
+output
+playwright-report
+test-results
+.npm-cache
+*.mp3
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts

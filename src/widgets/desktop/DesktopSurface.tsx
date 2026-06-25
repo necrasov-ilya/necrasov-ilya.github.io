@@ -50,7 +50,7 @@ export function DesktopSurface({
         if (shell && target) {
           const shellRect = shell.getBoundingClientRect();
           const targetRect = target.getBoundingClientRect();
-          const nextTop = shell.scrollTop + (targetRect.top - shellRect.top) - 16;
+          const nextTop = shell.scrollTop + (targetRect.top - shellRect.top) - 60;
 
           shell.scrollTo({
             top: Math.max(0, nextTop),

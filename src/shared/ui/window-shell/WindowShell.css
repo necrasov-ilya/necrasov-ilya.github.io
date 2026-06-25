@@ -249,9 +249,9 @@
     position: relative;
     left: auto !important;
     top: auto !important;
-    width: calc(100% - 24px) !important;
+    width: 100% !important;
     height: auto;
-    margin: 24px 12px 0;
+    margin: 24px 0 0;
     overscroll-behavior: auto;
   }
 

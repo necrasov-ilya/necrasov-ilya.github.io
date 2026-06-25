@@ -8,7 +8,7 @@ export function ProjectsApp() {
       <section className="repo-hero">
         <div>
           <div className="eyebrow">РЕПО / GITHUB</div>
-          <h2>Репозитории и рабочие наработки</h2>
+          <h2>Проекты</h2>
         </div>
 
         <div className="repo-stats">

@@ -15,8 +15,8 @@ export const applicationCatalog: AppDefinition[] = [
   {
     id: 'projects',
     icon: 'briefcase',
-    title: 'Репозитории',
-    shortTitle: 'Репо',
+    title: 'Проекты',
+    shortTitle: 'Проекты',
     subtitle: 'GitHub-проекты и актуальные ссылки',
     tint: '#ffb36b',
     defaultSize: { width: 980, height: 640 },
